@@ -1,10 +1,14 @@
 package com.okres.model.entity;
 
+import com.okres.model.entity.enums.Gender;
+import com.okres.model.entity.enums.Role;
+
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Reader {
+    private int id;
     private String firstName;
     private String lastName;
     private int phoneNumber;
@@ -20,7 +24,9 @@ public class Reader {
     public Reader() {
     }
 
-    public Reader(String firstName, String lastName, int phoneNumber, Gender gender, Timestamp date, String emailAddress, String password, Role role, List<Edition> editionList, List<Payment> paymentList) {
+    public Reader(int id, String firstName, String lastName, int phoneNumber, Gender gender, Timestamp date,
+                  String emailAddress, String password, Role role, List<Edition> editionList, List<Payment> paymentList) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
@@ -31,6 +37,14 @@ public class Reader {
         this.role = role;
         this.editionList = editionList;
         this.paymentList = paymentList;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getFirstName() {
@@ -116,7 +130,8 @@ public class Reader {
     @Override
     public String toString() {
         return "Reader{" +
-                "firstName='" + firstName + '\'' +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", phoneNumber=" + phoneNumber +
                 ", gender=" + gender +

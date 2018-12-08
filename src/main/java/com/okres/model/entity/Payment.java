@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Payment {
+    private int id;
     private int paymentAmmount;
     private boolean approve;
     private Reader reader;
@@ -12,11 +13,20 @@ public class Payment {
     public Payment() {
     }
 
-    public Payment(int paymentAmmount, boolean approve, Reader reader, List<Edition> editionList) {
+    public Payment(int id, int paymentAmmount, boolean approve, Reader reader, List<Edition> editionList) {
+        this.id = id;
         this.paymentAmmount = paymentAmmount;
         this.approve = approve;
         this.reader = reader;
         this.editionList = editionList;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getPaymentAmmount() {
@@ -53,8 +63,9 @@ public class Payment {
 
     @Override
     public String toString() {
-        return "Payment{" +
-                "paymentAmmount=" + paymentAmmount +
+        return "PaymentDao{" +
+                "id=" + id +
+                ", paymentAmmount=" + paymentAmmount +
                 ", approve=" + approve +
                 ", reader=" + reader +
                 ", editionList=" + editionList +

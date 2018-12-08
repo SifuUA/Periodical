@@ -1,10 +1,13 @@
 package com.okres.model.entity;
 
+import com.okres.model.entity.enums.Category;
+
 import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Edition {
+    private int id;
     private String editionName;
     private Category category;
     private Blob image;
@@ -15,13 +18,23 @@ public class Edition {
     public Edition() {
     }
 
-    public Edition(String editionName, Category category, Blob image, int price, List<Reader> readersList, List<Payment> paymentList) {
+    public Edition(int id, String editionName, Category category, Blob image, int price, List<Reader> readersList,
+                   List<Payment> paymentList) {
+        this.id = id;
         this.editionName = editionName;
         this.category = category;
         this.image = image;
         this.price = price;
         this.readersList = readersList;
         this.paymentList = paymentList;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getEditionName() {
@@ -75,7 +88,8 @@ public class Edition {
     @Override
     public String toString() {
         return "Edition{" +
-                "editionName='" + editionName + '\'' +
+                "id=" + id +
+                ", editionName='" + editionName + '\'' +
                 ", category=" + category +
                 ", image=" + image +
                 ", price=" + price +
