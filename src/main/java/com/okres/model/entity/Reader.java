@@ -13,30 +13,30 @@ public class Reader {
     private String lastName;
     private int phoneNumber;
     private Gender gender;
-    private Timestamp date;
+    private Timestamp birthDate;
     private String emailAddress;
     private String password;
     private Role role;
 
-    private List<Edition> editionList = new ArrayList<>();
-    private List<Payment> paymentList = new ArrayList<>();
+    private List<Edition> editionsList = new ArrayList<>();
+    private List<Payment> paymentsList = new ArrayList<>();
 
     public Reader() {
     }
 
-    public Reader(int id, String firstName, String lastName, int phoneNumber, Gender gender, Timestamp date,
-                  String emailAddress, String password, Role role, List<Edition> editionList, List<Payment> paymentList) {
+    public Reader(int id, String firstName, String lastName, int phoneNumber, Gender gender, Timestamp birthDate,
+                  String emailAddress, String password, Role role, List<Edition> editionsList, List<Payment> paymentsList) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
         this.gender = gender;
-        this.date = date;
+        this.birthDate = birthDate;
         this.emailAddress = emailAddress;
         this.password = password;
         this.role = role;
-        this.editionList = editionList;
-        this.paymentList = paymentList;
+        this.editionsList = editionsList;
+        this.paymentsList = paymentsList;
     }
 
     public int getId() {
@@ -79,12 +79,12 @@ public class Reader {
         this.gender = gender;
     }
 
-    public Timestamp getDate() {
-        return date;
+    public Timestamp getBirthDate() {
+        return birthDate;
     }
 
-    public void setDate(Timestamp date) {
-        this.date = date;
+    public void setBirthDate(Timestamp birthDate) {
+        this.birthDate = birthDate;
     }
 
     public String getEmailAddress() {
@@ -111,20 +111,20 @@ public class Reader {
         this.role = role;
     }
 
-    public List<Edition> getEditionList() {
-        return editionList;
+    public List<Edition> getEditionsList() {
+        return editionsList;
     }
 
-    public void setEditionList(List<Edition> editionList) {
-        this.editionList = editionList;
+    public void setEditionsList(List<Edition> editionsList) {
+        this.editionsList = editionsList;
     }
 
-    public List<Payment> getPaymentList() {
-        return paymentList;
+    public List<Payment> getPaymentsList() {
+        return paymentsList;
     }
 
-    public void setPaymentList(List<Payment> paymentList) {
-        this.paymentList = paymentList;
+    public void setPaymentsList(List<Payment> paymentsList) {
+        this.paymentsList = paymentsList;
     }
 
     @Override
@@ -135,12 +135,12 @@ public class Reader {
                 ", lastName='" + lastName + '\'' +
                 ", phoneNumber=" + phoneNumber +
                 ", gender=" + gender +
-                ", date=" + date +
+                ", birthDate=" + birthDate +
                 ", emailAddress='" + emailAddress + '\'' +
                 ", password='" + password + '\'' +
                 ", role=" + role +
-                ", editionList=" + editionList +
-                ", paymentList=" + paymentList +
+                ", editionsList=" + editionsList +
+                ", paymentsList=" + paymentsList +
                 '}';
     }
 }

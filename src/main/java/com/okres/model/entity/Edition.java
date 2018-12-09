@@ -13,20 +13,20 @@ public class Edition {
     private Blob image;
     private int price;
     private List<Reader> readersList = new ArrayList<>();
-    private List<Payment> paymentList = new ArrayList<>();
+    private List<Payment> paymentsList = new ArrayList<>();
 
     public Edition() {
     }
 
     public Edition(int id, String editionName, Category category, Blob image, int price, List<Reader> readersList,
-                   List<Payment> paymentList) {
+                   List<Payment> paymentsList) {
         this.id = id;
         this.editionName = editionName;
         this.category = category;
         this.image = image;
         this.price = price;
         this.readersList = readersList;
-        this.paymentList = paymentList;
+        this.paymentsList = paymentsList;
     }
 
     public int getId() {
@@ -77,12 +77,12 @@ public class Edition {
         this.readersList = readersList;
     }
 
-    public List<Payment> getPaymentList() {
-        return paymentList;
+    public List<Payment> getPaymentsList() {
+        return paymentsList;
     }
 
-    public void setPaymentList(List<Payment> paymentList) {
-        this.paymentList = paymentList;
+    public void setPaymentsList(List<Payment> paymentsList) {
+        this.paymentsList = paymentsList;
     }
 
     @Override
@@ -94,7 +94,7 @@ public class Edition {
                 ", image=" + image +
                 ", price=" + price +
                 ", readersList=" + readersList +
-                ", paymentList=" + paymentList +
+                ", paymentsList=" + paymentsList +
                 '}';
     }
 }
