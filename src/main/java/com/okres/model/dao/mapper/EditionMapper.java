@@ -10,11 +10,20 @@ public class EditionMapper implements ObjectMapper<Edition> {
 
     @Override
     public Edition extractFromResultSet(ResultSet rs) throws SQLException {
-        return null;
+
+        Edition edition = new Edition();
+        edition.setId(rs.getInt("id"));
+        edition.setEditionName(rs.getString("name"));
+        edition.setCategory(rs.getInt("category_id"));
+        edition.setImage(rs.getBlob("image"));
+        edition.setPrice(rs.getInt("price"));
+        return edition;
     }
 
     @Override
-    public Edition makeUnique(Map<Integer, Edition> cache, Edition teacher) {
-        return null;
+    public Edition makeUnique(Map<Integer, Edition> cache, Edition edition) {
+
+        cache.putIfAbsent(edition.getId(), edition);
+        return cache.get(edition.getId());
     }
 }

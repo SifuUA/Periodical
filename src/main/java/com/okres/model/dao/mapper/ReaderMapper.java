@@ -10,18 +10,20 @@ public class ReaderMapper implements ObjectMapper<Reader> {
 
     @Override
     public Reader extractFromResultSet(ResultSet rs) throws SQLException {
+
         Reader reader = new Reader();
         reader.setId(rs.getInt("id"));
         reader.setFirstName(rs.getString("first_name"));
-        reader.setId(rs.getInt("id"));
-        reader.setId(rs.getInt("id"));
-        reader.setId(rs.getInt("id"));
-
+        reader.setPhoneNumber(rs.getInt("phone_number"));
+        reader.setEmailAddress(rs.getString("email"));
+        reader.setPassword(rs.getString("password"));
         return reader;
     }
 
     @Override
-    public Reader makeUnique(Map<Integer, Reader> cache, Reader teacher) {
-        return null;
+    public Reader makeUnique(Map<Integer, Reader> cache, Reader reader) {
+
+        cache.putIfAbsent(reader.getId(),reader);
+        return cache.get(reader.getId());
     }
 }

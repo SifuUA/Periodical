@@ -1,7 +1,5 @@
 package com.okres.model.entity;
 
-import com.okres.model.entity.enums.Category;
-
 import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +7,7 @@ import java.util.List;
 public class Edition {
     private int id;
     private String editionName;
-    private Category category;
+    private int category;
     private Blob image;
     private int price;
     private List<Reader> readersList = new ArrayList<>();
@@ -18,7 +16,7 @@ public class Edition {
     public Edition() {
     }
 
-    public Edition(int id, String editionName, Category category, Blob image, int price, List<Reader> readersList,
+    public Edition(int id, String editionName, int category, Blob image, int price, List<Reader> readersList,
                    List<Payment> paymentsList) {
         this.id = id;
         this.editionName = editionName;
@@ -45,11 +43,11 @@ public class Edition {
         this.editionName = editionName;
     }
 
-    public Category getCategory() {
+    public int getCategory() {
         return category;
     }
 
-    public void setCategory(Category category) {
+    public void setCategory(int category) {
         this.category = category;
     }
 
