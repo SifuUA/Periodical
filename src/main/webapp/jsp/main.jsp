@@ -126,29 +126,30 @@
             </a>
         </div>
     </div>
-    <hr>
-    <br/>
-    <div class="row text-center">
+</div>
+<hr>
+<br/>
+<div class="row text-center">
+    <div class="col-lg-12">
+        <ul class="pagination justify-content-center">
+            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+        </ul>
+    </div>
+</div>
+<br/>
+<footer id="footer" class="card-footer">
+    <div class="row" align="center">
         <div class="col-lg-12">
-            <ul class="pagination justify-content-center">
-                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">Next</a></li>
-            </ul>
+            <p>Copyright &copy; Company 2018</p>
         </div>
     </div>
-    <br/>
-    <footer id="footer" class="card-footer">
-        <div class="row" align="center">
-            <div class="col-lg-12">
-                <p>Copyright &copy; Company 2018</p>
-            </div>
-        </div>
-    </footer>
+</footer>
 
-    <script language="javascript" type="text/javascript"><c:import url="../bootstrap/js/jquery-3.3.1.min.js"/> </script>
-    <script language="javascript" type="text/javascript"><c:import url="../bootstrap/js/bootstrap.min.js"/>></script>
+<script language="javascript" type="text/javascript"><c:import url="../bootstrap/js/jquery-3.3.1.min.js"/> </script>
+<script language="javascript" type="text/javascript"><c:import url="../bootstrap/js/bootstrap.min.js"/>></script>
 </body>
 </html>
