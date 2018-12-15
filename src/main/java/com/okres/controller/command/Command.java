@@ -1,7 +1,9 @@
 package com.okres.controller.command;
 
-import com.sun.deploy.net.HttpRequest;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 public interface Command {
-    String execute(HttpRequest request);
+    String execute(HttpServletRequest request, HttpServletResponse response);
 }
