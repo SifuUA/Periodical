@@ -3,9 +3,17 @@ package com.okres.model.dao.impl;
 import com.okres.model.dao.ReaderDao;
 import com.okres.model.entity.Reader;
 
+import java.sql.Connection;
 import java.util.List;
 
 public class JDBCReaderDao implements ReaderDao {
+
+    private Connection connection;
+
+    public JDBCReaderDao(Connection connection) {
+        this.connection = connection;
+    }
+
     @Override
     public void create(Reader entity) {
 

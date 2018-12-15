@@ -1,23 +1,23 @@
 package com.okres.model.entity;
 
 public class EditionCategory {
-    private int editionId;
+    private int categoryId;
     private String category;
 
     public EditionCategory() {
     }
 
-    public EditionCategory(int editionId, String category) {
-        this.editionId = editionId;
+    public EditionCategory(int categoryId, String category) {
+        this.categoryId = categoryId;
         this.category = category;
     }
 
-    public int getEditionId() {
-        return editionId;
+    public int getCategoryId() {
+        return categoryId;
     }
 
-    public void setEditionId(int editionId) {
-        this.editionId = editionId;
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
     }
 
     public String getCategory() {
@@ -31,7 +31,7 @@ public class EditionCategory {
     @Override
     public String toString() {
         return "EditionCategory{" +
-                "editionId=" + editionId +
+                "categoryId=" + categoryId +
                 ", category='" + category + '\'' +
                 '}';
     }
