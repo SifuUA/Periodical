@@ -51,8 +51,11 @@ public class ServletUtility {
         request.getServletContext().setAttribute("loggedUsers", loggedUsers);
     }
 
-    public static void setLoggedUsers(HttpSessionEvent event, Set<String> loggedUsers) {
-        event.getSession().getServletContext().setAttribute("loggedUsers", loggedUsers);
+    public static void setLoggedUsers(HttpSession session, Set<String> loggedUsers) {
+        session.getServletContext().setAttribute("loggedUsers", loggedUsers);
     }
 
+    public static String getUserLogin(HttpSession session) {
+        return (String) session.getServletContext().getAttribute("login");
+    }
 }

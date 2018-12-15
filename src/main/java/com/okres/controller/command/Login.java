@@ -12,6 +12,8 @@ public class Login implements Command{
         String password = request.getParameter("password");
 
 
+
+
         if (ServletUtility.checkIfUserIsLogged(request, login))
             return "/jsp/error.jsp";
 
