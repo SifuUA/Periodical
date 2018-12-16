@@ -13,7 +13,7 @@ public class AppUtils {
     private static final Map<Integer, String> idUriMap = new HashMap<>();
     private static final Map<String, Integer> uriIdMap = new HashMap<>();
 
-    public static void storeLogginedUser(HttpSession session, Reader reader) {
+    public static void storeLogginedReader(HttpSession session, Reader reader) {
         session.setAttribute("loginedReader", reader);
     }
 

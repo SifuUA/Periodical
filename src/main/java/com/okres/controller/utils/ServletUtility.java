@@ -1,4 +1,4 @@
-package com.okres.controller.command;
+package com.okres.controller.utils;
 
 import com.okres.model.entity.enums.Role;
 
