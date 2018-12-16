@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Main page</title>
 
-    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
     <%--<link rel="stylesheet" href="main.css">--%>
 </head>
 
@@ -149,7 +149,7 @@
     </div>
 </footer>
 
-<script language="javascript" type="text/javascript"><c:import url="../bootstrap/js/jquery-3.3.1.min.js"/> </script>
-<script language="javascript" type="text/javascript"><c:import url="../bootstrap/js/bootstrap.min.js"/>></script>
+<script language="javascript" type="text/javascript"><c:import url="../../bootstrap/js/jquery-3.3.1.min.js"/> </script>
+<script language="javascript" type="text/javascript"><c:import url="../../bootstrap/js/bootstrap.min.js"/>></script>
 </body>
 </html>

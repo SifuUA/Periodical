@@ -1,4 +1,4 @@
-package com.okres.controller.Filter;
+package com.okres.controller.filter;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
