@@ -3,6 +3,8 @@ package com.okres.controller;
 import com.okres.controller.command.Command;
 import com.okres.controller.command.Login;
 import com.okres.controller.command.Logout;
+import com.okres.model.entity.Reader;
+import com.okres.model.service.ReaderService;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -21,11 +23,12 @@ import java.util.Map;
 public class Servlet extends HttpServlet {
 
     private Map<String, Command> commands = new HashMap<>();
+    private ReaderService readerService = new ReaderService();
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         config.getServletContext().setAttribute("loggedUsers", new HashSet<String>());
-        commands.put("login", new Login());
+        commands.put("login", new Login(new ReaderService()));
         commands.put("logout", new Logout());
     }
 

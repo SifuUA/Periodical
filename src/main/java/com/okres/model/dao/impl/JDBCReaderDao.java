@@ -1,10 +1,15 @@
 package com.okres.model.dao.impl;
 
 import com.okres.model.dao.ReaderDao;
+import com.okres.model.dao.mapper.ReaderMapper;
 import com.okres.model.entity.Reader;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
 public class JDBCReaderDao implements ReaderDao {
 
@@ -42,5 +47,27 @@ public class JDBCReaderDao implements ReaderDao {
     @Override
     public void close() {
 
+    }
+
+    @Override
+    public Optional<Reader> findReaderByEmailAndPassword(String email, String password) {
+        Optional<Reader> result = Optional.empty();
+        ResultSet rs;
+        ReaderMapper readerMapper;
+
+        try {
+            PreparedStatement ps = connection.prepareCall("SELECT * FROM READER WHERE emailAddress = ? AND password = ?");
+            ps.setString(1, email);
+            ps.setString(2, password);
+
+            rs = ps.executeQuery();
+            readerMapper = new ReaderMapper();
+            if (rs.next()) {
+                result = Optional.of(readerMapper.extractFromResultSet(rs));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return Optional.empty();
     }
 }
