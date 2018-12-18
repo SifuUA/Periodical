@@ -3,6 +3,7 @@ package com.okres.controller;
 import com.okres.controller.command.Command;
 import com.okres.controller.command.Login;
 import com.okres.controller.command.Logout;
+import com.okres.controller.command.MainPage;
 import com.okres.model.entity.Reader;
 import com.okres.model.service.ReaderService;
 
@@ -14,7 +15,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -29,6 +29,7 @@ public class Servlet extends HttpServlet {
     public void init(ServletConfig config) throws ServletException {
         config.getServletContext().setAttribute("loggedUsers", new HashSet<String>());
         commands.put("login", new Login(new ReaderService()));
+        commands.put("home", new MainPage());
         commands.put("logout", new Logout());
     }
 
@@ -49,11 +50,10 @@ public class Servlet extends HttpServlet {
         String loginButton = request.getParameter("loginButton");
         if (loginButton != null)
             path = "login";
-
-        Command command = commands.getOrDefault(path, (req, res)->"/main.jsp");
+//        else
+//            path = path.replaceAll(".*/home/" , "");
+        Command command = commands.getOrDefault(path, (req, res)->"/home");
         String page = command.execute(request, response);
-
-        System.out.println(path);
-        System.out.println("AAA" + request.getParameter("buttton"));
+        request.getRequestDispatcher(page).forward(request,response);
     }
 }

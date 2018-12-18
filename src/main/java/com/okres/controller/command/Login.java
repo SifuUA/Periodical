@@ -1,6 +1,7 @@
 package com.okres.controller.command;
 
 import com.okres.model.entity.Reader;
+import com.okres.model.entity.enums.Role;
 import com.okres.model.service.ReaderService;
 
 import javax.servlet.RequestDispatcher;
@@ -30,9 +31,20 @@ public class Login implements Command {
             return "/WEB-INF/views/main.jsp";
         Optional<Reader> reader = readerService.getReaderByEmailAndPassword(email, password);
         if (reader.isPresent()) {
-            request.getSession().setAttribute("reader", reader.get());
-            return "/WEB-INF/views/main.jsp";
-        }
+            if (reader.get().getId() == 1) {
+                reader.get().setRole(Role.ADMIN);
+                request.getSession().setAttribute("reader", reader.get());
+                return "/WEB-INF/views/admin.jsp";
+            }
+            else {
+                reader.get().setRole(Role.READER);
+                request.getSession().setAttribute("reader", reader.get());
+                return "/WEB-INF/views/reader.jsp";
+
+            }
+
+        } else
+            request.getSession().setAttribute("reader", readerService.createGuestReader());
         return "/WEB-INF/views/main.jsp";
     }
 }

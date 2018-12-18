@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html; charset=UTF-8" language="java" %>
+<%@ page isELIgnored="false" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -15,6 +16,7 @@
 </head>
 
 <body>
+
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" role="navigation">
         <%--<div class="container">--%>
@@ -25,6 +27,7 @@
         <div class="collapse navbar-collapse" id="exCollapsingNavbar">
             <ul class="nav navbar-nav">
                 <li class="nav-item"><a href="#" class="nav-link">My subscriptions</a></li>
+
             </ul>
             <ul class="nav navbar-nav flex-row justify-content-between ml-auto">
                 <li class="nav-item order-2 order-md-1"><a href="#" class="nav-link" title="settings"><i
@@ -39,10 +42,6 @@
                                     <input id="emailInput" placeholder="Email" class="form-control form-control-sm"
                                            type="text" required="" name="email">
                                 </div>
-                                <%--<c:url var="logoutCommand" value="">
-                                    <c:param name="command" value="logout"/>
-                                </c:url>
-                                <a href="${logoutCommand}">Log out</a>--%>
                                 <div class="form-group">
                                     <input id="passwordInput" placeholder="Password"
                                            class="form-control form-control-sm" type="text" required="" name="password">
@@ -142,6 +141,7 @@
     </div>
 </div>
 <br/>
+<h2>HEllo Main</h2>
 <footer id="footer" class="card-footer">
     <div class="row" align="center">
         <div class="col-lg-12">
@@ -150,7 +150,7 @@
     </div>
 </footer>
 
-<script language="javascript" type="text/javascript"><c:import url="../../bootstrap/js/jquery-3.3.1.min.js"/> </script>
-<script language="javascript" type="text/javascript"><c:import url="../../bootstrap/js/bootstrap.min.js"/>></script>
+<script language="javascript" type="text/javascript"><c:import url="../../bootstrap/js/jquery-3.3.1.min.js"/></script>
+<script language="javascript" type="text/javascript"><c:import url="../../bootstrap/js/bootstrap.min.js"/></script>
 </body>
 </html>

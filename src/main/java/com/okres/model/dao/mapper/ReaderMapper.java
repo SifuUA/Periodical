@@ -1,6 +1,7 @@
 package com.okres.model.dao.mapper;
 
 import com.okres.model.entity.Reader;
+import com.okres.model.entity.enums.Role;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

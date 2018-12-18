@@ -56,7 +56,7 @@ public class JDBCReaderDao implements ReaderDao {
         ReaderMapper readerMapper;
 
         try {
-            PreparedStatement ps = connection.prepareCall("SELECT * FROM READER WHERE emailAddress = ? AND password = ?");
+            PreparedStatement ps = connection.prepareCall("SELECT * FROM periodical.reader WHERE email = ? AND password = ?");
             ps.setString(1, email);
             ps.setString(2, password);
 
@@ -68,6 +68,6 @@ public class JDBCReaderDao implements ReaderDao {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return Optional.empty();
+        return result;
     }
 }
