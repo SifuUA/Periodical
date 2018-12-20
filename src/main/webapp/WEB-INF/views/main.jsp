@@ -37,7 +37,7 @@
                             class="btn btn-outline-secondary dropdown-toggle">Login <span class="caret"></span></button>
                     <ul class="dropdown-menu dropdown-menu-right mt-2">
                         <li class="px-3 py-2">
-                            <form class="form" role="form" action="" method=get>
+                            <form class="form" role="form" action="${pageContext.request.contextPath}/servlet/login" method=get>
                                 <div class="form-group">
                                     <input id="emailInput" placeholder="Email" class="form-control form-control-sm"
                                            type="text" required="" name="email">
@@ -47,7 +47,7 @@
                                            class="form-control form-control-sm" type="text" required="" name="password">
                                 </div>
                                 <div class="form-group">
-                                    <button type="submit" value="Login" class="btn btn-success" id="login" name="loginButton">Login</button>
+                                    <button type="submit" value="Login" class="btn btn-success" id="login" name="loginButton" >Login</button>
                                 </div>
                             </form>
                         </li>
@@ -142,6 +142,7 @@
 </div>
 <br/>
 <h2>HEllo Main</h2>
+<li class="nav-item">Hello ${reader}</li>
 <footer id="footer" class="card-footer">
     <div class="row" align="center">
         <div class="col-lg-12">

@@ -4,10 +4,8 @@ import com.okres.controller.command.Command;
 import com.okres.controller.command.Login;
 import com.okres.controller.command.Logout;
 import com.okres.controller.command.MainPage;
-import com.okres.model.entity.Reader;
 import com.okres.model.service.ReaderService;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,7 +17,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 
-@WebServlet("/home")
+@WebServlet(urlPatterns = "/servlet/*")
 public class Servlet extends HttpServlet {
 
     private Map<String, Command> commands = new HashMap<>();
@@ -35,8 +33,8 @@ public class Servlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        RequestDispatcher dispatcher = req.getServletContext().getRequestDispatcher("/WEB-INF/views/main.jsp");
-        dispatcher.forward(req, resp);
+        /*RequestDispatcher dispatcher = req.getServletContext().getRequestDispatcher("/WEB-INF/views/main.jsp");
+        dispatcher.forward(req, resp);*/
         processRequest(req, resp);
     }
 
@@ -46,14 +44,37 @@ public class Servlet extends HttpServlet {
     }
 
     private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String path = request.getRequestURI();
-        String loginButton = request.getParameter("loginButton");
-        if (loginButton != null)
-            path = "login";
-//        else
-//            path = path.replaceAll(".*/home/" , "");
-        Command command = commands.getOrDefault(path, (req, res)->"/home");
-        String page = command.execute(request, response);
-        request.getRequestDispatcher(page).forward(request,response);
+
+        /*Command command = getCommand(request, response);
+        if (command != null)
+            command.execute(request, response);*/
+        getCommand(request, response);
+
     }
-}
+
+    private void getCommand(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String path = request.getRequestURI();
+
+        path = path.replaceAll(".*/servlet/", "");
+        Command command = commands.getOrDefault(path, (req, res) -> "/WEB-INF/views/main.jsp");
+        String page = command.execute(request, response);
+        request.getRequestDispatcher(page).forward(request, response);
+    }}
+        /*Command command = getCommand(request);
+        String page = command.execute(request, response);
+
+        if (page.contains("redirect: ")) {
+            response.sendRedirect(request.getContextPath() + page.replaceAll("redirect: ", ""));
+        } else {
+            request.getRequestDispatcher(page).forward(request,response);
+        }*/
+//   }
+
+    /*private Command getCommand(HttpServletRequest request) {
+        String path = request.getRequestURI();
+        System.out.println("Before " + path);
+        path = path.substring(path.lastIndexOf("/") + 1);
+        System.out.println("After " + path);
+        return commands.getOrDefault(path, (req, res) -> "/WEB-INF/views/main.jsp");
+    }*/
+

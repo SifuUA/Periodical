@@ -8,6 +8,7 @@ import java.io.IOException;
 public class MainPage implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        return "/WEB-INF/views/main.jsp";
+       // return "/WEB-INF/views/main.jsp";
+        return null;
     }
 }
