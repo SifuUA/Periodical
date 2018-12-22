@@ -4,6 +4,7 @@ import com.okres.controller.command.Command;
 import com.okres.controller.command.Login;
 import com.okres.controller.command.Logout;
 import com.okres.controller.command.MainPage;
+import com.okres.model.entity.enums.Role;
 import com.okres.model.service.ReaderService;
 
 import javax.servlet.ServletConfig;
@@ -48,6 +49,7 @@ public class Servlet extends HttpServlet {
         /*Command command = getCommand(request, response);
         if (command != null)
             command.execute(request, response);*/
+
         getCommand(request, response);
 
     }
@@ -58,8 +60,12 @@ public class Servlet extends HttpServlet {
         path = path.replaceAll(".*/servlet/", "");
         Command command = commands.getOrDefault(path, (req, res) -> "/WEB-INF/views/main.jsp");
         String page = command.execute(request, response);
-        request.getRequestDispatcher(page).forward(request, response);
-    }}
+        if (page.contains("redirect:"))
+            response.sendRedirect(request.getContextPath() + "/servlet/home" /*request.getContextPath() + "/servlet/" + page.replaceAll("redirect: ", "")*/);
+        else
+            request.getRequestDispatcher(page).forward(request, response);
+    }
+}
         /*Command command = getCommand(request);
         String page = command.execute(request, response);
 

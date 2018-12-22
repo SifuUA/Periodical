@@ -18,13 +18,14 @@ public class ReaderMapper implements ObjectMapper<Reader> {
         reader.setPhoneNumber(rs.getInt("phone_number"));
         reader.setEmailAddress(rs.getString("email"));
         reader.setPassword(rs.getString("password"));
+        reader.setRole(rs.getInt("role_id") == 1 ? Role.ADMIN : Role.READER);
         return reader;
     }
 
     @Override
     public Reader makeUnique(Map<Integer, Reader> cache, Reader reader) {
 
-        cache.putIfAbsent(reader.getId(),reader);
+        cache.putIfAbsent(reader.getId(), reader);
         return cache.get(reader.getId());
     }
 }

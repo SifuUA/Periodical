@@ -59,7 +59,6 @@ public class JDBCReaderDao implements ReaderDao {
             PreparedStatement ps = connection.prepareCall("SELECT * FROM periodical.reader WHERE email = ? AND password = ?");
             ps.setString(1, email);
             ps.setString(2, password);
-
             rs = ps.executeQuery();
             readerMapper = new ReaderMapper();
             if (rs.next()) {
