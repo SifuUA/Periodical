@@ -12,7 +12,7 @@ import java.io.IOException;
 
 import static java.util.Objects.nonNull;
 
-@WebFilter(urlPatterns = {"/servlet/admin"})
+@WebFilter(value = {"/servlet/admin", "/servlet/reader"})
 public class AccessFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -32,11 +32,32 @@ public class AccessFilter implements Filter {
         final HttpServletResponse res = (HttpServletResponse) servletResponse;
         HttpSession session = req.getSession();
 
-        if (nonNull(session.getAttribute("role")) && !session.getAttribute("role").equals(Role.ADMIN)) {
+        String requestUri = req.getRequestURI();
+        if (requestUri.contains("admin")) {
+            if (nonNull(session.getAttribute("role")) &&
+                    req.getSession().getAttribute("role").equals(Role.ADMIN))
+                filterChain.doFilter(req, res);
+            else {
+                servletResponse.getWriter().append("AccessDenied");
+                return;
+            }
+        } else if (requestUri.contains("reader")) {
+            if (nonNull(session.getAttribute("role")) &&
+                    req.getSession().getAttribute("role").equals(Role.READER))
+                filterChain.doFilter(req, res);
+            else {
+                servletResponse.getWriter().append("AccessDenied");
+                return;
+            }
+        }
+        filterChain.doFilter(req, res);
+
+        //if (nonNull(session.getAttribute("role")) && !session.getAttribute("role").equals(Role.ADMIN)) {
+
           /*  RequestDispatcher dispatcher = req.getServletContext().getRequestDispatcher("/WEB-INF/views/errorPage");
 
             dispatcher.forward(req, res);*/
-        }
+        //}
 
         /*ServletContext context = servletRequest.getServletContext();
 
@@ -54,7 +75,7 @@ public class AccessFilter implements Filter {
         }else{
             filterChain.doFilter(servletRequest,servletResponse);
         }*/
-        filterChain.doFilter(req, res);
+        //filterChain.doFilter(req, res);
     }
 
     @Override

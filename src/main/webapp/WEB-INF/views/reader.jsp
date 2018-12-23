@@ -1,7 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html; charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page isELIgnored="false" %>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -17,47 +16,23 @@
 </head>
 
 <body>
-
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" role="navigation">
         <%--<div class="container">--%>
-        <a class="navbar-brand" href="${pageContext.request.contextPath}/servlet/home">Home</a>
+        <a class="navbar-brand" href="#">Home</a>
         <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar">
             &#9776;
         </button>
         <div class="collapse navbar-collapse" id="exCollapsingNavbar">
             <ul class="nav navbar-nav">
                 <li class="nav-item"><a href="#" class="nav-link">My subscriptions</a></li>
-
             </ul>
             <ul class="nav navbar-nav flex-row justify-content-between ml-auto">
                 <li class="nav-item order-2 order-md-1"><a href="#" class="nav-link" title="settings"><i
                         class="fa fa-cog fa-fw fa-lg"></i></a></li>
-                <li class="dropdown order-1">
-                    <button type="button" id="dropdownMenu1" data-toggle="dropdown"
-                            class="btn btn-outline-secondary dropdown-toggle">Login <span class="caret"></span></button>
-                    <ul class="dropdown-menu dropdown-menu-right mt-2">
-                        <li class="px-3 py-2">
-                            <form class="form" role="form" action="${pageContext.request.contextPath}/servlet/login"
-                                  method=get>
-                                <div class="form-group">
-                                    <input id="emailInput" placeholder="Email" class="form-control form-control-sm"
-                                           type="text" required="" name="email">
-                                </div>
-                                <div class="form-group">
-                                    <input id="passwordInput" placeholder="Password"
-                                           class="form-control form-control-sm" type="text" required="" name="password">
-                                </div>
-                                <div class="form-group">
-                                    <button type="submit" value="Login" class="btn btn-success" id="login"
-                                            name="loginButton">Login
-                                    </button>
-                                </div>
-                            </form>
-                        </li>
-                    </ul>
-                </li>
-                <li class="nav-item"><a href="registration.jsp" class="nav-link">Registration</a></li>
+                <li class="navbar-brand">Hello ${sessionScope.name}</li>
+                <li class="nav-item"><a href="${pageContext.request.contextPath}/servlet/logout"
+                                        class="nav-link">Logout</a></li>
             </ul>
         </div>
         <%--</div>--%>
@@ -153,7 +128,7 @@
     </div>
 </footer>
 
-<script language="javascript" type="text/javascript"><c:import url="../../bootstrap/js/jquery-3.3.1.min.js"/></script>
+<script language="javascript" type="text/javascript"><c:import url="../../bootstrap/js/jquery-3.3.1.min.js"/> </script>
 <script language="javascript" type="text/javascript"><c:import url="../../bootstrap/js/bootstrap.min.js"/></script>
 </body>
 </html>
