@@ -1,9 +1,7 @@
 package com.okres.controller;
 
-import com.okres.controller.command.Command;
-import com.okres.controller.command.Login;
-import com.okres.controller.command.Logout;
-import com.okres.controller.command.MainPage;
+import com.okres.controller.command.*;
+import com.okres.controller.command.Exception;
 import com.okres.model.entity.enums.Role;
 import com.okres.model.service.ReaderService;
 
@@ -30,6 +28,10 @@ public class Servlet extends HttpServlet {
         commands.put("login", new Login(new ReaderService()));
         commands.put("home", new MainPage());
         commands.put("logout", new Logout());
+        commands.put("admin", new AdminPage());
+        commands.put("reader", new ReaderPage());
+        commands.put("registration", new RegistrationPage());
+        commands.put("error", new Exception());
     }
 
     @Override
@@ -60,9 +62,11 @@ public class Servlet extends HttpServlet {
         path = path.replaceAll(".*/servlet/", "");
         Command command = commands.getOrDefault(path, (req, res) -> "/WEB-INF/views/main.jsp");
         String page = command.execute(request, response);
-        if (page.contains("redirect:"))
-            response.sendRedirect(request.getContextPath() + "/servlet/home" /*request.getContextPath() + "/servlet/" + page.replaceAll("redirect: ", "")*/);
-        else
+        if (page.contains("redirect:")) {
+            String destination = page.replaceAll("redirect: ", "");
+            System.out.println(destination);
+            response.sendRedirect(request.getContextPath() + "/servlet/" + destination);
+        } else
             request.getRequestDispatcher(page).forward(request, response);
     }
 }

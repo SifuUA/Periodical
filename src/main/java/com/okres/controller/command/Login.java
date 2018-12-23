@@ -18,19 +18,43 @@ import static java.util.Objects.nonNull;
 
 public class Login implements Command {
     private ReaderService readerService;
+    private HttpSession httpSession;
+
     public Login(ReaderService readerService) {
         this.readerService = readerService;
     }
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        httpSession = request.getSession();
+
+        if (!isHasAcces())
+            return "redirect: home";
+
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
+        Optional<Reader> reader = readerService.getReaderByEmailAndPassword(email, password);
+        if (!reader.isPresent())
+            return "redirect: registration";
+        httpSession.setAttribute("role", reader.get().getRole());
+        httpSession.setAttribute("name", reader.get().getFirstName());
+
+        return "redirect: home";
+    }
+
+    public boolean isHasAcces() {
+        return httpSession.getAttribute("role") == null ||
+                httpSession.getAttribute("role").equals(Role.GUEST);
+    }
+
+
 
 
    /*     response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
         response.addHeader("Cache-Control", "post-check=0, pre-check=0");
         response.setHeader("Pragma", "no-cache");
         response.setDateHeader("Expires", 0);*/
-        if (request.getSession().getAttribute("reader") == null &&
+       /* if (request.getSession().getAttribute("reader") == null &&
                 request.getParameter("email") == null && isNull(request.getParameter("password"))
                 && isNull(request.getParameter("password"))) {
             response.sendRedirect("/WEB-INF/views/main.jsp");
@@ -46,7 +70,7 @@ public class Login implements Command {
             return "/WEB-INF/views/main.jsp";
         }
         Optional<Reader> reader = readerService.getReaderByEmailAndPassword(email, password);
-        if (reader.isPresent() && request.getSession().isNew() /*&& (isNull(currentRole) || !currentRole.equals(Role.GUEST))*/) {
+        if (reader.isPresent() && request.getSession().isNew() *//*&& (isNull(currentRole) || !currentRole.equals(Role.GUEST))*//*) {
             if (reader.get().getId() == 1) {
                 reader.get().setRole(Role.ADMIN);
                 request.getSession().setAttribute("reader", reader.get());
@@ -68,5 +92,5 @@ public class Login implements Command {
             return "redirect: home";
         }
 
-    }
+    }*/
 }
