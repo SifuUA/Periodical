@@ -13,10 +13,14 @@
     <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
 </head>
 <body>
+
+<div class="container">
+    <a href="${pageContext.request.contextPath}/servlet/home" class="btn btn-info" role="button" style="margin-top: 20px">Home</a>
+</div>
 <div class="container py-5">
     <div class="row">
         <div class="col-md-12">
-            <h5 class="text-center text-white mb-4">Login Form</h5>
+            <h5 class="text-center text-white mb-4">Registration Form</h5>
             <div class="row">
                 <div class="col-md-6 mx-auto">
                     <div class="card rounded-0">

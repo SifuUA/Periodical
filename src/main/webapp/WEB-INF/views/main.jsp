@@ -57,7 +57,7 @@
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item"><a href="registration.jsp" class="nav-link">Registration</a></li>
+                <li class="nav-item"><a href="${pageContext.request.contextPath}/servlet/registration" class="nav-link">Registration</a></li>
             </ul>
         </div>
         <%--</div>--%>

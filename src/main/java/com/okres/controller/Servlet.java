@@ -32,12 +32,11 @@ public class Servlet extends HttpServlet {
         commands.put("reader", new ReaderPage());
         commands.put("registration", new RegistrationPage());
         commands.put("error", new Exception());
+        commands.put("upload", new Upload());
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        /*RequestDispatcher dispatcher = req.getServletContext().getRequestDispatcher("/WEB-INF/views/main.jsp");
-        dispatcher.forward(req, resp);*/
         processRequest(req, resp);
     }
 
@@ -47,21 +46,20 @@ public class Servlet extends HttpServlet {
     }
 
     private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        /*Command command = getCommand(request, response);
-        if (command != null)
-            command.execute(request, response);*/
-
         getCommand(request, response);
-
     }
 
     private void getCommand(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String path = request.getRequestURI();
 
-        path = path.replaceAll(".*/servlet/", "");
+        String path = request.getRequestURI();
+        if (path.contains("admin/"))
+            path = path.replaceAll(".*/servlet/admin/", "");
+        else
+            path = path.replaceAll(".*/servlet/", "");
+
         Command command = commands.getOrDefault(path, (req, res) -> "/WEB-INF/views/main.jsp");
         String page = command.execute(request, response);
+
         if (page.contains("redirect:")) {
             String destination = page.replaceAll("redirect: ", "");
             System.out.println(destination);
@@ -70,21 +68,4 @@ public class Servlet extends HttpServlet {
             request.getRequestDispatcher(page).forward(request, response);
     }
 }
-        /*Command command = getCommand(request);
-        String page = command.execute(request, response);
-
-        if (page.contains("redirect: ")) {
-            response.sendRedirect(request.getContextPath() + page.replaceAll("redirect: ", ""));
-        } else {
-            request.getRequestDispatcher(page).forward(request,response);
-        }*/
-//   }
-
-    /*private Command getCommand(HttpServletRequest request) {
-        String path = request.getRequestURI();
-        System.out.println("Before " + path);
-        path = path.substring(path.lastIndexOf("/") + 1);
-        System.out.println("After " + path);
-        return commands.getOrDefault(path, (req, res) -> "/WEB-INF/views/main.jsp");
-    }*/
 

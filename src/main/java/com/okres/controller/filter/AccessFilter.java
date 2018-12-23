@@ -31,7 +31,6 @@ public class AccessFilter implements Filter {
         final HttpServletRequest req = (HttpServletRequest) servletRequest;
         final HttpServletResponse res = (HttpServletResponse) servletResponse;
         HttpSession session = req.getSession();
-
         String requestUri = req.getRequestURI();
         if (requestUri.contains("admin")) {
             if (nonNull(session.getAttribute("role")) &&

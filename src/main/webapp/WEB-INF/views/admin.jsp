@@ -24,9 +24,9 @@
             &#9776;
         </button>
         <div class="collapse navbar-collapse" id="exCollapsingNavbar">
-            <ul class="nav navbar-nav">
+            <%--<ul class="nav navbar-nav">
                 <li class="nav-item"><a href="#" class="nav-link">My subscriptions</a></li>
-            </ul>
+            </ul>--%>
             <ul class="nav navbar-nav flex-row justify-content-between ml-auto">
                 <li class="nav-item order-2 order-md-1"><a href="#" class="nav-link" title="settings"><i
                         class="fa fa-cog fa-fw fa-lg"></i></a></li>
@@ -38,45 +38,57 @@
         </div>
         <%--</div>--%>
     </nav>
-    <div id="modalPassword" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3>Forgot password</h3>
-                    <button type="button" class="close font-weight-light" data-dismiss="modal" aria-hidden="true">×
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p>Reset your password..</p>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-                    <button class="btn btn-primary">Save changes</button>
-                </div>
-            </div>
-        </div>
-    </div>
 </header>
 <div class="container-fluid" style="margin-top: 100px">
-    <div class="container mt-3">
-        <h3>Upload edition</h3>
-        <form action="${pageContext.request.contextPath}/servlet/admin/upload1">
-            <div class="custom-file mb-3">
-                <input type="file" class="custom-file-input" id="customFile" name="filename">
-                <label class="custom-file-label" for="customFile">Choose file</label>
-            </div>
-            <div class="mt-3">
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </div>
-        </form>
-    </div>
+    <div class="row">
+        <%--1--%>
+        <div class="container mt-3 col-sm-6">
+            <h3>Upload edition</h3>
+            <form action="${pageContext.request.contextPath}/servlet/admin/upload" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label class="col-md-7 control-label" for="editionName">Edition Name</label>
+                    <div class="col-md-7">
+                        <input id="editionName" name="editionName" type="text" placeholder="Sport News"
+                               class="form-control input-md"
+                               required="">
+                    </div>
+                </div>
 
-    <hr>
-    <div class="container">
-        <a class="btn btn-primary" href="#" role="button">View readers</a>
-        <a class="btn btn-primary" href="#" role="button">View subscriptions</a>
-        <a class="btn btn-primary" href="#" role="button">Accept payments</a>
+                <div class="form-group">
+                    <label class="col-md-7 control-label" for="category">Edition Category</label>
+                    <div class="col-md-7">
+                        <input id="category" name="category" type="text" placeholder="Sport"
+                               class="form-control input-md"
+                               required="">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-7 control-label" for="price">Edition Price $$$</label>
+                    <div class="col-md-7">
+                        <input id="price" name="price" type="text" placeholder="100"
+                               class="form-control input-md"
+                               required="">
+                    </div>
+                </div>
+
+                <div class="custom-file form-group col-md-7">
+                    <input type="file" class="custom-file-input" id="customFile" name="filename">
+                    <label class="custom-file-label" for="customFile">Choose file</label>
+                </div>
+                <div class="mt-3">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+
+        <%--<hr>--%>
+        <%--2--%>
+        <div class="col-sm-6">
+            <a class="btn btn-primary" href="#" role="button">View readers</a>
+            <a class="btn btn-primary" href="#" role="button">View subscriptions</a>
+            <a class="btn btn-primary" href="#" role="button">Accept payments</a>
+        </div>
     </div>
 </div>
 <hr>

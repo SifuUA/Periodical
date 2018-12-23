@@ -2,8 +2,11 @@ package com.okres.model.dao.impl;
 
 import com.okres.model.dao.EditionDao;
 import com.okres.model.entity.Edition;
+import org.apache.commons.fileupload.FileItem;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
 
 public class JDBCEditionDao implements EditionDao {
@@ -42,5 +45,16 @@ public class JDBCEditionDao implements EditionDao {
     @Override
     public void close() {
 
+    }
+
+    @Override
+    public void putNewEdition(String editionName, String category, int price, FileItem file) {
+        try{
+            PreparedStatement preparedStatement = connection.
+                    prepareCall("INSERT INTO periodical.edition (name, category_id, image, price) " +
+                            "VALUES (editionName,)");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
