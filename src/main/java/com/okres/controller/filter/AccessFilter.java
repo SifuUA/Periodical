@@ -23,11 +23,6 @@ public class AccessFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
             throws IOException, ServletException {
 
-
-
-        /*HttpServletRequest request = (HttpServletRequest) servletRequest;
-        String path = request.getRequestURI();*/
-
         final HttpServletRequest req = (HttpServletRequest) servletRequest;
         final HttpServletResponse res = (HttpServletResponse) servletResponse;
         HttpSession session = req.getSession();

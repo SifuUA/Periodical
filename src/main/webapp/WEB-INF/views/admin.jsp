@@ -43,7 +43,7 @@
     <div class="row">
         <div class="col-sm-6">
             <a class="btn btn-primary" href="${pageContext.request.contextPath}/servlet/admin/uploadForm" role="button">Add new edition</a>
-            <a class="btn btn-primary" href="#" role="button">View readers</a>
+            <a class="btn btn-primary" href="${pageContext.request.contextPath}/servlet/admin/uploadForm" role="button">View readers</a>
             <a class="btn btn-primary" href="#" role="button">View subscriptions</a>
             <a class="btn btn-primary" href="#" role="button">Accept payments</a>
         </div>

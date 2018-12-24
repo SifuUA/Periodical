@@ -8,12 +8,15 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 public class JDBCReaderDao implements ReaderDao {
 
     private Connection connection;
+
+
 
     public JDBCReaderDao(Connection connection) {
         this.connection = connection;
@@ -31,7 +34,20 @@ public class JDBCReaderDao implements ReaderDao {
 
     @Override
     public List<Reader> findAll() {
-        return null;
+        List<Reader> readers = new ArrayList<>();
+        PreparedStatement preparedStatement;
+        ResultSet resultSet;
+        ReaderMapper readerMapper = new ReaderMapper();
+        try {
+            preparedStatement = connection.prepareCall("SELECT * FROM periodical.reader where role_id = 0");
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                readers.add(readerMapper.extractFromResultSet(resultSet));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return readers;
     }
 
     @Override

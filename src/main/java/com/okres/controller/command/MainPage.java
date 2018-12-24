@@ -16,6 +16,7 @@ public class MainPage implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         servletUtility.setEditionImage(request, response);
+        servletUtility.setCategory(request, response);
         HttpSession httpSession = request.getSession();
 
         if (isNull(httpSession.getAttribute("role")))

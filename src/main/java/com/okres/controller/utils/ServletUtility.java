@@ -1,18 +1,16 @@
 package com.okres.controller.utils;
 
 import com.okres.model.entity.Edition;
-import com.okres.model.entity.enums.Role;
+import com.okres.model.entity.EditionCategory;
+import com.okres.model.service.EditionService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import javax.servlet.http.HttpSessionEvent;
-import java.io.IOException;
-import java.io.OutputStream;
 import java.sql.SQLException;
 import java.util.*;
 
 public class ServletUtility {
+    EditionService editionService  = new EditionService();
 
     public void setEditionImage(HttpServletRequest request, HttpServletResponse response) {
         List<Edition> editionList = (List<Edition>) request.getServletContext().getAttribute("editionList");
@@ -28,7 +26,12 @@ public class ServletUtility {
                 e.printStackTrace();
             }
         }
-        //request.setAttribute("encodeImages", encodeImages);
         request.getSession().setAttribute("encodeImages", encodeImages);
+    }
+
+    public void setCategory(HttpServletRequest request, HttpServletResponse response) {
+        List<EditionCategory> editionCategoryList = editionService.getAllGategories();
+        request.getSession().setAttribute("editionCategories", editionCategoryList);
+
     }
 }

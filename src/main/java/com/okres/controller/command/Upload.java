@@ -1,7 +1,6 @@
 package com.okres.controller.command;
 
 import com.okres.model.service.EditionService;
-import com.okres.model.service.ReaderService;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileItemFactory;
 import org.apache.commons.fileupload.FileUploadException;
@@ -12,11 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.CallableStatement;
-import java.sql.Connection;
 import java.util.Iterator;
 import java.util.List;
 

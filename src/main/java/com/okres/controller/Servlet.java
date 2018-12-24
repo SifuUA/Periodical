@@ -2,6 +2,7 @@ package com.okres.controller;
 
 import com.okres.controller.command.*;
 import com.okres.controller.command.Exception;
+import com.okres.controller.utils.ServletUtility;
 import com.okres.model.entity.Edition;
 import com.okres.model.entity.enums.Role;
 import com.okres.model.service.EditionService;
@@ -27,7 +28,7 @@ public class Servlet extends HttpServlet {
     private Map<String, Command> commands = new HashMap<>();
     private ReaderService readerService = new ReaderService();
     private EditionService editionService = new EditionService();
-    private List<Edition> editionList;
+
 
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -41,11 +42,12 @@ public class Servlet extends HttpServlet {
         commands.put("error", new Exception());
         commands.put("upload", new Upload());
         commands.put("uploadForm", new UploadForm());
+        commands.put("viewReaders", new ViewReaders(readerService));
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        this.editionList = editionService.getAllEditions();
+        List<Edition> editionList = editionService.getAllEditions();
         req.getServletContext().setAttribute("editionList", editionList);
         processRequest(req, resp);
     }
@@ -66,7 +68,8 @@ public class Servlet extends HttpServlet {
         else
             path = path.replaceAll(".*/servlet/", "");
 
-        Command command = commands.getOrDefault(path, (req, res) -> "/WEB-INF/views/main.jsp");
+        //Command command = commands.getOrDefault(path, (req, res) -> "/WEB-INF/views/main.jsp");
+        Command command = commands.getOrDefault(path, (req, res) -> "redirect: home");
         String page = command.execute(request, response);
 
         if (page.contains("redirect:")) {
