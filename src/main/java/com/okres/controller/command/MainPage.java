@@ -1,5 +1,6 @@
 package com.okres.controller.command;
 
+import com.okres.controller.utils.ServletUtility;
 import com.okres.model.entity.enums.Role;
 
 import javax.servlet.ServletException;
@@ -11,9 +12,10 @@ import java.io.IOException;
 import static java.util.Objects.isNull;
 
 public class MainPage implements Command {
+    private ServletUtility servletUtility = new ServletUtility();
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        servletUtility.setEditionImage(request, response);
         HttpSession httpSession = request.getSession();
 
         if (isNull(httpSession.getAttribute("role")))

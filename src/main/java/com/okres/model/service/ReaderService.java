@@ -26,12 +26,4 @@ public class ReaderService {
         reader.setRole(Role.GUEST);
         return reader;
     }
-
-    public void inputEditionData(String editionName, String category, int price, FileItem file) {
-        EditionDao editionDao = daoFactory.createEditionDao();
-        editionDao.putNewEdition(editionName, category, price, file);
-
-
-
-    }
 }

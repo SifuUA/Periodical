@@ -41,64 +41,26 @@
 </header>
 <div class="container-fluid" style="margin-top: 100px">
     <div class="row">
-        <%--1--%>
-        <div class="container mt-3 col-sm-6">
-            <h3>Upload edition</h3>
-            <form action="${pageContext.request.contextPath}/servlet/admin/upload" method="post" enctype="multipart/form-data">
-                <div class="form-group">
-                    <label class="col-md-7 control-label" for="editionName">Edition Name</label>
-                    <div class="col-md-7">
-                        <input id="editionName" name="editionName" type="text" placeholder="Sport News"
-                               class="form-control input-md"
-                               required="">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="col-md-7 control-label" for="category">Edition Category</label>
-                    <div class="col-md-7">
-                        <input id="category" name="category" type="text" placeholder="Sport"
-                               class="form-control input-md"
-                               required="">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="col-md-7 control-label" for="price">Edition Price $$$</label>
-                    <div class="col-md-7">
-                        <input id="price" name="price" type="text" placeholder="100"
-                               class="form-control input-md"
-                               required="">
-                    </div>
-                </div>
-
-                <div class="custom-file form-group col-md-7">
-                    <input type="file" class="custom-file-input" id="customFile" name="filename">
-                    <label class="custom-file-label" for="customFile">Choose file</label>
-                </div>
-                <div class="mt-3">
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
-            </form>
-        </div>
-
-        <%--<hr>--%>
-        <%--2--%>
         <div class="col-sm-6">
+            <a class="btn btn-primary" href="${pageContext.request.contextPath}/servlet/admin/uploadForm" role="button">Add new edition</a>
             <a class="btn btn-primary" href="#" role="button">View readers</a>
             <a class="btn btn-primary" href="#" role="button">View subscriptions</a>
             <a class="btn btn-primary" href="#" role="button">Accept payments</a>
         </div>
     </div>
 </div>
-<hr>
-<footer id="footer" class="card-footer" style="position: fixed; left: 0; bottom: 0; width: 100%;">
-    <div class="row" align="bottom">
-        <div class="col-lg-12">
-            <p>Copyright &copy; Company 2018</p>
-        </div>
+
+<div class="container" style="margin-top: 100px">
+    <div class="row">
+        <c:forEach var="imgBase" items="${sessionScope.encodeImages}">
+            <div class="col-lg-2 col-md-6 col-xs-6">
+                <a href="#" class="d-block mb-4 h-100">
+                    <img class="img-fluid img-thumbnail" src="data:image/jpeg;base64,${imgBase}" alt="">
+                </a>
+            </div>
+        </c:forEach>
     </div>
-</footer>
+</div>
 
 <script language="javascript" type="text/javascript"><c:import url="../../bootstrap/js/jquery-3.3.1.min.js"/> </script>
 <script language="javascript" type="text/javascript"><c:import url="../../bootstrap/js/bootstrap.min.js"/></script>

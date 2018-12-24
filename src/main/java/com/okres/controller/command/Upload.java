@@ -1,5 +1,6 @@
 package com.okres.controller.command;
 
+import com.okres.model.service.EditionService;
 import com.okres.model.service.ReaderService;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileItemFactory;
@@ -24,10 +25,10 @@ import java.util.List;
 public class Upload implements Command {
 
     private String editionName;
-    private String category;
+    private int category;
     private int price;
     private FileItem file = null;
-    private ReaderService readerService;
+    private EditionService editionService = new EditionService();
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -50,7 +51,7 @@ public class Upload implements Command {
                         file = fileItem;
                     }
                 }
-                readerService.inputEditionData(editionName, category, price, file);
+                editionService.inputEditionData(editionName, category, price, file);
             }
         } catch (FileUploadException e) {
             e.printStackTrace();
@@ -62,7 +63,7 @@ public class Upload implements Command {
         if (item.getFieldName().equals("editionName")) {
             this.editionName = item.getString();
         } else if (item.getFieldName().equals("category")) {
-            category = item.getString();
+            category = Integer.parseInt(item.getString());
         } else if (item.getFieldName().equals("price")) {
             price = Integer.parseInt(item.getString());
         }
