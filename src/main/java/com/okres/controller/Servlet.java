@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -26,13 +27,17 @@ public class Servlet extends HttpServlet {
     private ReaderService readerService = new ReaderService();
     private EditionService editionService = new EditionService();
     private List<Edition> editionList = editionService.getAllEditions();
+    //!!!!//
+    private ServletUtility servletUtility = new ServletUtility();
 
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         config.getServletContext().setAttribute("loggedUsers", new HashSet<String>());
-        /*servletUtility.setEditionImage(request, response);
-        servletUtility.setCategory(request, response);*/
+        config.getServletContext().setAttribute("editionList", editionList);
+        config.getServletContext().setAttribute("encodeImages", servletUtility.setEditionImage(config.getServletContext()));
+        config.getServletContext().setAttribute("editionCategories", servletUtility.setCategory(config.getServletContext()));
+
         commands.put("login", new Login(new ReaderService()));
         commands.put("home", new MainPage());
         commands.put("logout", new Logout());
@@ -47,7 +52,9 @@ public class Servlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getSession().setAttribute("editionList", editionList);
+
+        //!!//
+        //req.getSession().setAttribute("editionList", editionList);
         processRequest(req, resp);
     }
 

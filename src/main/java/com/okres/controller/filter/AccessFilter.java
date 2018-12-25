@@ -32,16 +32,16 @@ public class AccessFilter implements Filter {
                     req.getSession().getAttribute("role").equals(Role.ADMIN)) {
                 filterChain.doFilter(req, res);
                 return;
-            }
-            else {
+            } else {
                 servletResponse.getWriter().append("AccessDenied");
                 return;
             }
         } else if (requestUri.contains("reader")) {
             if (nonNull(session.getAttribute("role")) &&
-                    req.getSession().getAttribute("role").equals(Role.READER))
+                    req.getSession().getAttribute("role").equals(Role.READER)) {
                 filterChain.doFilter(req, res);
-            else {
+                return;
+            } else {
                 servletResponse.getWriter().append("AccessDenied");
                 return;
             }

@@ -33,7 +33,7 @@
                         Categories
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <c:forEach var="categ" items="${sessionScope.editionCategories}">
+                        <c:forEach var="categ" items="${applicationScope.editionCategories}">
                             <a class="dropdown-item"
                                href="${pageContext.request.contextPath}/servlet/home/${categ.category}">${categ.category}
                             </a>
@@ -98,7 +98,7 @@
 
 <div class="container" style="margin-top: 100px">
     <div class="row">
-        <c:forEach var="imgBase" items="${sessionScope.encodeImages}">
+        <c:forEach var="imgBase" items="${applicationScope.encodeImages}">
             <div class="col-lg-2 col-md-6 col-xs-6">
                 <a href="#" class="d-block mb-4 h-100">
                     <img class="img-fluid img-thumbnail" src="data:image/jpeg;base64,${imgBase}" alt="">

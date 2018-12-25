@@ -12,12 +12,12 @@ import java.io.IOException;
 import static java.util.Objects.isNull;
 
 public class MainPage implements Command {
-    private ServletUtility servletUtility = new ServletUtility();
+   // private ServletUtility servletUtility = new ServletUtility();
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        servletUtility.setEditionImage(request, response);
-        servletUtility.setCategory(request, response);
+     //   servletUtility.setEditionImage(request, response);
+       // servletUtility.setCategory(request, response);
         HttpSession httpSession = request.getSession();
 
         if (isNull(httpSession.getAttribute("role")))

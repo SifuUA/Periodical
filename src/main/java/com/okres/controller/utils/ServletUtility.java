@@ -4,6 +4,7 @@ import com.okres.model.entity.Edition;
 import com.okres.model.entity.EditionCategory;
 import com.okres.model.service.EditionService;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
@@ -35,5 +36,28 @@ public class ServletUtility {
         System.out.println(request.getSession().getAttribute("ct"));
         request.getSession().setAttribute("editionCategories", editionCategoryList);
 
+    }
+
+    public List<String> setEditionImage(ServletContext servletContext) {
+        @SuppressWarnings("unchecked")
+        List<Edition> editionList = (List<Edition>) servletContext.getAttribute("editionList");
+        List<String> encodeImages = new ArrayList<>();
+
+        for (Edition edition : editionList) {
+            try {
+                byte[] imageBytes = edition.getImage().getBytes(1, (int) edition.getImage().length());
+                String encode = Base64.getEncoder().encodeToString(imageBytes);
+                encodeImages.add(encode);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return encodeImages;
+    }
+
+    public List<EditionCategory> setCategory(ServletContext servletContext) {
+        List<EditionCategory> editionCategoryList = editionService.getAllGategories();
+        System.out.println(servletContext.getAttribute("ct"));
+        return editionCategoryList;
     }
 }
