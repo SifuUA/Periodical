@@ -36,7 +36,7 @@
             <div class="form-group">
                 <label class="col-md-7 control-label" for="category">Edition Category</label>
                 <div class="col-md-7">
-                    <input id="category" name="category" type="text" placeholder="Sport"
+                    <input id="category" name="category" type="text" placeholder="1-Sport; 2-Cooking; 3-Knitting; 4-Nature; 5-Since"
                            class="form-control input-md"
                            required="">
                 </div>
@@ -51,8 +51,17 @@
                 </div>
             </div>
 
+            <div class="form-group">
+                <label class="col-md-7 control-label" for="price">Short notation about magazine </label>
+                <div class="col-md-7">
+                    <input id="notation" name="notation" type="text" placeholder="Very interesting magazine ..."
+                           class="form-control input-md"
+                           required="">
+                </div>
+            </div>
+
             <div class="custom-file form-group col-md-7">
-                <input type="file" class="custom-file-input" id="customFile" name="filename">
+                <input type="file" class="custom-file-input" id="customFile" name="filename" required="">
                 <label class="custom-file-label" for="customFile">Choose file</label>
             </div>
             <div class="mt-3">

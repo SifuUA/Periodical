@@ -17,6 +17,7 @@ public class EditionMapper implements ObjectMapper<Edition> {
         edition.setCategory(rs.getInt("category_id"));
         edition.setImage(rs.getBlob("image"));
         edition.setPrice(rs.getInt("price"));
+        edition.setNotation(rs.getString("notation"));
         return edition;
     }
 

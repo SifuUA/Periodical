@@ -12,13 +12,18 @@ import java.io.IOException;
 import static java.util.Objects.isNull;
 
 public class MainPage implements Command {
-   // private ServletUtility servletUtility = new ServletUtility();
+    // private ServletUtility servletUtility = new ServletUtility();
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-     //   servletUtility.setEditionImage(request, response);
-       // servletUtility.setCategory(request, response);
+        //   servletUtility.setEditionImage(request, response);
+        // servletUtility.setCategory(request, response);
         HttpSession httpSession = request.getSession();
+        String index = (String) request.getSession().getAttribute("editionIndex");
+        if (index != null) {
+            System.out.println(index);
+            return "redirect: edition";
+        }
 
         if (isNull(httpSession.getAttribute("role")))
             return "/WEB-INF/views/main.jsp";

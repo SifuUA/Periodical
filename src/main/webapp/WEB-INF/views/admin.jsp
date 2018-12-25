@@ -43,7 +43,7 @@
     <div class="row">
         <div class="col-sm-6">
             <a class="btn btn-primary" href="${pageContext.request.contextPath}/servlet/admin/uploadForm" role="button">Add new edition</a>
-            <a class="btn btn-primary" href="${pageContext.request.contextPath}/servlet/admin/uploadForm" role="button">View readers</a>
+            <a class="btn btn-primary" href="${pageContext.request.contextPath}/servlet/admin/viewReaders" role="button">View readers</a>
             <a class="btn btn-primary" href="#" role="button">View subscriptions</a>
             <a class="btn btn-primary" href="#" role="button">Accept payments</a>
         </div>
@@ -52,12 +52,13 @@
 
 <div class="container" style="margin-top: 100px">
     <div class="row">
-        <c:forEach var="imgBase" items="${sessionScope.encodeImages}">
+        <c:forEach var="imgBase" items="${applicationScope.encodeImages}">
             <div class="col-lg-2 col-md-6 col-xs-6">
                 <a href="#" class="d-block mb-4 h-100">
-                    <img class="img-fluid img-thumbnail" src="data:image/jpeg;base64,${imgBase}" alt="">
+                    <img class="img-fluid img-thumbnail" src="data:image/jpeg;base64,${imgBase.value}" alt="">
                 </a>
             </div>
+
         </c:forEach>
     </div>
 </div>

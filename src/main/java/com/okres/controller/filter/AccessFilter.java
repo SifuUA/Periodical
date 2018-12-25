@@ -47,31 +47,6 @@ public class AccessFilter implements Filter {
             }
         }
         filterChain.doFilter(req, res);
-
-        //if (nonNull(session.getAttribute("role")) && !session.getAttribute("role").equals(Role.ADMIN)) {
-
-          /*  RequestDispatcher dispatcher = req.getServletContext().getRequestDispatcher("/WEB-INF/views/errorPage");
-
-            dispatcher.forward(req, res);*/
-        //}
-
-        /*ServletContext context = servletRequest.getServletContext();
-
-        System.out.println(session);
-        System.out.println(context);
-        System.out.println(SecurityConfig.getAllAppRoles().toString());
-        System.out.println(SecurityConfig.getAllAppRoles().toString());*/
-        /*if(path.contains("add-student")) {//TODO: rewrite add user roles
-            if ((teacher = (Teacher) ((HttpServletRequest) servletRequest).getSession().getAttribute("teacher")) != null) {
-                filterChain.doFilter(servletRequest,servletResponse);
-            }else{
-                servletResponse.getWriter().append("AccessDenied");
-                return;
-            }
-        }else{
-            filterChain.doFilter(servletRequest,servletResponse);
-        }*/
-        //filterChain.doFilter(req, res);
     }
 
     @Override

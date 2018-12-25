@@ -22,6 +22,7 @@ public class Upload implements Command {
     private String editionName;
     private int category;
     private int price;
+    private String notation;
     private FileItem file = null;
     private EditionService editionService = new EditionService();
 
@@ -46,7 +47,7 @@ public class Upload implements Command {
                         file = fileItem;
                     }
                 }
-                editionService.inputEditionData(editionName, category, price, file);
+                editionService.inputEditionData(editionName, category, price, file, notation);
             }
         } catch (FileUploadException e) {
             e.printStackTrace();

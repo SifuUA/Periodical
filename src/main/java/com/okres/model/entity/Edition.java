@@ -10,19 +10,21 @@ public class Edition {
     private int category;
     private Blob image;
     private int price;
+    private String notation;
     private List<Reader> readersList = new ArrayList<>();
     private List<Payment> paymentsList = new ArrayList<>();
 
     public Edition() {
     }
 
-    public Edition(int id, String editionName, int category, Blob image, int price, List<Reader> readersList,
+    public Edition(int id, String editionName, int category, Blob image, int price, String notation, List<Reader> readersList,
                    List<Payment> paymentsList) {
         this.id = id;
         this.editionName = editionName;
         this.category = category;
         this.image = image;
         this.price = price;
+        this.notation = notation;
         this.readersList = readersList;
         this.paymentsList = paymentsList;
     }
@@ -83,6 +85,14 @@ public class Edition {
         this.paymentsList = paymentsList;
     }
 
+    public String getNotation() {
+        return notation;
+    }
+
+    public void setNotation(String notation) {
+        this.notation = notation;
+    }
+
     @Override
     public String toString() {
         return "Edition{" +
@@ -91,6 +101,7 @@ public class Edition {
                 ", category=" + category +
                 ", image=" + image +
                 ", price=" + price +
+                ", notation='" + notation + '\'' +
                 ", readersList=" + readersList +
                 ", paymentsList=" + paymentsList +
                 '}';

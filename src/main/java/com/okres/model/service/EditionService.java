@@ -13,10 +13,10 @@ public class EditionService {
 
     private DaoFactory daoFactory = DaoFactory.getInstance();
 
-    //TODO:replace arguments on Edition obj
-    public void inputEditionData(String editionName, int category, int price, FileItem file) {
+    //TODO:replace arguments on EditionPage obj
+    public void inputEditionData(String editionName, int category, int price, FileItem file, String notation) {
         try (EditionDao editionDao = daoFactory.createEditionDao()) {
-            editionDao.putNewEdition(editionName, category, price, file);
+            editionDao.putNewEdition(editionName, category, price, file, notation);
         }
     }
 

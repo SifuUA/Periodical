@@ -61,15 +61,16 @@ public class JDBCEditionDao implements EditionDao {
     }
 
     @Override
-    public void putNewEdition(String editionName, int category, int price, FileItem file) {
+    public void putNewEdition(String editionName, int category, int price, FileItem file, String notation) {
         try {
             PreparedStatement preparedStatement = connection.
-                    prepareCall("INSERT INTO periodical.edition (name, category_id, image, price) " +
-                            "VALUES (?, ?, ?, ?)");
+                    prepareCall("INSERT INTO periodical.edition (name, category_id, image, price, notation) " +
+                            "VALUES (?, ?, ?, ?, ?)");
             preparedStatement.setString(1, editionName);
             preparedStatement.setInt(2, category);
             preparedStatement.setBinaryStream(3, file.getInputStream(), (int) file.getSize());
             preparedStatement.setInt(4, price);
+            preparedStatement.setString(5, notation);
             preparedStatement.execute();
         } catch (SQLException | IOException e) {
             e.printStackTrace();

@@ -48,6 +48,8 @@ public class Servlet extends HttpServlet {
         commands.put("upload", new Upload());
         commands.put("uploadForm", new UploadForm());
         commands.put("viewReaders", new ViewReaders());
+        commands.put("edition", new EditionPage());
+        commands.put("subscribe", new Subscribe());
     }
 
     @Override
@@ -69,9 +71,13 @@ public class Servlet extends HttpServlet {
 
     private void getCommand(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String path = request.getRequestURI();
+        System.out.println(path);
         if (path.contains("admin/"))
             path = path.replaceAll(".*/servlet/admin/", "");
-        else
+        else if (path.matches("/servlet/home/[0-9]")) {
+            String index = path.replaceAll("/servlet/home/", "");
+            request.getSession().setAttribute("editionIndex", index);
+        } else
             path = path.replaceAll(".*/servlet/", "");
 
         //Command command = commands.getOrDefault(path, (req, res) -> "/WEB-INF/views/main.jsp");

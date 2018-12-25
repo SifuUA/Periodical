@@ -6,7 +6,7 @@ import org.apache.commons.fileupload.FileItem;
 import java.util.List;
 
 public interface EditionDao extends GenericDao<Edition> {
-    void putNewEdition(String editionName, int category, int price, FileItem file);
+    void putNewEdition(String editionName, int category, int price, FileItem file, String notation);
 
     @Override
     void create(Edition entity);

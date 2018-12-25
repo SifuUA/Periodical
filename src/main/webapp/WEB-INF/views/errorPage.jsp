@@ -9,7 +9,7 @@
 <html>
 <head>
     <title>Error</title>
-    <h2>ACCES DENIAED!!!</h2>
+    <h2>ACCESS DENIED!!!</h2>
 </head>
 <body>
 

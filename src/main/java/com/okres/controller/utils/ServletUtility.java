@@ -5,20 +5,18 @@ import com.okres.model.entity.EditionCategory;
 import com.okres.model.service.EditionService;
 
 import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
 import java.util.*;
 
 public class ServletUtility {
     private EditionService editionService = new EditionService();
 
-    public void setEditionImage(HttpServletRequest request, HttpServletResponse response) {
+    /*public void setEditionImage(HttpServletRequest request, HttpServletResponse response) {
         @SuppressWarnings("unchecked")
-        List<Edition> editionList = (List<Edition>) request.getSession().getAttribute("editionList");
+        List<EditionPage> editionList = (List<EditionPage>) request.getSession().getAttribute("editionList");
         List<String> encodeImages = new ArrayList<>();
 
-        for (Edition edition : editionList) {
+        for (EditionPage edition : editionList) {
             try {
 
                 byte[] imageBytes = edition.getImage().getBytes(1, (int) edition.getImage().length());
@@ -36,23 +34,26 @@ public class ServletUtility {
         System.out.println(request.getSession().getAttribute("ct"));
         request.getSession().setAttribute("editionCategories", editionCategoryList);
 
-    }
+    }*/
 
-    public List<String> setEditionImage(ServletContext servletContext) {
+    public Map<Edition, String> setEditionImage(ServletContext servletContext) {
         @SuppressWarnings("unchecked")
         List<Edition> editionList = (List<Edition>) servletContext.getAttribute("editionList");
         List<String> encodeImages = new ArrayList<>();
+        Map<Edition, String> editionWithImage = new HashMap<>();
 
         for (Edition edition : editionList) {
             try {
                 byte[] imageBytes = edition.getImage().getBytes(1, (int) edition.getImage().length());
                 String encode = Base64.getEncoder().encodeToString(imageBytes);
                 encodeImages.add(encode);
+                editionWithImage.put(edition, encode);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
-        return encodeImages;
+        //return encodeImages;
+        return editionWithImage;
     }
 
     public List<EditionCategory> setCategory(ServletContext servletContext) {
