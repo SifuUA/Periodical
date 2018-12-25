@@ -3,6 +3,7 @@ package com.okres.model.dao;
 import com.okres.model.entity.Reader;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public interface ReaderDao extends GenericDao<Reader> {
@@ -25,4 +26,6 @@ public interface ReaderDao extends GenericDao<Reader> {
 
     @Override
     void close();
+
+    Map<Integer, List<String>> findRaderPayments();
 }

@@ -50,6 +50,7 @@ public class Servlet extends HttpServlet {
         commands.put("viewReaders", new ViewReaders());
         commands.put("edition", new EditionPage());
         commands.put("subscribe", new Subscribe());
+        commands.put("readerSubscription", new ReaderSubscriptions());
     }
 
     @Override

@@ -5,7 +5,9 @@ import com.okres.model.dao.ReaderDao;
 import com.okres.model.entity.Reader;
 import com.okres.model.entity.enums.Role;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public class ReaderService {
@@ -29,5 +31,10 @@ public class ReaderService {
     public List<Reader> getAllreaders() {
         ReaderDao readerDao = daoFactory.createReaderDao();
         return readerDao.findAll();
+    }
+
+    public Map<Integer, List<String>> getReaderPayments(HttpServletRequest request) {
+        ReaderDao readerDao = daoFactory.createReaderDao();
+        return readerDao.findRaderPayments();
     }
 }

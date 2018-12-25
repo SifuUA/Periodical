@@ -35,6 +35,7 @@ public class Login implements Command {
             return "redirect: registration";
         httpSession.setAttribute("role", reader.get().getRole());
         httpSession.setAttribute("name", reader.get().getFirstName());
+        httpSession.setAttribute("reader", reader.get());
 
         return "redirect: home";
     }

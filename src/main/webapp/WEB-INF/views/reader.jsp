@@ -25,8 +25,24 @@
         </button>
         <div class="collapse navbar-collapse" id="exCollapsingNavbar">
             <ul class="nav navbar-nav">
-                <li class="nav-item"><a href="#" class="nav-link">My subscriptions</a></li>
+                <div class="dropdown">
+                    <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Categories
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <c:forEach var="categ" items="${applicationScope.editionCategories}">
+                            <a class="dropdown-item"
+                               href="${pageContext.request.contextPath}/servlet/home/${categ.category}">${categ.category}
+                            </a>
+                        </c:forEach>
+                    </div>
+                </div>
             </ul>
+            <ul class="nav navbar-nav">
+                <li class="nav-item"><a href="${pageContext.request.contextPath}/servlet/readerSubscription" class="nav-link">My subscriptions</a></li>
+            </ul>
+
             <ul class="nav navbar-nav flex-row justify-content-between ml-auto">
                 <li class="nav-item order-2 order-md-1"><a href="#" class="nav-link" title="settings"><i
                         class="fa fa-cog fa-fw fa-lg"></i></a></li>
@@ -61,10 +77,12 @@
 <div class="container" style="margin-top: 100px">
     <div class="row">
         <%--<c:forEach var="imgBase" items="${requestScope.encodeImages}">--%>
-        <c:forEach var="imgBase" items="${sessionScope.encodeImages}">
+        <c:forEach var="imgBase" items="${applicationScope.encodeImages}">
             <div class="col-lg-2 col-md-6 col-xs-6">
-                <a href="#" class="d-block mb-4 h-100">
-                    <img class="img-fluid img-thumbnail" src="data:image/jpeg;base64,${imgBase}" alt="">
+                <a href="${pageContext.request.contextPath}/servlet/home/${imgBase.key.id}" class="d-block mb-4 h-100">
+                    <img class="img-fluid img-thumbnail" src="data:image/jpeg;base64,${imgBase.value}" alt="">
+                    <h6>${imgBase.key.editionName}</h6>
+                        <%--<h6>${imgBase.key.id}</h6>--%>
                 </a>
             </div>
         </c:forEach>

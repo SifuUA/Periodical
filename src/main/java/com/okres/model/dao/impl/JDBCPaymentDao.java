@@ -6,6 +6,8 @@ import com.okres.model.entity.Edition;
 import com.okres.model.entity.Payment;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
 
 public class JDBCPaymentDao implements PaymentDao {
@@ -17,7 +19,23 @@ public class JDBCPaymentDao implements PaymentDao {
     }
 
     @Override
-    public void create(Payment entity) {
+    public void create(Payment payment) throws SQLException {
+        try {
+            connection.setAutoCommit(false);
+            PreparedStatement preparedStatement =
+                    connection.prepareStatement("INSERT INTO periodical." +
+                            "payment (amount, approve, edition_id, reader_id) " +
+                            "VALUES (?,?,?,?)");
+            preparedStatement.setInt(1, payment.getPaymentAmmount());
+            preparedStatement.setBoolean(2, false);
+            preparedStatement.setInt(3, payment.getEdition_id());
+            preparedStatement.setInt(4, payment.getReader_id());
+            preparedStatement.executeUpdate();
+            connection.commit();
+        } catch (SQLException e) {
+            connection.rollback();
+            e.printStackTrace();
+        }
 
     }
 

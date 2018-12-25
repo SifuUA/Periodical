@@ -40,7 +40,6 @@
                         </c:forEach>
                     </div>
                 </div>
-
             </ul>
             <ul class="nav navbar-nav flex-row justify-content-between ml-auto">
                 <li class="nav-item order-2 order-md-1"><a href="#" class="nav-link" title="settings"><i

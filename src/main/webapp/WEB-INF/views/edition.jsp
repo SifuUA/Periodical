@@ -32,7 +32,7 @@
 
         <div class="container">
             <a href="${pageContext.request.contextPath}/servlet/subscribe" class="btn btn-dark" role="button"
-               style="margin: 20px; padding: 10px">Subscribe</a>
+               style="margin: 20px; padding: 10px">Subscribe and register payment</a>
         </div>
 
         <div class="container">

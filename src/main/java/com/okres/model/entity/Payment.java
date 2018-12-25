@@ -7,18 +7,25 @@ public class Payment {
     private int id;
     private int paymentAmmount;
     private boolean approve;
-    private Reader reader;
-    private List<Edition> editionList = new ArrayList<>();
+    private int reader_id;
+    private int edition_id;
 
     public Payment() {
     }
 
-    public Payment(int id, int paymentAmmount, boolean approve, Reader reader, List<Edition> editionList) {
+    public Payment(int id, int paymentAmmount, boolean approve, int reader_id, int edition_id) {
         this.id = id;
         this.paymentAmmount = paymentAmmount;
         this.approve = approve;
-        this.reader = reader;
-        this.editionList = editionList;
+        this.reader_id = reader_id;
+        this.edition_id = edition_id;
+    }
+
+    public Payment(int paymentAmmount, boolean approve, int reader_id, int edition_id) {
+        this.paymentAmmount = paymentAmmount;
+        this.approve = approve;
+        this.reader_id = reader_id;
+        this.edition_id = edition_id;
     }
 
     public int getId() {
@@ -45,30 +52,30 @@ public class Payment {
         this.approve = approve;
     }
 
-    public Reader getReader() {
-        return reader;
+    public int getReader_id() {
+        return reader_id;
     }
 
-    public void setReader(Reader reader) {
-        this.reader = reader;
+    public void setReader_id(int reader_id) {
+        this.reader_id = reader_id;
     }
 
-    public List<Edition> getEditionList() {
-        return editionList;
+    public int getEdition_id() {
+        return edition_id;
     }
 
-    public void setEditionList(List<Edition> editionList) {
-        this.editionList = editionList;
+    public void setEdition_id(int edition_id) {
+        this.edition_id = edition_id;
     }
 
     @Override
     public String toString() {
-        return "PaymentDao{" +
+        return "Payment{" +
                 "id=" + id +
                 ", paymentAmmount=" + paymentAmmount +
                 ", approve=" + approve +
-                ", reader=" + reader +
-                ", editionList=" + editionList +
+                ", reader_id=" + reader_id +
+                ", edition_id=" + edition_id +
                 '}';
     }
 }
