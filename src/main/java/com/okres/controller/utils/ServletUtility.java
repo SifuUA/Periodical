@@ -10,10 +10,11 @@ import java.sql.SQLException;
 import java.util.*;
 
 public class ServletUtility {
-    EditionService editionService  = new EditionService();
+    private EditionService editionService = new EditionService();
 
     public void setEditionImage(HttpServletRequest request, HttpServletResponse response) {
-        List<Edition> editionList = (List<Edition>) request.getServletContext().getAttribute("editionList");
+        @SuppressWarnings("unchecked")
+        List<Edition> editionList = (List<Edition>) request.getSession().getAttribute("editionList");
         List<String> encodeImages = new ArrayList<>();
 
         for (Edition edition : editionList) {
@@ -31,6 +32,7 @@ public class ServletUtility {
 
     public void setCategory(HttpServletRequest request, HttpServletResponse response) {
         List<EditionCategory> editionCategoryList = editionService.getAllGategories();
+        System.out.println(request.getSession().getAttribute("ct"));
         request.getSession().setAttribute("editionCategories", editionCategoryList);
 
     }

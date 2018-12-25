@@ -4,7 +4,6 @@ import com.okres.controller.command.*;
 import com.okres.controller.command.Exception;
 import com.okres.controller.utils.ServletUtility;
 import com.okres.model.entity.Edition;
-import com.okres.model.entity.enums.Role;
 import com.okres.model.service.EditionService;
 import com.okres.model.service.ReaderService;
 
@@ -15,8 +14,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -28,11 +25,14 @@ public class Servlet extends HttpServlet {
     private Map<String, Command> commands = new HashMap<>();
     private ReaderService readerService = new ReaderService();
     private EditionService editionService = new EditionService();
+    private List<Edition> editionList = editionService.getAllEditions();
 
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         config.getServletContext().setAttribute("loggedUsers", new HashSet<String>());
+        /*servletUtility.setEditionImage(request, response);
+        servletUtility.setCategory(request, response);*/
         commands.put("login", new Login(new ReaderService()));
         commands.put("home", new MainPage());
         commands.put("logout", new Logout());
@@ -42,13 +42,12 @@ public class Servlet extends HttpServlet {
         commands.put("error", new Exception());
         commands.put("upload", new Upload());
         commands.put("uploadForm", new UploadForm());
-        commands.put("viewReaders", new ViewReaders(readerService));
+        commands.put("viewReaders", new ViewReaders());
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<Edition> editionList = editionService.getAllEditions();
-        req.getServletContext().setAttribute("editionList", editionList);
+        req.getSession().setAttribute("editionList", editionList);
         processRequest(req, resp);
     }
 
@@ -76,6 +75,7 @@ public class Servlet extends HttpServlet {
             String destination = page.replaceAll("redirect: ", "");
             System.out.println(destination);
             response.sendRedirect(request.getContextPath() + "/servlet/" + destination);
+            return;
         } else
             request.getRequestDispatcher(page).forward(request, response);
     }

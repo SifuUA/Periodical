@@ -13,6 +13,7 @@ import static java.util.Objects.isNull;
 
 public class MainPage implements Command {
     private ServletUtility servletUtility = new ServletUtility();
+
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         servletUtility.setEditionImage(request, response);

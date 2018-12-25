@@ -12,20 +12,26 @@ import java.util.List;
 public class EditionService {
 
     private DaoFactory daoFactory = DaoFactory.getInstance();
-    private EditionDao editionDao = daoFactory.createEditionDao();
-    private EditionCategoryDao editionCategory = daoFactory.createEditionCategoryDao();
 
     //TODO:replace arguments on Edition obj
     public void inputEditionData(String editionName, int category, int price, FileItem file) {
-        editionDao.putNewEdition(editionName, category, price, file);
+        try (EditionDao editionDao = daoFactory.createEditionDao()) {
+            editionDao.putNewEdition(editionName, category, price, file);
+        }
     }
 
     public List<Edition> getAllEditions() {
-        return editionDao.findAll();
+        try (
+                EditionDao editionDao = daoFactory.createEditionDao()) {
+            return editionDao.findAll();
+        }
     }
 
 
     public List<EditionCategory> getAllGategories() {
-        return editionCategory.findAll();
+        DaoFactory daoFactory = DaoFactory.getInstance();
+        try (EditionCategoryDao editionCategory = daoFactory.createEditionCategoryDao()) {
+            return editionCategory.findAll();
+        }
     }
 }

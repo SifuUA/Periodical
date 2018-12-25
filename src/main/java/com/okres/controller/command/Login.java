@@ -10,11 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.List;
 import java.util.Optional;
 
-import static java.util.Objects.isNull;
-import static java.util.Objects.nonNull;
 
 public class Login implements Command {
     private ReaderService readerService;

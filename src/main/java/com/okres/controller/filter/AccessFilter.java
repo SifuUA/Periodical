@@ -29,8 +29,10 @@ public class AccessFilter implements Filter {
         String requestUri = req.getRequestURI();
         if (requestUri.contains("admin")) {
             if (nonNull(session.getAttribute("role")) &&
-                    req.getSession().getAttribute("role").equals(Role.ADMIN))
+                    req.getSession().getAttribute("role").equals(Role.ADMIN)) {
                 filterChain.doFilter(req, res);
+                return;
+            }
             else {
                 servletResponse.getWriter().append("AccessDenied");
                 return;

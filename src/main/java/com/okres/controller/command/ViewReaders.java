@@ -11,11 +11,7 @@ import java.util.List;
 
 public class ViewReaders implements Command {
 
-    private ReaderService readerService;
-
-    public ViewReaders(ReaderService readerService) {
-        this.readerService = readerService;
-    }
+    private ReaderService readerService = new ReaderService();
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

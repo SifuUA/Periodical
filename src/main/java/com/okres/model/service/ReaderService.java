@@ -11,7 +11,6 @@ import java.util.Optional;
 public class ReaderService {
 
     private DaoFactory daoFactory = DaoFactory.getInstance();
-    ReaderDao readerDao = daoFactory.createReaderDao();
 
     public Optional<Reader> getReaderByEmailAndPassword(String email, String password) {
         Optional<Reader> result;
@@ -28,6 +27,7 @@ public class ReaderService {
     }
 
     public List<Reader> getAllreaders() {
+        ReaderDao readerDao = daoFactory.createReaderDao();
         return readerDao.findAll();
     }
 }

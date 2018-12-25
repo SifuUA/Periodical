@@ -1,8 +1,6 @@
 package com.okres.controller.command;
 
-import com.okres.model.entity.Reader;
 import com.okres.model.entity.enums.Role;
-import com.sun.istack.internal.NotNull;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

@@ -28,12 +28,15 @@
         <div class="collapse navbar-collapse" id="exCollapsingNavbar">
             <ul class="nav navbar-nav">
                 <div class="dropdown">
-                    <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Categories
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <c:forEach var="categ" items="${sessionScope.editionCategories}">
-                            <a class="dropdown-item" href="#">${categ.category}</a>
+                            <a class="dropdown-item"
+                               href="${pageContext.request.contextPath}/servlet/home/${categ.category}">${categ.category}
+                            </a>
                         </c:forEach>
                     </div>
                 </div>
