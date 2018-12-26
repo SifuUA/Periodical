@@ -52,6 +52,7 @@ public class Servlet extends HttpServlet {
         commands.put("subscribe", new Subscribe());
         commands.put("readerSubscription", new ReaderSubscriptions());
         commands.put("registerReader", new RegisterReader());
+        commands.put("viewReadersSubscriptionsByAdmin", new AcceptSubscription());
     }
 
     @Override
@@ -76,7 +77,7 @@ public class Servlet extends HttpServlet {
         System.out.println(path);
         if (path.contains("admin/"))
             path = path.replaceAll(".*/servlet/admin/", "");
-        else if (path.matches("/servlet/home/[0-9]")) {
+        else if (path.matches("/servlet/home/[0-9]+")) {
             String index = path.replaceAll("/servlet/home/", "");
             request.getSession().setAttribute("editionIndex", index);
         } else

@@ -34,9 +34,9 @@ public class ReaderService {
         return readerDao.findAll();
     }
 
-    public Map<Integer, List<String>> getReaderPayments(HttpServletRequest request) {
+    public Map<Integer, List<String>> getReaderPayments(int readerId) {
         ReaderDao readerDao = daoFactory.createReaderDao();
-        return readerDao.findRaderPayments();
+        return readerDao.findReaderPayments(readerId);
     }
 
     public boolean readerIsRegistred(Reader reader) {
@@ -53,5 +53,10 @@ public class ReaderService {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public Map<Integer, List<String>> getReadersPayments() {
+        ReaderDao readerDao = daoFactory.createReaderDao();
+        return readerDao.findReadersPayments();
     }
 }

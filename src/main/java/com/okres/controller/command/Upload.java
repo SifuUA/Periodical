@@ -1,5 +1,6 @@
 package com.okres.controller.command;
 
+import com.okres.model.entity.Edition;
 import com.okres.model.service.EditionService;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileItemFactory;
@@ -19,12 +20,9 @@ import java.util.List;
         maxFileSize = 1024 * 1024 * 5, maxRequestSize = 1024 * 1024 * 5 * 5)
 public class Upload implements Command {
 
-    private String editionName;
-    private int category;
-    private int price;
-    private String notation;
     private FileItem file = null;
     private EditionService editionService = new EditionService();
+    private Edition edition = new Edition();
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -43,11 +41,10 @@ public class Upload implements Command {
                     FileItem fileItem = iter.next();
                     if (fileItem.isFormField()) {
                         processFormField(fileItem);
-                    } else {
+                    } else
                         file = fileItem;
-                    }
                 }
-                editionService.inputEditionData(editionName, category, price, file, notation);
+                editionService.inputEditionData(edition, file);
             }
         } catch (FileUploadException e) {
             e.printStackTrace();
@@ -57,41 +54,13 @@ public class Upload implements Command {
 
     private void processFormField(FileItem item) {
         if (item.getFieldName().equals("editionName")) {
-            this.editionName = item.getString();
+            edition.setEditionName(item.getString());
         } else if (item.getFieldName().equals("category")) {
-            category = Integer.parseInt(item.getString());
+            edition.setCategory(Integer.parseInt(item.getString()));
         } else if (item.getFieldName().equals("price")) {
-            price = Integer.parseInt(item.getString());
-        }
+            edition.setPrice(Integer.parseInt(item.getString()));
+        } else if (item.getFieldName().equals("notation"))
+            edition.setNotation(item.getString());
     }
 
 }
-
-
-    /*private final String UPLOAD_DIRECTORY = "/home/alex/Pictures/uploads";
-
-    @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-
-        if (ServletFileUpload.isMultipartContent(request)) {
-            try {
-                List<FileItem> multiparts = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(request);
-
-                for (FileItem item : multiparts) {
-                    if (!item.isFormField()) {
-                        String name = new File(item.getName()).getName();
-                        item.write(new File(UPLOAD_DIRECTORY + File.separator + name));
-                    }
-                }
-                request.setAttribute("message", "File upload successfully");
-            } catch (java.lang.Exception e) {
-                request.setAttribute("message", "File Upload Failed due to " + e);
-            }
-        } else {
-            request.setAttribute("message",
-                    "Sorry this Servlet only handles file upload request");
-        }
-        return "/WEB-INF/views/admin.jsp";
-    }*/
-//}

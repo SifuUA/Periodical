@@ -29,5 +29,7 @@ public interface ReaderDao extends GenericDao<Reader> {
     @Override
     void close();
 
-    Map<Integer, List<String>> findRaderPayments();
+    Map<Integer, List<String>> findReaderPayments(int id);
+
+    Map<Integer, List<String>> findReadersPayments();
 }

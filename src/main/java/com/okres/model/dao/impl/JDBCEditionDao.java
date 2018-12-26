@@ -19,6 +19,23 @@ public class    JDBCEditionDao implements EditionDao {
     }
 
     @Override
+    public void create(Edition edit, FileItem file) {
+        try {
+            PreparedStatement preparedStatement = connection.
+                    prepareCall("INSERT INTO periodical.edition (name, category_id, image, price, notation) " +
+                            "VALUES (?, ?, ?, ?, ?)");
+            preparedStatement.setString(1, edit.getEditionName());
+            preparedStatement.setInt(2, edit.getCategory());
+            preparedStatement.setBinaryStream(3, file.getInputStream(), (int) file.getSize());
+            preparedStatement.setInt(4, edit.getPrice());
+            preparedStatement.setString(5, edit.getNotation());
+            preparedStatement.execute();
+        } catch (SQLException | IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
     public void create(Edition entity) {
 
     }
@@ -60,7 +77,7 @@ public class    JDBCEditionDao implements EditionDao {
 
     }
 
-    @Override
+   /* @Override
     public void putNewEdition(String editionName, int category, int price, FileItem file, String notation) {
         try {
             PreparedStatement preparedStatement = connection.
@@ -75,5 +92,5 @@ public class    JDBCEditionDao implements EditionDao {
         } catch (SQLException | IOException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 }

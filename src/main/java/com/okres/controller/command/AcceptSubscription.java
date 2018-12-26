@@ -10,14 +10,12 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-public class ReaderSubscriptions implements Command {
+public class AcceptSubscription implements Command {
     private ReaderService readerService = new ReaderService();
-
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Reader reader = (Reader) request.getSession().getAttribute("reader");
-        Map<Integer, List<String>> readerPayments = readerService.getReaderPayments(reader.getId());
-        request.getSession().setAttribute("readerPayments", readerPayments);
-        return "/WEB-INF/views/viewReadersSubscription.jsp";
+        Map<Integer, List<String>> readersPayments = readerService.getReadersPayments();
+        request.getSession().setAttribute("readersPayments", readersPayments);
+        return "/WEB-INF/views/viewReadersSubscriptionsByAdmin.jsp";
     }
 }
