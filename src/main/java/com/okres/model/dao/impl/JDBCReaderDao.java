@@ -3,6 +3,7 @@ package com.okres.model.dao.impl;
 import com.okres.model.dao.ReaderDao;
 import com.okres.model.dao.mapper.ReaderMapper;
 import com.okres.model.entity.Reader;
+import com.okres.model.entity.enums.Role;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -19,8 +20,26 @@ public class JDBCReaderDao implements ReaderDao {
         this.connection = connection;
     }
 
+    ResultSet resultSet;
+
     @Override
-    public void create(Reader entity) {
+    public void create(Reader read) throws SQLException {
+        try {
+            connection.setAutoCommit(false);
+            PreparedStatement preparedStatement =
+                    connection.prepareStatement("INSERT INTO periodical.reader (first_name, last_name, phone_number, email, password, role_id) VALUES (?,?,?,?,?,?)");
+            preparedStatement.setString(1, read.getFirstName());
+            preparedStatement.setString(2, read.getLastName());
+            preparedStatement.setString(3, read.getPhoneNumber());
+            preparedStatement.setString(4, read.getEmailAddress());
+            preparedStatement.setString(5, read.getPassword());
+            preparedStatement.setInt(6, read.getRole().equals(Role.ADMIN) ? 1 : 0);
+            preparedStatement.executeUpdate();
+            connection.commit();
+        } catch (SQLException e) {
+            connection.rollback();
+            e.printStackTrace();
+        }
 
     }
 

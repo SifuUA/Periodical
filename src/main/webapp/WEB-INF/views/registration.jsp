@@ -28,7 +28,7 @@
                             <h4 class="mb-0">Registration From</h4>
                         </div>
                         <div class="card-body">
-                            <form method="post" class="form-horizontal" style="width: 800px">
+                            <form action="${pageContext.request.contextPath}/servlet/registerReader" method="get" class="form-horizontal" style="width: 800px">
                                 <fieldset>
                                     <!-- Text input-->
                                     <div class="form-group">
@@ -52,7 +52,7 @@
                                     <div class="form-group">
                                         <label class="col-md-7 control-label" for="phone">Phone number</label>
                                         <div class="col-md-7">
-                                            <input id="phone" name="email" type="text" placeholder="380677777777"
+                                            <input id="phone" name="phone" type="text" placeholder="380677777777"
                                                    class="form-control input-md" required="">
                                         </div>
                                     </div>

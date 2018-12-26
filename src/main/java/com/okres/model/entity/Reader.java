@@ -11,7 +11,7 @@ public class Reader {
     private int id;
     private String firstName;
     private String lastName;
-    private int phoneNumber;
+    private String phoneNumber;
     private Gender gender;
     private Timestamp birthDate;
     private String emailAddress;
@@ -24,7 +24,7 @@ public class Reader {
     public Reader() {
     }
 
-    public Reader(int id, String firstName, String lastName, int phoneNumber, Gender gender, Timestamp birthDate,
+    public Reader(int id, String firstName, String lastName, String phoneNumber, Gender gender, Timestamp birthDate,
                   String emailAddress, String password, Role role, List<Edition> editionsList, List<Payment> paymentsList) {
         this.id = id;
         this.firstName = firstName;
@@ -37,6 +37,16 @@ public class Reader {
         this.role = role;
         this.editionsList = editionsList;
         this.paymentsList = paymentsList;
+    }
+
+    public Reader(String firstName, String lastName, String phoneNumber, String email, String password, Role role) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
+        this.emailAddress = email;
+        this.password = password;
+        this.role = role;
+
     }
 
     public int getId() {
@@ -63,11 +73,11 @@ public class Reader {
         this.lastName = lastName;
     }
 
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
@@ -133,7 +143,7 @@ public class Reader {
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", phoneNumber=" + phoneNumber +
+                ", phoneNumber='" + phoneNumber + '\'' +
                 ", gender=" + gender +
                 ", birthDate=" + birthDate +
                 ", emailAddress='" + emailAddress + '\'' +

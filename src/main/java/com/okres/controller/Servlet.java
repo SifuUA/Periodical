@@ -51,6 +51,7 @@ public class Servlet extends HttpServlet {
         commands.put("edition", new EditionPage());
         commands.put("subscribe", new Subscribe());
         commands.put("readerSubscription", new ReaderSubscriptions());
+        commands.put("registerReader", new RegisterReader());
     }
 
     @Override

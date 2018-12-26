@@ -15,7 +15,8 @@ public class ReaderMapper implements ObjectMapper<Reader> {
         Reader reader = new Reader();
         reader.setId(rs.getInt("id"));
         reader.setFirstName(rs.getString("first_name"));
-        reader.setPhoneNumber(rs.getInt("phone_number"));
+        reader.setLastName(rs.getString("last_name"));
+        reader.setPhoneNumber(rs.getString("phone_number"));
         reader.setEmailAddress(rs.getString("email"));
         reader.setPassword(rs.getString("password"));
         reader.setRole(rs.getInt("role_id") == 1 ? Role.ADMIN : Role.READER);

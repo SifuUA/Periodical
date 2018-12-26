@@ -10,7 +10,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JDBCEditionDao implements EditionDao {
+public class    JDBCEditionDao implements EditionDao {
 
     private Connection connection;
 

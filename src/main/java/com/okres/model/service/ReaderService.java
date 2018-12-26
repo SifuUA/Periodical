@@ -6,6 +6,7 @@ import com.okres.model.entity.Reader;
 import com.okres.model.entity.enums.Role;
 
 import javax.servlet.http.HttpServletRequest;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -36,5 +37,21 @@ public class ReaderService {
     public Map<Integer, List<String>> getReaderPayments(HttpServletRequest request) {
         ReaderDao readerDao = daoFactory.createReaderDao();
         return readerDao.findRaderPayments();
+    }
+
+    public boolean readerIsRegistred(Reader reader) {
+        ReaderDao readerDao = daoFactory.createReaderDao();
+        Optional<Reader> foundReader = readerDao.findReaderByEmailAndPassword(reader.getEmailAddress(), reader.getPassword());
+        return foundReader.isPresent();
+    }
+
+    public void createReader(Reader reader) {
+        ReaderDao readerDao = daoFactory.createReaderDao();
+
+        try {
+            readerDao.create(reader);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
