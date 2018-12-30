@@ -26,4 +26,9 @@ public interface EditionDao extends GenericDao<Edition> {
     void close();
 
     void create(Edition entity, FileItem fileItem);
+
+    List<Edition> getLimitOfEditions(int start, int recordsPerPage);
+
+    int getCountOfEditions();
 }
+

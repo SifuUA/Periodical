@@ -10,7 +10,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class    JDBCEditionDao implements EditionDao {
+public class JDBCEditionDao implements EditionDao {
 
     private Connection connection;
 
@@ -34,6 +34,7 @@ public class    JDBCEditionDao implements EditionDao {
             e.printStackTrace();
         }
     }
+
 
     @Override
     public void create(Edition entity) {
@@ -77,20 +78,41 @@ public class    JDBCEditionDao implements EditionDao {
 
     }
 
-   /* @Override
-    public void putNewEdition(String editionName, int category, int price, FileItem file, String notation) {
+    @Override
+    public List<Edition> getLimitOfEditions(int start, int recordsPerPage) {
+        List<Edition> editionList = new ArrayList<>();
+        EditionMapper editionMapper = new EditionMapper();
+        ResultSet resultSet;
+
         try {
-            PreparedStatement preparedStatement = connection.
-                    prepareCall("INSERT INTO periodical.edition (name, category_id, image, price, notation) " +
-                            "VALUES (?, ?, ?, ?, ?)");
-            preparedStatement.setString(1, editionName);
-            preparedStatement.setInt(2, category);
-            preparedStatement.setBinaryStream(3, file.getInputStream(), (int) file.getSize());
-            preparedStatement.setInt(4, price);
-            preparedStatement.setString(5, notation);
-            preparedStatement.execute();
-        } catch (SQLException | IOException e) {
+            PreparedStatement preparedStatement =
+                    connection.prepareCall("SELECT * FROM periodical.edition LIMIT ?, ?");
+            preparedStatement.setInt(1, start);
+            preparedStatement.setInt(2, recordsPerPage);
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                editionList.add(editionMapper.extractFromResultSet(resultSet));
+            }
+
+        } catch (SQLException e) {
             e.printStackTrace();
         }
-    }*/
+        return editionList;
+    }
+
+    @Override
+    public int getCountOfEditions() {
+        ResultSet resultSet;
+        int count = 0;
+        try {
+            PreparedStatement preparedStatement = connection.prepareCall("SELECT COUNT(*) FROM periodical.edition");
+            resultSet = preparedStatement.executeQuery();
+            if (resultSet.next())
+                count = resultSet.getInt(1);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
 }

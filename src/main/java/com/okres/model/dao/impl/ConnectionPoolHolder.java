@@ -18,8 +18,8 @@ public class ConnectionPoolHolder {
                     ds.setDriverClassName("com.mysql.cj.jdbc.Driver");
                     ds.setUsername("phpmyadmin");
                     ds.setPassword("root");
-                    ds.setMinIdle(5);
-                    ds.setMaxIdle(10);
+                    ds.setMinIdle(10);
+                    ds.setMaxIdle(20);
                     ds.setMaxOpenPreparedStatements(100);
 
                     dataSource = ds;

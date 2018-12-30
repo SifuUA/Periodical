@@ -7,6 +7,7 @@ import com.okres.model.entity.Edition;
 import com.okres.model.entity.EditionCategory;
 import org.apache.commons.fileupload.FileItem;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class EditionService {
@@ -33,5 +34,23 @@ public class EditionService {
         try (EditionCategoryDao editionCategory = daoFactory.createEditionCategoryDao()) {
             return editionCategory.findAll();
         }
+    }
+
+    public List<Edition> viewAllEditions(int start, int recordsPerPage) {
+        DaoFactory daoFactory = DaoFactory.getInstance();
+
+        try (EditionDao editionDao = daoFactory.createEditionDao()) {
+
+            //int start = i * recordsPerPage - recordsPerPage;
+            return editionDao.getLimitOfEditions(start, recordsPerPage);
+        }
+    }
+
+    public int getNoOfRecords() {
+        DaoFactory daoFactory = DaoFactory.getInstance();
+
+        try (EditionDao editionDao = daoFactory.createEditionDao()) {
+            return editionDao.getCountOfEditions();}
+
     }
 }

@@ -5,6 +5,7 @@ import com.okres.model.entity.EditionCategory;
 import com.okres.model.service.EditionService;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLException;
 import java.util.*;
 
@@ -60,5 +61,37 @@ public class ServletUtility {
         List<EditionCategory> editionCategoryList = editionService.getAllGategories();
         System.out.println(servletContext.getAttribute("ct"));
         return editionCategoryList;
+    }
+
+    public List<Edition> viewAllEditions(int start, int recordsPerPage, HttpServletRequest request) {
+        int counter = 0;
+
+        List<Edition> editionList = (List<Edition>) request.getServletContext().getAttribute("editionList");
+        List<Edition> resultList = new ArrayList<>();
+
+        for (Edition edition : editionList) {
+            if (counter >= start && recordsPerPage > 0) {
+                resultList.add(edition);
+                recordsPerPage--;
+            }
+            counter++;
+        }
+        return resultList;
+    }
+
+    public Map<Edition, String> getLimitEditionImage(HttpServletRequest request, int start, int recordsPerPage) {
+        Map<Edition, String> encodeImages = (Map<Edition, String>) request.getServletContext().getAttribute("encodeImages");
+        Map<Edition, String> resultEditionImage = new HashMap<>();
+        int counter = 0;
+
+        for (Map.Entry<Edition, String> map : encodeImages.entrySet()) {
+            if (counter >= start && recordsPerPage > 0) {
+                resultEditionImage.put(map.getKey(), map.getValue());
+                recordsPerPage--;
+            }
+            counter++;
+        }
+
+        return resultEditionImage;
     }
 }

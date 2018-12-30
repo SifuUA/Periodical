@@ -24,7 +24,7 @@ import java.util.Map;
 public class Servlet extends HttpServlet {
 
     private Map<String, Command> commands = new HashMap<>();
-    private ReaderService readerService = new ReaderService();
+    //private ReaderService readerService = new ReaderService();
     private EditionService editionService = new EditionService();
     private List<Edition> editionList = editionService.getAllEditions();
     //!!!!//
