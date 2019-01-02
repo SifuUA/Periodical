@@ -25,7 +25,7 @@ public class MainPage implements Command {
         ServletUtility servletUtility = new ServletUtility();
 
         int page = 1;
-        int recordsPerPage = 5;
+        int recordsPerPage = 12;
         if (request.getParameter("page") != null) {
             page = Integer.parseInt(request.getParameter("page"));
         }

@@ -1,7 +1,6 @@
 package com.okres.model.dao.impl;
 
 import com.mysql.cj.jdbc.MysqlConnectionPoolDataSource;
-import org.apache.commons.dbcp.BasicDataSource;
 
 import javax.sql.DataSource;
 
@@ -22,7 +21,7 @@ public class ConnectionPoolHolder {
                             "&serverTimezone=UTC");
                     MysqlConnectionPoolDataSource pooledDataSource = new MysqlConnectionPoolDataSource();
                     pooledDataSource.setUrl(url);
-                    pooledDataSource.setUser("root");
+                    pooledDataSource.setUser("phpmyadmin");
                     pooledDataSource.setPassword("root");
                     dataSource = pooledDataSource;
                 }
@@ -42,8 +41,6 @@ public class ConnectionPoolHolder {
                             "&useJDBCCompliantTimezoneShift=true" +
                             "&useLegacyDatetimeCode=false" +
                             "&serverTimezone=UTC");
-
-
                     //jdbc:mysql://localhost/db?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
                     ds.setDriverClassName("com.mysql.cj.jdbc.Driver");
                     ds.setUsername("root");
@@ -51,7 +48,6 @@ public class ConnectionPoolHolder {
                     ds.setMinIdle(5);
                     ds.setMaxIdle(10);
                     ds.setMaxOpenPreparedStatements(100);
-
                     dataSource = ds;
                 }
             }
