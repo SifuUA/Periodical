@@ -119,7 +119,7 @@
 <hr>
 <br/>
 
-<table border="1" cellpadding="5" cellspacing="5" align="center">
+<table <%--border="1" cellpadding="5" cellspacing="5"--%> align="center">
     <tr>
         <c:if test="${currentPage != 1}">
             <td><a class="page-link" href="${pageContext.request.contextPath}/servlet/home?page=${currentPage - 1}">Previous</a></td>
@@ -138,10 +138,8 @@
             <td><a class="page-link" href="${pageContext.request.contextPath}/servlet/home?page=${currentPage + 1}">Next</a></td>
         </c:if>
     </tr>
-
 </table>
-
-<%--For displaying Next link --%>
+<br/>
 
 <footer id="footer" class="card-footer">
     <div class="row" align="center">

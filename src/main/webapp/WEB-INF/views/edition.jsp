@@ -30,11 +30,10 @@
         <h4>Category: ${edition.key.notation}</h4>
         <h4>Price: ${edition.key.price} $ / 1 month</h4>
 
-        <div class="container">
+       <%-- <div class="container">
             <a href="${pageContext.request.contextPath}/servlet/subscribe" class="btn btn-dark" role="button"
                style="margin: 20px; padding: 10px">Subscribe and register payment</a>
-        </div>
-
+        </div>--%>
         <div class="container">
             <a href="${pageContext.request.contextPath}/servlet/home" class="btn btn-dark" role="button"
                style="margin: 20px; padding: 10px">Move back</a>

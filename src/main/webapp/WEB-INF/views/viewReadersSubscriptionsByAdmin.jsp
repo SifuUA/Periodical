@@ -38,7 +38,11 @@
             <c:forEach var="redpay" items="${readersPayments.value}">
                 <td>${redpay}</td>
             </c:forEach>
-            <td><a href="${pageContext.request.contextPath}/servlet/admin/confirm">Confirm</a></td>
+            <c:set var="tmp" value="${readersPayments.key}"/>
+            <c:out value="${tmp}"/>
+            <td>
+                <a href="${pageContext.request.contextPath}/servlet/admin/confirm?item=${tmp}">Confirm</a>
+            </td>
         </tr>
     </c:forEach>
     </tbody>

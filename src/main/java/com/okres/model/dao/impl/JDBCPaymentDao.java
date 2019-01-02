@@ -63,4 +63,26 @@ public class JDBCPaymentDao implements PaymentDao {
     public void close() {
 
     }
+
+    @Override
+    public void confirmSubscription(String readerFirstName, String readerLastName, String editionName) {
+        try {
+            PreparedStatement preparedStatement =
+                    connection.prepareCall("UPDATE payment\n" +
+                            "SET approve = TRUE\n" +
+                            "WHERE payment.reader_id = (SELECT reader.id" +
+                            "                           FROM reader" +
+                            "                           WHERE first_name LIKE ?" +
+                            "                             AND last_name LIKE ?)" +
+                            "  AND payment.edition_id = (SELECT edition.id FROM edition WHERE name = ?)");
+
+            preparedStatement.setString(1, readerFirstName);
+            preparedStatement.setString(2, readerLastName);
+            preparedStatement.setString(3, editionName);
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -5,17 +5,27 @@ import com.okres.model.dao.PaymentDao;
 import com.okres.model.entity.Payment;
 
 import java.sql.SQLException;
+import java.util.List;
 
 public class PaymentService {
 
-    private DaoFactory daoFactory = DaoFactory.getInstance();
+    DaoFactory daoFactory = DaoFactory.getInstance();
+
 
     public void registerPayment(Payment payment) {
-        PaymentDao paymentDao = daoFactory.createPaymentDao();
-        try {
+
+        try (PaymentDao paymentDao = daoFactory.createPaymentDao()) {
+
             paymentDao.create(payment);
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+    }
+
+
+    public void confirm(List<String> payment) {
+        try (PaymentDao paymentDao = daoFactory.createPaymentDao()) {
+            paymentDao.confirmSubscription(payment.get(0), payment.get(1), payment.get(3));
         }
     }
 }

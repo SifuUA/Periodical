@@ -5,6 +5,7 @@ import com.okres.controller.command.Exception;
 import com.okres.controller.utils.ServletUtility;
 import com.okres.model.entity.Edition;
 import com.okres.model.service.EditionService;
+import com.okres.model.service.PaymentService;
 import com.okres.model.service.ReaderService;
 
 import javax.servlet.ServletConfig;
@@ -24,7 +25,6 @@ import java.util.Map;
 public class Servlet extends HttpServlet {
 
     private Map<String, Command> commands = new HashMap<>();
-    //private ReaderService readerService = new ReaderService();
     private EditionService editionService = new EditionService();
     private List<Edition> editionList = editionService.getAllEditions();
     //!!!!//
@@ -33,12 +33,16 @@ public class Servlet extends HttpServlet {
 
     @Override
     public void init(ServletConfig config) throws ServletException {
+         ReaderService readerService = new ReaderService();
+        PaymentService paymentService = new PaymentService();
+
+
         config.getServletContext().setAttribute("loggedUsers", new HashSet<String>());
         config.getServletContext().setAttribute("editionList", editionList);
         config.getServletContext().setAttribute("encodeImages", servletUtility.setEditionImage(config.getServletContext()));
         config.getServletContext().setAttribute("editionCategories", servletUtility.setCategory(config.getServletContext()));
 
-        commands.put("login", new Login(new ReaderService()));
+        commands.put("login", new Login(readerService));
         commands.put("home", new MainPage());
         commands.put("logout", new Logout());
         commands.put("admin", new AdminPage());
@@ -53,6 +57,8 @@ public class Servlet extends HttpServlet {
         commands.put("readerSubscription", new ReaderSubscriptions());
         commands.put("registerReader", new RegisterReader());
         commands.put("viewReadersSubscriptionsByAdmin", new AcceptSubscription());
+        commands.put("confirm", new ConfitmPayment(readerService, paymentService));
+        //commands.put("confirm", new ConfitmPayment());
     }
 
     @Override

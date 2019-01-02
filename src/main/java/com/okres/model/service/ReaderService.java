@@ -14,12 +14,11 @@ import java.util.Optional;
 public class ReaderService {
 
     private DaoFactory daoFactory = DaoFactory.getInstance();
+    private ReaderDao readerDao = daoFactory.createReaderDao();
 
     public Optional<Reader> getReaderByEmailAndPassword(String email, String password) {
         Optional<Reader> result;
-        try (ReaderDao readerDao = daoFactory.createReaderDao()) {
-            result = readerDao.findReaderByEmailAndPassword(email, password);
-        }
+        result = readerDao.findReaderByEmailAndPassword(email, password);
         return result;
     }
 
@@ -30,23 +29,19 @@ public class ReaderService {
     }
 
     public List<Reader> getAllreaders() {
-        ReaderDao readerDao = daoFactory.createReaderDao();
         return readerDao.findAll();
     }
 
     public Map<Integer, List<String>> getReaderPayments(int readerId) {
-        ReaderDao readerDao = daoFactory.createReaderDao();
         return readerDao.findReaderPayments(readerId);
     }
 
     public boolean readerIsRegistred(Reader reader) {
-        ReaderDao readerDao = daoFactory.createReaderDao();
         Optional<Reader> foundReader = readerDao.findReaderByEmailAndPassword(reader.getEmailAddress(), reader.getPassword());
         return foundReader.isPresent();
     }
 
     public void createReader(Reader reader) {
-        ReaderDao readerDao = daoFactory.createReaderDao();
 
         try {
             readerDao.create(reader);
@@ -56,7 +51,6 @@ public class ReaderService {
     }
 
     public Map<Integer, List<String>> getReadersPayments() {
-        ReaderDao readerDao = daoFactory.createReaderDao();
         return readerDao.findReadersPayments();
     }
 }

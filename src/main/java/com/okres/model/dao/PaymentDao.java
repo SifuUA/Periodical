@@ -23,4 +23,6 @@ public interface PaymentDao extends GenericDao<Payment>{
 
     @Override
     void close();
+
+    void confirmSubscription(String readerFirstName, String readerLastName, String phone);
 }
