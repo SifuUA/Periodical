@@ -36,6 +36,10 @@
                     <a href="${pageContext.request.contextPath}/servlet/subscribe" class="btn btn-dark" role="button"
                        style="margin: 20px; padding: 10px">Subscribe and register payment</a>
                 </c:when>
+                <c:when test="${role eq 'ADMIN'}">
+                    <a href="${pageContext.request.contextPath}/servlet/admin/delete?iId=${edition.key.id}" class="btn btn-dark" role="button"
+                       style="margin: 20px; padding: 10px">Delete edition</a>
+                </c:when>
                 <c:otherwise>
                     <a href="${pageContext.request.contextPath}/servlet/registration" class="btn btn-dark" role="button"
                        style="margin: 20px; padding: 10px">To subscribe you must be registred</a>

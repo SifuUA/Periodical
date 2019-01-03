@@ -52,13 +52,12 @@
 
 <div class="container" style="margin-top: 100px">
     <div class="row">
-        <c:forEach var="imgBase" items="${applicationScope.encodeImages}">
+        <c:forEach var="imgBase" items="${sessionScope.encodeImages}">
             <div class="col-lg-2 col-md-6 col-xs-6">
-                <a href="#" class="d-block mb-4 h-100">
+                <a href="${pageContext.request.contextPath}/servlet/admin?editionIndex=${imgBase.key.id}" class="d-block mb-4 h-100">
                     <img class="img-fluid img-thumbnail" src="data:image/jpeg;base64,${imgBase.value}" alt="">
                 </a>
             </div>
-
         </c:forEach>
     </div>
 </div>

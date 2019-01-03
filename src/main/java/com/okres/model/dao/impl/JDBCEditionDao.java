@@ -71,6 +71,15 @@ public class JDBCEditionDao implements EditionDao {
     @Override
     public void delete(int id) {
 
+        try {
+            PreparedStatement preparedStatement =
+                    connection.prepareStatement("DELETE FROM periodical.edition WHERE id=?");
+            preparedStatement.setInt(1, id);
+            preparedStatement.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Override

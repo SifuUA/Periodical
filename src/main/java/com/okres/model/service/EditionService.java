@@ -53,4 +53,10 @@ public class EditionService {
             return editionDao.getCountOfEditions();}
 
     }
+
+    public void deleteEditionById(int id) {
+        DaoFactory daoFactory = DaoFactory.getInstance();
+        EditionDao editionDao = daoFactory.createEditionDao();
+        editionDao.delete(id);
+    }
 }
