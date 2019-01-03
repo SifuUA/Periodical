@@ -33,7 +33,7 @@ public class Servlet extends HttpServlet {
 
     @Override
     public void init(ServletConfig config) throws ServletException {
-         ReaderService readerService = new ReaderService();
+        ReaderService readerService = new ReaderService();
         PaymentService paymentService = new PaymentService();
 
 
@@ -85,6 +85,9 @@ public class Servlet extends HttpServlet {
             path = path.replaceAll(".*/servlet/admin/", "");
         else if (path.matches("/servlet/home/[0-9]+")) {
             String index = path.replaceAll("/servlet/home/", "");
+            request.getSession().setAttribute("editionIndex", index);
+        } else if (path.matches("/servlet/reader/[0-9]+")) {
+            String index = path.replaceAll("/servlet/reader/", "");
             request.getSession().setAttribute("editionIndex", index);
         } else
             path = path.replaceAll(".*/servlet/", "");

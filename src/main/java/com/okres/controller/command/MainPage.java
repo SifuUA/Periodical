@@ -19,10 +19,11 @@ public class MainPage implements Command {
 
     private EditionService editionService = new EditionService();
     private int rows = editionService.getNoOfRecords();
+    private ServletUtility servletUtility = new ServletUtility();
+
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ServletUtility servletUtility = new ServletUtility();
 
         int page = 1;
         int recordsPerPage = 12;
@@ -31,15 +32,15 @@ public class MainPage implements Command {
         }
 
         int noOfPages = (int) Math.ceil(rows * 1.0 / recordsPerPage);
-        List<Edition> editionResultList = servletUtility.viewAllEditions((page - 1) * recordsPerPage,
-                recordsPerPage, request);
+       // List<Edition> editionResultList = servletUtility.viewAllEditions((page - 1) * recordsPerPage,
+         //       recordsPerPage, request);
         Map<Edition, String> limitEditionImage = servletUtility.getLimitEditionImage(request, (page - 1) * recordsPerPage, recordsPerPage);
 
-        request.setAttribute("editionResultList", editionResultList);
+        //request.setAttribute("editionResultList", editionResultList);
         //request.setAttribute("encodeImages", servletUtility.setEditionImage(editionList));
-        request.setAttribute("encodeImages", limitEditionImage);
-        request.setAttribute("numberOfPages", noOfPages);
-        request.setAttribute("currentPage", page);
+        request.getSession().setAttribute("encodeImages", limitEditionImage);
+        request.getSession().setAttribute("numberOfPages", noOfPages);
+        request.getSession().setAttribute("currentPage", page);
 
 
         HttpSession httpSession = request.getSession();

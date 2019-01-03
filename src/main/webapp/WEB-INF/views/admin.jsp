@@ -45,7 +45,7 @@
             <a class="btn btn-primary" href="${pageContext.request.contextPath}/servlet/admin/uploadForm" role="button">Add new edition</a>
             <a class="btn btn-primary" href="${pageContext.request.contextPath}/servlet/admin/viewReaders" role="button">View readers</a>
             <a class="btn btn-primary" href="${pageContext.request.contextPath}/servlet/admin/viewReadersSubscriptionsByAdmin" role="button">View subscriptions</a>
-            <%--<a class="btn btn-primary" href="#" role="button">Accept payments</a>--%>
+                <%--<a class="btn btn-primary" href="#" role="button">Accept payments</a>--%>
         </div>
     </div>
 </div>

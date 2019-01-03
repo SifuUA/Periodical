@@ -77,9 +77,9 @@
 <div class="container" style="margin-top: 100px">
     <div class="row">
         <%--<c:forEach var="imgBase" items="${requestScope.encodeImages}">--%>
-        <c:forEach var="imgBase" items="${applicationScope.encodeImages}">
+        <c:forEach var="imgBase" items="${sessionScope.encodeImages}">
             <div class="col-lg-2 col-md-6 col-xs-6">
-                <a href="${pageContext.request.contextPath}/servlet/home/${imgBase.key.id}" class="d-block mb-4 h-100">
+                <a href="${pageContext.request.contextPath}/servlet/reader/${imgBase.key.id}" class="d-block mb-4 h-100">
                     <img class="img-fluid img-thumbnail" src="data:image/jpeg;base64,${imgBase.value}" alt="">
                     <h6>${imgBase.key.editionName}</h6>
                         <%--<h6>${imgBase.key.id}</h6>--%>
@@ -91,17 +91,26 @@
 
 <hr>
 <br/>
-<div class="row text-center">
-    <div class="col-lg-12">
-        <ul class="pagination justify-content-center">
-            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" href="#">Next</a></li>
-        </ul>
-    </div>
-</div>
+<table <%--border="1" cellpadding="5" cellspacing="5"--%> align="center">
+    <tr>
+        <c:if test="${sessionScope.currentPage != 1}">
+            <td><a class="page-link" href="${pageContext.request.contextPath}/servlet/reader?page=${sessionScope.currentPage - 1}">Previous</a></td>
+        </c:if>
+        <c:forEach begin="1" end="${sessionScope.numberOfPages}" var="i">
+            <c:choose>
+                <c:when test="${sessionScope.currentPage eq i}">
+                    <td> <a class="page-link">${i}</a> </td>
+                </c:when>
+                <c:otherwise>
+                    <td><a class="page-link" href="${pageContext.request.contextPath}/servlet/reader?page=${i}">${i}</a></td>
+                </c:otherwise>
+            </c:choose>
+        </c:forEach>
+        <c:if test="${sessionScope.currentPage lt sessionScope.numberOfPages}">
+            <td><a class="page-link" href="${pageContext.request.contextPath}/servlet/reader?page=${sessionScope.currentPage + 1}">Next</a></td>
+        </c:if>
+    </tr>
+</table>
 <br/>
 <footer id="footer" class="card-footer">
     <div class="row" align="center">

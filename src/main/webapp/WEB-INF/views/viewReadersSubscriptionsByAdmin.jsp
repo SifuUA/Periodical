@@ -39,7 +39,7 @@
                 <td>${redpay}</td>
             </c:forEach>
             <c:set var="tmp" value="${readersPayments.key}"/>
-            <c:out value="${tmp}"/>
+            <%--<c:out value="${tmp}"/>--%>
             <td>
                 <a href="${pageContext.request.contextPath}/servlet/admin/confirm?item=${tmp}">Confirm</a>
             </td>
