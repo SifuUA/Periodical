@@ -52,6 +52,43 @@
 
 <div class="container" style="margin-top: 100px">
     <div class="row">
+        <%--<c:forEach var="imgBase" items="${requestScope.encodeImages}">--%>
+        <c:forEach var="imgBase" items="${sessionScope.encodeImages}">
+            <div class="col-lg-2 col-md-6 col-xs-6">
+                <a href="${pageContext.request.contextPath}/servlet/reader/${imgBase.key.id}" class="d-block mb-4 h-100">
+                    <img class="img-fluid img-thumbnail" src="data:image/jpeg;base64,${imgBase.value}" alt="">
+                    <h6>${imgBase.key.editionName}</h6>
+                        <%--<h6>${imgBase.key.id}</h6>--%>
+                </a>
+            </div>
+        </c:forEach>
+    </div>
+</div>
+
+<hr>
+<br/>
+<table <%--border="1" cellpadding="5" cellspacing="5"--%> align="center">
+    <tr>
+        <c:if test="${sessionScope.currentPage != 1}">
+            <td><a class="page-link" href="${pageContext.request.contextPath}/servlet/admin?page=${sessionScope.currentPage - 1}">Previous</a></td>
+        </c:if>
+        <c:forEach begin="1" end="${sessionScope.numberOfPages}" var="i">
+            <c:choose>
+                <c:when test="${sessionScope.currentPage eq i}">
+                    <td> <a class="page-link">${i}</a> </td>
+                </c:when>
+                <c:otherwise>
+                    <td><a class="page-link" href="${pageContext.request.contextPath}/servlet/admin?page=${i}">${i}</a></td>
+                </c:otherwise>
+            </c:choose>
+        </c:forEach>
+        <c:if test="${sessionScope.currentPage lt sessionScope.numberOfPages}">
+            <td><a class="page-link" href="${pageContext.request.contextPath}/servlet/admin?page=${sessionScope.currentPage + 1}">Next</a></td>
+        </c:if>
+    </tr>
+</table>
+<%--<div class="container" style="margin-top: 100px">
+    <div class="row">
         <c:forEach var="imgBase" items="${sessionScope.encodeImages}">
             <div class="col-lg-2 col-md-6 col-xs-6">
                 <a href="${pageContext.request.contextPath}/servlet/admin?editionIndex=${imgBase.key.id}" class="d-block mb-4 h-100">
@@ -60,7 +97,7 @@
             </div>
         </c:forEach>
     </div>
-</div>
+</div>--%>
 
 <script language="javascript" type="text/javascript"><c:import url="../../bootstrap/js/jquery-3.3.1.min.js"/> </script>
 <script language="javascript" type="text/javascript"><c:import url="../../bootstrap/js/bootstrap.min.js"/></script>

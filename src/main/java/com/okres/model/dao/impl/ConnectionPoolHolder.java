@@ -21,7 +21,7 @@ public class ConnectionPoolHolder {
                             "&serverTimezone=UTC");
                     MysqlConnectionPoolDataSource pooledDataSource = new MysqlConnectionPoolDataSource();
                     pooledDataSource.setUrl(url);
-                    pooledDataSource.setUser("phpmyadmin");
+                    pooledDataSource.setUser("root");
                     pooledDataSource.setPassword("root");
                     dataSource = pooledDataSource;
                 }

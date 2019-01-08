@@ -89,6 +89,9 @@ public class Servlet extends HttpServlet {
         } else if (path.matches("/servlet/reader/[0-9]+")) {
             String index = path.replaceAll("/servlet/reader/", "");
             request.getSession().setAttribute("editionIndex", index);
+        } else if (path.matches("/servlet/admin/[0-9]+")) {
+            String index = path.replaceAll("/servlet/admin/", "");
+            request.getSession().setAttribute("editionIndex", index);
         } else
             path = path.replaceAll(".*/servlet/", "");
 

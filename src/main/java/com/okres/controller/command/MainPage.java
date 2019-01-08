@@ -32,24 +32,22 @@ public class MainPage implements Command {
         }
 
         int noOfPages = (int) Math.ceil(rows * 1.0 / recordsPerPage);
-       // List<Edition> editionResultList = servletUtility.viewAllEditions((page - 1) * recordsPerPage,
-         //       recordsPerPage, request);
         Map<Edition, String> limitEditionImage = servletUtility.getLimitEditionImage(request, (page - 1) * recordsPerPage, recordsPerPage);
-
-        //request.setAttribute("editionResultList", editionResultList);
-        //request.setAttribute("encodeImages", servletUtility.setEditionImage(editionList));
         request.getSession().setAttribute("encodeImages", limitEditionImage);
         request.getSession().setAttribute("numberOfPages", noOfPages);
         request.getSession().setAttribute("currentPage", page);
 
-
-        HttpSession httpSession = request.getSession();
         String index = (String) request.getSession().getAttribute("editionIndex");
+        return getPath(request, index);
+    }
+
+    private String getPath(HttpServletRequest request, String index) {
+        HttpSession httpSession = request.getSession();
+
         if (index != null) {
             System.out.println(index);
             return "redirect: edition";
         }
-
         if (isNull(httpSession.getAttribute("role")))
             return "/WEB-INF/views/main.jsp";
 
