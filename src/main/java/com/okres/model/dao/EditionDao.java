@@ -3,6 +3,7 @@ package com.okres.model.dao;
 import com.okres.model.entity.Edition;
 import org.apache.commons.fileupload.FileItem;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public interface EditionDao extends GenericDao<Edition> {
@@ -20,7 +21,7 @@ public interface EditionDao extends GenericDao<Edition> {
     void update(Edition entity);
 
     @Override
-    void delete(int id);
+    void delete(int id) throws SQLException;
 
     @Override
     void close();

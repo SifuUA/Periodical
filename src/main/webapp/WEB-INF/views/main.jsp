@@ -35,7 +35,7 @@
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <c:forEach var="categ" items="${applicationScope.editionCategories}">
                             <a class="dropdown-item"
-                               href="${pageContext.request.contextPath}/servlet/home/${categ.category}">${categ.category}
+                               href="${pageContext.request.contextPath}/servlet/home?catId=${categ.categoryId}">${categ.category}
                             </a>
                         </c:forEach>
                     </div>

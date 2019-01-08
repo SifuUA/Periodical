@@ -69,17 +69,22 @@ public class JDBCEditionDao implements EditionDao {
     }
 
     @Override
-    public void delete(int id) {
-
+    public void delete(int id) throws SQLException {
         try {
-            PreparedStatement preparedStatement =
+            connection.setAutoCommit(false);
+            PreparedStatement paymentPreparedStatement =
+                    connection.prepareStatement("DELETE FROM periodical.payment WHERE edition_id=?");
+            PreparedStatement editionPreparedStatement =
                     connection.prepareStatement("DELETE FROM periodical.edition WHERE id=?");
-            preparedStatement.setInt(1, id);
-            preparedStatement.execute();
+            paymentPreparedStatement.setInt(1, id);
+            editionPreparedStatement.setInt(1, id);
+            paymentPreparedStatement.executeUpdate();
+            editionPreparedStatement.executeUpdate();
+            connection.commit();
         } catch (SQLException e) {
+            connection.rollback();
             e.printStackTrace();
         }
-
     }
 
     @Override

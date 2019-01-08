@@ -38,7 +38,7 @@ public class Servlet extends HttpServlet {
 
 
         config.getServletContext().setAttribute("loggedUsers", new HashSet<String>());
-        config.getServletContext().setAttribute("editionList", editionList);
+        config.getServletContext().setAttribute("editionList", editionService.getAllEditions());
         config.getServletContext().setAttribute("encodeImages", servletUtility.setEditionImage(config.getServletContext()));
         config.getServletContext().setAttribute("editionCategories", servletUtility.setCategory(config.getServletContext()));
 
@@ -95,7 +95,6 @@ public class Servlet extends HttpServlet {
         } else
             path = path.replaceAll(".*/servlet/", "");
 
-        //Command command = commands.getOrDefault(path, (req, res) -> "/WEB-INF/views/main.jsp");
         Command command = commands.getOrDefault(path, (req, res) -> "redirect: home");
         String page = command.execute(request, response);
 

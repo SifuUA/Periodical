@@ -57,6 +57,10 @@ public class EditionService {
     public void deleteEditionById(int id) {
         DaoFactory daoFactory = DaoFactory.getInstance();
         EditionDao editionDao = daoFactory.createEditionDao();
-        editionDao.delete(id);
+        try {
+            editionDao.delete(id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
