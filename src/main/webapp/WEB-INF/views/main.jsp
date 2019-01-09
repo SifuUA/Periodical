@@ -1,10 +1,16 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page pageEncoding="UTF-8" %>
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@ page isELIgnored="false" %>
+<%@ page session="true" %>
 
 
+<%--<c:set var="language" value="${not empty param.language ? param.language : not empty language ? language : pageContext.request.locale}" scope="session" />--%>
+<fmt:setLocale value="${sessionScope.lang}" />
+<fmt:setBundle basename="messages" />
 <!DOCTYPE html>
-<html lang="en">
+<html lang="${sessionScope.lang}">]
 <head>
     <!-- Required meta tags -->
     <meta charset="UTF-8">
@@ -19,9 +25,10 @@
 <body>
 
 <header>
+
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" role="navigation">
         <%--<div class="container">--%>
-        <a class="navbar-brand" href="${pageContext.request.contextPath}/servlet/home">Home</a>
+        <a class="navbar-brand" href="${pageContext.request.contextPath}/servlet/home"><fmt:message key="main.button.home"/></a>
         <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar">
             &#9776;
         </button>
@@ -30,7 +37,7 @@
                 <div class="dropdown">
                     <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Categories
+                        <fmt:message key="main.button.categories"/>
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <c:forEach var="categ" items="${applicationScope.editionCategories}">
@@ -41,12 +48,22 @@
                     </div>
                 </div>
             </ul>
+            <%--<form>
+                <select id="language" name="language" onchange="submit()">
+                    <option value="en" ${language == 'en' ? 'selected' : ''}>En</option>
+                    <option value="ua" ${language == 'ua' ? 'selected' : ''}>Ua</option>
+                </select>
+            </form>--%>
+            <ul>
+                <li><a href="?locale=en"><fmt:message key="label.lang.en" /></a></li>
+                <li><a href="?locale=ua"><fmt:message key="label.lang.ua" /></a></li>
+            </ul>
             <ul class="nav navbar-nav flex-row justify-content-between ml-auto">
                 <li class="nav-item order-2 order-md-1"><a href="#" class="nav-link" title="settings"><i
                         class="fa fa-cog fa-fw fa-lg"></i></a></li>
                 <li class="dropdown order-1">
                     <button type="button" id="dropdownMenu1" data-toggle="dropdown"
-                            class="btn btn-outline-secondary dropdown-toggle">Login <span class="caret"></span></button>
+                            class="btn btn-outline-secondary dropdown-toggle"><fmt:message key="main.button.login"/> <span class="caret"></span></button>
                     <ul class="dropdown-menu dropdown-menu-right mt-2">
                         <li class="px-3 py-2">
                             <form class="form" role="form" action="${pageContext.request.contextPath}/servlet/login"
@@ -68,7 +85,10 @@
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item"><a href="${pageContext.request.contextPath}/servlet/registration" class="nav-link">Registration</a>
+                <li class="nav-item">
+                    <a href="${pageContext.request.contextPath}/servlet/registration" class="nav-link">
+                    <fmt:message key="main.button.registration"/>
+                    </a>
                 </li>
             </ul>
         </div>
@@ -97,22 +117,22 @@
 
 <div class="container" style="margin-top: 100px">
     <div class="row">
-       <%-- <c:forEach var="imgBase" items="${applicationScope.encodeImages}">
+        <%-- <c:forEach var="imgBase" items="${applicationScope.encodeImages}">
+             <div class="col-lg-2 col-md-6 col-xs-6">
+                 <a href="#" class="d-block mb-4 h-100">
+                     <img class="img-fluid img-thumbnail" src="data:image/jpeg;base64,${imgBase}" alt="">
+                 </a>
+             </div>
+         </c:forEach>--%>
+        <c:forEach var="imgBase" items="${sessionScope.encodeImages}">
             <div class="col-lg-2 col-md-6 col-xs-6">
-                <a href="#" class="d-block mb-4 h-100">
-                    <img class="img-fluid img-thumbnail" src="data:image/jpeg;base64,${imgBase}" alt="">
+                <a href="${pageContext.request.contextPath}/servlet/home/${imgBase.key.id}" class="d-block mb-4 h-100">
+                    <img class="img-fluid img-thumbnail" src="data:image/jpeg;base64,${imgBase.value}" alt="">
+                    <h6>${imgBase.key.editionName}</h6>
+                        <%--<h6>${imgBase.key.id}</h6>--%>
                 </a>
             </div>
-        </c:forEach>--%>
-            <c:forEach var="imgBase" items="${sessionScope.encodeImages}">
-                <div class="col-lg-2 col-md-6 col-xs-6">
-                    <a href="${pageContext.request.contextPath}/servlet/home/${imgBase.key.id}" class="d-block mb-4 h-100">
-                        <img class="img-fluid img-thumbnail" src="data:image/jpeg;base64,${imgBase.value}" alt="">
-                        <h6>${imgBase.key.editionName}</h6>
-                        <%--<h6>${imgBase.key.id}</h6>--%>
-                    </a>
-                </div>
-            </c:forEach>
+        </c:forEach>
     </div>
 </div>
 
@@ -122,20 +142,25 @@
 <table <%--border="1" cellpadding="5" cellspacing="5"--%> align="center">
     <tr>
         <c:if test="${sessionScope.currentPage != 1}">
-            <td><a class="page-link" href="${pageContext.request.contextPath}/servlet/home?page=${sessionScope.currentPage - 1}">Previous</a></td>
+            <td><a class="page-link"
+                   href="${pageContext.request.contextPath}/servlet/home?page=${sessionScope.currentPage - 1}">Previous</a>
+            </td>
         </c:if>
         <c:forEach begin="1" end="${sessionScope.numberOfPages}" var="i">
             <c:choose>
                 <c:when test="${sessionScope.currentPage eq i}">
-                    <td> <a class="page-link">${i}</a> </td>
+                    <td><a class="page-link">${i}</a></td>
                 </c:when>
                 <c:otherwise>
-                    <td><a class="page-link" href="${pageContext.request.contextPath}/servlet/home?page=${i}">${i}</a></td>
+                    <td><a class="page-link" href="${pageContext.request.contextPath}/servlet/home?page=${i}">${i}</a>
+                    </td>
                 </c:otherwise>
             </c:choose>
         </c:forEach>
         <c:if test="${sessionScope.currentPage lt sessionScope.numberOfPages}">
-            <td><a class="page-link" href="${pageContext.request.contextPath}/servlet/home?page=${sessionScope.currentPage + 1}">Next</a></td>
+            <td><a class="page-link"
+                   href="${pageContext.request.contextPath}/servlet/home?page=${sessionScope.currentPage + 1}">Next</a>
+            </td>
         </c:if>
     </tr>
 </table>

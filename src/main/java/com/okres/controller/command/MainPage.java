@@ -25,6 +25,11 @@ public class MainPage implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        //TODO:Maybe implement sort by category
+        /*String currentCategory = request.getParameter("catId");
+        if (currentCategory != null)
+            request.getServletContext().setAttribute("editionList", editionService.getEditionsByCategory());*/
+
         int page = 1;
         int recordsPerPage = 12;
         if (request.getParameter("page") != null) {

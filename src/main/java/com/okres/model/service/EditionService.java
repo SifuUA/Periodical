@@ -9,6 +9,7 @@ import org.apache.commons.fileupload.FileItem;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 public class EditionService {
 
@@ -62,5 +63,11 @@ public class EditionService {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public Map<Edition, String> getEditionsByCategory() {
+
+
+        return null;
     }
 }
