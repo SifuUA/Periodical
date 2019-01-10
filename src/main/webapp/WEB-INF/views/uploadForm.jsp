@@ -21,10 +21,6 @@
 </head>
 <body>
 
-<%--<div class="container">
-    <a href="${pageContext.request.contextPath}/servlet/admin" class="btn btn-info" role="button"
-       style="margin-top: 20px; margin-left: 300px">Home</a>
-</div>--%>
 <div class="row">
     <%--1--%>
     <div class="container mt-3 col-sm-6">
