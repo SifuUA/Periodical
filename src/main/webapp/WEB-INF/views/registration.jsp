@@ -1,8 +1,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page pageEncoding="UTF-8" %>
+<%@ page contentType="text/html; charset=UTF-8" language="java" %>
+<%@ page isELIgnored="false" %>
+<%@ page session="true" %>
 
+
+<fmt:setLocale value="${sessionScope.lang}"/>
+<fmt:setBundle basename="messages"/>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="${sessionScope.lang}">
 <head>
     <!-- Required meta tags -->
     <meta charset="UTF-8">
@@ -15,7 +22,7 @@
 <body>
 
 <div class="container">
-    <a href="${pageContext.request.contextPath}/servlet/home" class="btn btn-info" role="button" style="margin-top: 20px">Home</a>
+    <a href="${pageContext.request.contextPath}/servlet/home" class="btn btn-info" role="button" style="margin-top: 20px"><fmt:message key="registration.home"/> </a>
 </div>
 <div class="container py-5">
     <div class="row">
@@ -25,48 +32,48 @@
                 <div class="col-md-6 mx-auto">
                     <div class="card rounded-0">
                         <div class="card-header">
-                            <h4 class="mb-0">Registration From</h4>
+                            <h4 class="mb-0"><fmt:message key="registration.title"/></h4>
                         </div>
                         <div class="card-body">
                             <form action="${pageContext.request.contextPath}/servlet/registerReader" method="get" class="form-horizontal" style="width: 800px">
                                 <fieldset>
                                     <!-- Text input-->
                                     <div class="form-group">
-                                        <label class="col-md-7 control-label" for="fname">First Name</label>
+                                        <label class="col-md-7 control-label" for="fname"><fmt:message key="registration.firstname"/></label>
                                         <div class="col-md-7">
-                                            <input id="fname" name="fname" type="text" placeholder="John"
+                                            <input id="fname" name="fname" type="text" placeholder=<fmt:message key="registration.firstname.hint"/>
                                                    class="form-control input-md"
                                                    required="">
                                         </div>
                                     </div>
                                     <!-- Text input-->
                                     <div class="form-group">
-                                        <label class="col-md-7 control-label" for="lname">Last Name</label>
+                                        <label class="col-md-7 control-label" for="lname"><fmt:message key="registration.lastname"/></label>
                                         <div class="col-md-7">
-                                            <input id="lname" name="lname" type="text" placeholder="Doe"
+                                            <input id="lname" name="lname" type="text" placeholder=<fmt:message key="registration.lastname.hint"/>
                                                    class="form-control input-md"
                                                    required="">
                                         </div>
                                     </div>
                                     <!-- Text input-->
                                     <div class="form-group">
-                                        <label class="col-md-7 control-label" for="phone">Phone number</label>
+                                        <label class="col-md-7 control-label" for="phone"><fmt:message key="registration.phone"/></label>
                                         <div class="col-md-7">
-                                            <input id="phone" name="phone" type="text" placeholder="380677777777"
+                                            <input id="phone" name="phone" type="text" placeholder=<fmt:message key="registration.phone.hint"/>
                                                    class="form-control input-md" required="">
                                         </div>
                                     </div>
                                     <!-- Text input-->
                                     <div class="form-group">
-                                        <label class="col-md-7 control-label" for="email">Email</label>
+                                        <label class="col-md-7 control-label" for="email"><fmt:message key="registration.email"/></label>
                                         <div class="col-md-7">
-                                            <input id="email" name="email" type="text" placeholder="johndoe@example.com"
+                                            <input id="email" name="email" type="text" placeholder=<fmt:message key="registration.email.hint"/>
                                                    class="form-control input-md" required="">
                                         </div>
                                     </div>
                                     <!-- Password input-->
                                     <div class="form-group">
-                                        <label class="col-md-7 control-label" for="password">Password</label>
+                                        <label class="col-md-7 control-label" for="password"><fmt:message key="registration.password"/></label>
                                         <div class="col-md-7">
                                             <input id="password" name="password" type="password" placeholder=""
                                                    class="form-control input-md"
@@ -77,8 +84,8 @@
                                     <div class="form-group">
                                         <label class="col-md-7 control-label" for="save"></label>
                                         <div class="col-md-8">
-                                            <button id="save" name="save" class="btn btn-success">Register</button>
-                                            <button id="clear" name="clear" class="btn btn-danger">Reset</button>
+                                            <button id="save" name="save" class="btn btn-success"><fmt:message key="registration.register"/></button>
+                                            <button id="clear" name="clear" class="btn btn-danger"><fmt:message key="registration.reset"/></button>
                                         </div>
                                     </div>
                                 </fieldset>
