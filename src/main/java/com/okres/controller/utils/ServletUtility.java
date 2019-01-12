@@ -97,13 +97,9 @@ public class ServletUtility {
         request.getSession().setAttribute("numberOfPages", noOfPages);
         request.getSession().setAttribute("currentPage", page);
 
-        String index = request.getParameter("editionIndex");
-        if (index != null) {
-            System.out.println(index);
-            request.getSession().setAttribute("editionIndex", index);
-            return true;
-        }
-        return false;
+        String index = request.getParameter("imageIndex");
+        request.getSession().setAttribute("imageIndex", index);
+        return index != null;
     }
 
 

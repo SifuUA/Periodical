@@ -13,13 +13,14 @@ public class EditionPage implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Map<Edition, String> map = (HashMap<Edition, String>) request.getServletContext().getAttribute("encodeImages");
-        findIamge(map, (String) request.getSession().getAttribute("editionIndex"), request);
+//        findImage(map, (String) request.getSession().getAttribute("editionIndex"), request);
+       findImage(map, String.valueOf(request.getSession().getAttribute ("imageIndex")), request);
         request.getSession().setAttribute("editionIndex", null);
 
         return "/WEB-INF/views/edition.jsp";
     }
 
-    private void findIamge(Map<Edition, String> map, String index, HttpServletRequest request) {
+    private void findImage(Map<Edition, String> map, String index, HttpServletRequest request) {
         int position = Integer.parseInt(index);
         Map<Edition, String> currentEdition = new HashMap<>();
 

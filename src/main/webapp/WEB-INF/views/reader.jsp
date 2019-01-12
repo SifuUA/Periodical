@@ -65,7 +65,7 @@
         <%--<c:forEach var="imgBase" items="${requestScope.encodeImages}">--%>
         <c:forEach var="imgBase" items="${sessionScope.encodeImages}">
             <div class="col-lg-2 col-md-6 col-xs-6">
-                <a href="${pageContext.request.contextPath}/servlet/reader/${imgBase.key.id}" class="d-block mb-4 h-100">
+                <a href="${pageContext.request.contextPath}/servlet/reader?imageIndex=${imgBase.key.id}" class="d-block mb-4 h-100">
                     <img class="img-fluid img-thumbnail" src="data:image/jpeg;base64,${imgBase.value}" alt="">
                     <h6>${imgBase.key.editionName}</h6>
                         <%--<h6>${imgBase.key.id}</h6>--%>

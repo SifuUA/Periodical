@@ -38,7 +38,9 @@ public class MainPage implements Command {
         request.getSession().setAttribute("currentPage", page);
         request.getServletContext().setAttribute("editionCategories", servletUtility.setCategory(request.getServletContext()));
 
-        String index = (String) request.getSession().getAttribute("editionIndex");
+        //String index = (String) request.getSession().getAttribute("editionIndex");
+        String index = request.getParameter("imageIndex");
+        request.getSession().setAttribute("imageIndex", index);
         return getPath(request, index);
     }
 
