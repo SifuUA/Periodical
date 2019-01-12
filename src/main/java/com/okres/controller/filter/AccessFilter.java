@@ -1,6 +1,5 @@
 package com.okres.controller.filter;
 
-import com.okres.controller.config.SecurityConfig;
 import com.okres.model.entity.enums.Role;
 
 import javax.servlet.*;
@@ -12,7 +11,7 @@ import java.io.IOException;
 
 import static java.util.Objects.nonNull;
 
-@WebFilter(value = {"/servlet/admin", "/servlet/reader"})
+@WebFilter(value = {"/servlet/admin/*", "/servlet/reader/*"})
 public class AccessFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -33,7 +32,7 @@ public class AccessFilter implements Filter {
                 filterChain.doFilter(req, res);
                 return;
             } else {
-                servletResponse.getWriter().append("AccessDenied");
+                req.getRequestDispatcher("/WEB-INF/views/errorPage.jsp").forward(req, res);
                 return;
             }
         } else if (requestUri.contains("reader")) {
@@ -42,7 +41,7 @@ public class AccessFilter implements Filter {
                 filterChain.doFilter(req, res);
                 return;
             } else {
-                servletResponse.getWriter().append("AccessDenied");
+                req.getRequestDispatcher("/WEB-INF/views/errorPage.jsp").forward(req, res);
                 return;
             }
         }

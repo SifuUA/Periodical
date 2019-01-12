@@ -48,15 +48,17 @@
                     </div>
                 </div>
             </ul>
-            <%--<form>
-                <select id="language" name="language" onchange="submit()">
-                    <option value="en" ${language == 'en' ? 'selected' : ''}>En</option>
-                    <option value="ua" ${language == 'ua' ? 'selected' : ''}>Ua</option>
-                </select>
-            </form>--%>
-            <ul>
-                <li><a href="?locale=en"><fmt:message key="label.lang.en"/></a></li>
-                <li><a href="?locale=ua"><fmt:message key="label.lang.ua"/></a></li>
+            <ul class="nav navbar-nav">
+                <div class="dropdown">
+                    <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton1"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <fmt:message key="main.button.lang"/>
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <a class="dropdown-item" href="?locale=en"><fmt:message key="label.lang.en"/></a>
+                            <a class="dropdown-item" href="?locale=ua"><fmt:message key="label.lang.ua"/></a>
+                    </div>
+                </div>
             </ul>
             <ul class="nav navbar-nav flex-row justify-content-between ml-auto">
                 <li class="nav-item order-2 order-md-1"><a href="#" class="nav-link" title="settings"><i
@@ -146,7 +148,8 @@
     <tr>
         <c:if test="${sessionScope.currentPage != 1}">
             <td><a class="page-link"
-                   href="${pageContext.request.contextPath}/servlet/home?page=${sessionScope.currentPage - 1}"><fmt:message key="button.previous"/></a>
+                   href="${pageContext.request.contextPath}/servlet/home?page=${sessionScope.currentPage - 1}"><fmt:message
+                    key="button.previous"/></a>
             </td>
         </c:if>
         <c:forEach begin="1" end="${sessionScope.numberOfPages}" var="i">
@@ -162,7 +165,8 @@
         </c:forEach>
         <c:if test="${sessionScope.currentPage lt sessionScope.numberOfPages}">
             <td><a class="page-link"
-                   href="${pageContext.request.contextPath}/servlet/home?page=${sessionScope.currentPage + 1}"><fmt:message key="button.next"/></a>
+                   href="${pageContext.request.contextPath}/servlet/home?page=${sessionScope.currentPage + 1}"><fmt:message
+                    key="button.next"/></a>
             </td>
         </c:if>
     </tr>

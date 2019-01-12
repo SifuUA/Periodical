@@ -24,12 +24,6 @@ public class MainPage implements Command {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        //TODO:Maybe implement sort by category
-        /*String currentCategory = request.getParameter("catId");
-        if (currentCategory != null)
-            request.getServletContext().setAttribute("editionList", editionService.getEditionsByCategory());*/
-
         int page = 1;
         int recordsPerPage = 12;
         if (request.getParameter("page") != null) {
@@ -37,7 +31,8 @@ public class MainPage implements Command {
         }
 
         int noOfPages = (int) Math.ceil(rows * 1.0 / recordsPerPage);
-        Map<Edition, String> limitEditionImage = servletUtility.getLimitEditionImage(request, (page - 1) * recordsPerPage, recordsPerPage);
+        Map<Edition, String> limitEditionImage =
+                servletUtility.getLimitEditionImage(request, (page - 1) * recordsPerPage, recordsPerPage);
         request.getSession().setAttribute("encodeImages", limitEditionImage);
         request.getSession().setAttribute("numberOfPages", noOfPages);
         request.getSession().setAttribute("currentPage", page);

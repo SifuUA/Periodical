@@ -54,20 +54,41 @@ public class ServletUtility {
     }
 
     public Map<Edition, String> getLimitEditionImage(HttpServletRequest request, int start, int recordsPerPage) {
+
+        String currentCategory = request.getParameter("catId");
+        boolean categoryFlag = false;
+        int category = 0;
+        if (currentCategory != null) {
+            categoryFlag = true;
+            category = Integer.parseInt(currentCategory);
+        }
+
+
         Map<Edition, String> encodeImages = (Map<Edition, String>) request.getServletContext().getAttribute("encodeImages");
         Map<Edition, String> resultEditionImage = new HashMap<>();
         int counter = 0;
 
         for (Map.Entry<Edition, String> map : encodeImages.entrySet()) {
             if (counter >= start && recordsPerPage > 0) {
-                resultEditionImage.put(map.getKey(), map.getValue());
-                recordsPerPage--;
+                if (categoryFlag && map.getKey().getCategory() == category) {
+                    resultEditionImage.put(map.getKey(), map.getValue());
+                    recordsPerPage--;
+                } else if (!categoryFlag){
+                    resultEditionImage.put(map.getKey(), map.getValue());
+                    recordsPerPage--;
+                }
             }
             counter++;
         }
 
         return resultEditionImage;
     }
+
+   /* public Map<Edition, String> setEditionsByCategory(HttpServletRequest request, String currentCategory) {
+        Map<Edition, String> result = editionService.getEditionsByCategory(Integer.parseInt(currentCategory));
+        request.getServletContext().setAttribute(String.valueOf(result), "encodeImages");
+        return
+    }*/
 
     public boolean getCurrentImages(HttpServletRequest request) {
 
@@ -91,4 +112,6 @@ public class ServletUtility {
         }
         return false;
     }
+
+
 }

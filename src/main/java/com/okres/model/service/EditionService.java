@@ -65,7 +65,7 @@ public class EditionService {
         }
     }
 
-    public Map<Edition, String> getEditionsByCategory() {
+    public Map<Edition, String> getEditionsByCategory(int i) {
 
 
         return null;

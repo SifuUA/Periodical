@@ -25,7 +25,7 @@
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" role="navigation">
         <%--<div class="container">--%>
-        <a class="navbar-brand" href="#"><fmt:message key="reader.main"/> </a>
+        <a class="navbar-brand" href="${pageContext.request.contextPath}/servlet/reader"><fmt:message key="reader.main"/> </a>
         <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar">
             &#9776;
         </button>
@@ -39,7 +39,7 @@
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <c:forEach var="categ" items="${applicationScope.editionCategories}">
                             <a class="dropdown-item"
-                               href="${pageContext.request.contextPath}/servlet/home/${categ.category}">${categ.category}
+                               href="${pageContext.request.contextPath}/servlet/reader?catId=${categ.categoryId}">${categ.category}
                             </a>
                         </c:forEach>
                     </div>
