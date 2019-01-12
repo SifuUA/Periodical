@@ -48,7 +48,7 @@
             <c:set var="tmp" value="${readersPayments.key}"/>
             <%--<c:out value="${tmp}"/>--%>
             <td>
-                <a href="${pageContext.request.contextPath}/servlet/admin/confirm?item=${tmp}"><fmt:message key="admin.subscriptions.accept" </a>
+                <a href="${pageContext.request.contextPath}/servlet/admin/confirm?item=${tmp}"><fmt:message key="admin.subscriptions.accept"/> </a>
             </td>
         </tr>
     </c:forEach>

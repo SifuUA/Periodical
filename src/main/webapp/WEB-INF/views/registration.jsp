@@ -85,7 +85,6 @@
                                         <label class="col-md-7 control-label" for="save"></label>
                                         <div class="col-md-8">
                                             <button id="save" name="save" class="btn btn-success"><fmt:message key="registration.register"/></button>
-                                            <button id="clear" name="clear" class="btn btn-danger"><fmt:message key="registration.reset"/></button>
                                         </div>
                                     </div>
                                 </fieldset>

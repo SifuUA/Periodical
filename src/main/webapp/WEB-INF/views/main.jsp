@@ -6,7 +6,6 @@
 <%@ page session="true" %>
 
 
-<%--<c:set var="language" value="${not empty param.language ? param.language : not empty language ? language : pageContext.request.locale}" scope="session" />--%>
 <fmt:setLocale value="${sessionScope.lang}"/>
 <fmt:setBundle basename="messages"/>
 <!DOCTYPE html>
@@ -173,7 +172,7 @@
 <footer id="footer" class="card-footer">
     <div class="row" align="center">
         <div class="col-lg-12">
-            <p><fmt:message key="main.footer.copyright"/> &copy; <fmt:message key="main.footer.company"/> 2018</p>
+            <p><fmt:message key="main.footer.copyright"/> &copy; <fmt:message key="main.footer.company"/> 2019</p>
         </div>
     </div>
 </footer>

@@ -28,6 +28,7 @@ public class JDBCReaderDao implements ReaderDao {
             connection.setAutoCommit(false);
             PreparedStatement preparedStatement =
                     connection.prepareStatement("INSERT INTO periodical.reader (first_name, last_name, phone_number, email, password, role_id) VALUES (?,?,?,?,?,?)");
+            System.out.println(read.toString());
             preparedStatement.setString(1, read.getFirstName());
             preparedStatement.setString(2, read.getLastName());
             preparedStatement.setString(3, read.getPhoneNumber());

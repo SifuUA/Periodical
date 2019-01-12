@@ -43,7 +43,7 @@
             <c:choose>
                 <c:when test="${role eq 'READER'}">
                     <a href="${pageContext.request.contextPath}/servlet/subscribe" class="btn btn-dark" role="button"
-                       style="margin: 20px; padding: 10px">Subscribe and register payment</a>
+                       style="margin: 20px; padding: 10px"><fmt:message key="reader.edition.subscribe"/></a>
                 </c:when>
                 <c:when test="${role eq 'ADMIN'}">
                     <a href="${pageContext.request.contextPath}/servlet/admin/delete?iId=${edition.key.id}"

@@ -1,9 +1,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page pageEncoding="UTF-8" %>
+<%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@ page isELIgnored="false" %>
+<%@ page session="true" %>
 
+
+<fmt:setLocale value="${sessionScope.lang}"/>
+<fmt:setBundle basename="messages"/>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="${sessionScope.lang}">
 <head>
     <!-- Required meta tags -->
     <meta charset="UTF-8">
@@ -19,7 +25,7 @@
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" role="navigation">
         <%--<div class="container">--%>
-        <a class="navbar-brand" href="#">Home</a>
+        <a class="navbar-brand" href="#"><fmt:message key="reader.main"/> </a>
         <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar">
             &#9776;
         </button>
@@ -28,7 +34,7 @@
                 <div class="dropdown">
                     <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Categories
+                        <fmt:message key="reader.categories"/>
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <c:forEach var="categ" items="${applicationScope.editionCategories}">
@@ -40,15 +46,15 @@
                 </div>
             </ul>
             <ul class="nav navbar-nav">
-                <li class="nav-item"><a href="${pageContext.request.contextPath}/servlet/readerSubscription" class="nav-link">My subscriptions</a></li>
+                <li class="nav-item"><a href="${pageContext.request.contextPath}/servlet/readerSubscription" class="nav-link"><fmt:message key="reader.subscriptions"/></a></li>
             </ul>
 
             <ul class="nav navbar-nav flex-row justify-content-between ml-auto">
                 <li class="nav-item order-2 order-md-1"><a href="#" class="nav-link" title="settings"><i
                         class="fa fa-cog fa-fw fa-lg"></i></a></li>
-                <li class="navbar-brand">Hello ${sessionScope.name}</li>
+                <li class="navbar-brand"><fmt:message key="reader.hello"/> ${sessionScope.name}</li>
                 <li class="nav-item"><a href="${pageContext.request.contextPath}/servlet/logout"
-                                        class="nav-link">Logout</a></li>
+                                        class="nav-link"><fmt:message key="reader.logout"/></a></li>
             </ul>
         </div>
         <%--</div>--%>
@@ -115,7 +121,7 @@
 <footer id="footer" class="card-footer">
     <div class="row" align="center">
         <div class="col-lg-12">
-            <p>Copyright &copy; Company 2018</p>
+            <p><fmt:message key="main.footer.copyright"/> &copy; <fmt:message key="main.footer.company"/> 2019</p>
         </div>
     </div>
 </footer>
