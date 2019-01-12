@@ -1,23 +1,5 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ page pageEncoding="UTF-8" %>
-<%@ page contentType="text/html; charset=UTF-8" language="java" %>
-<%@ page isELIgnored="false" %>
-<%@ page session="true" %>
-
-
-<fmt:setLocale value="${sessionScope.lang}"/>
-<fmt:setBundle basename="messages"/>
-<!DOCTYPE html>
-<html lang="${sessionScope.lang}">
-<head>
-    <!-- Required meta tags -->
-    <meta charset="UTF-8">
-    <!--    автоматическая подстройка сайта под разные девайсы-->
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Registration</title>
-
-    <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
+<%@include file="../templates/header.jspf" %>
+<title>Upload</title>
 </head>
 <body>
 
@@ -30,18 +12,20 @@
             <div class="form-group">
                 <label class="col-md-7 control-label" for="editionName"><fmt:message key="admin.editionname"/></label>
                 <div class="col-md-7">
-                    <input id="editionName" name="editionName" type="text" placeholder=<fmt:message key="admin.editionname.hint"/>
-                           class="form-control input-md"
-                           required="">
+                    <input id="editionName" name="editionName" type="text" placeholder=
+                    <fmt:message key="admin.editionname.hint"/>
+                            class="form-control input-md"
+                    required="">
                 </div>
             </div>
 
             <div class="form-group">
                 <label class="col-md-7 control-label" for="category"><fmt:message key="admin.editioncategory"/></label>
                 <div class="col-md-7">
-                    <input id="category" name="category" type="text" placeholder=<fmt:message key="admin.editioncategory.hint"/>
-                           class="form-control input-md"
-                           required="">
+                    <input id="category" name="category" type="text" placeholder=
+                    <fmt:message key="admin.editioncategory.hint"/>
+                            class="form-control input-md"
+                    required="">
                 </div>
             </div>
 
@@ -57,9 +41,10 @@
             <div class="form-group">
                 <label class="col-md-7 control-label" for="price"><fmt:message key="admin.editionnotation"/></label>
                 <div class="col-md-7">
-                    <input id="notation" name="notation" type="text" placeholder=<fmt:message key="admin.editionnotation.hint"/>
-                           class="form-control input-md"
-                           required="">
+                    <input id="notation" name="notation" type="text" placeholder=
+                    <fmt:message key="admin.editionnotation.hint"/>
+                            class="form-control input-md"
+                    required="">
                 </div>
             </div>
 
