@@ -29,6 +29,7 @@ public class Servlet extends HttpServlet {
     private List<Edition> editionList = editionService.getAllEditions();
     //!!!!//
     private ServletUtility servletUtility = new ServletUtility();
+    public static String langFlag;
 
 
     @Override
@@ -79,6 +80,9 @@ public class Servlet extends HttpServlet {
     }
 
     private void getCommand(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        langFlag = (String) request.getSession().getAttribute("lang");
+        System.out.println("langflag = " + langFlag);
+
         String path = request.getRequestURI();
         System.out.println(path);
         if (path.contains("admin/"))

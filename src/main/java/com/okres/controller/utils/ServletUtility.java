@@ -33,8 +33,7 @@ public class ServletUtility {
     }
 
     public List<EditionCategory> setCategory(ServletContext servletContext) {
-        List<EditionCategory> editionCategoryList = editionService.getAllGategories();
-        return editionCategoryList;
+        return editionService.getAllGategories();
     }
 
     public List<Edition> viewAllEditions(int start, int recordsPerPage, HttpServletRequest request) {
@@ -83,12 +82,6 @@ public class ServletUtility {
 
         return resultEditionImage;
     }
-
-   /* public Map<Edition, String> setEditionsByCategory(HttpServletRequest request, String currentCategory) {
-        Map<Edition, String> result = editionService.getEditionsByCategory(Integer.parseInt(currentCategory));
-        request.getServletContext().setAttribute(String.valueOf(result), "encodeImages");
-        return
-    }*/
 
     public boolean getCurrentImages(HttpServletRequest request) {
 

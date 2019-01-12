@@ -65,9 +65,10 @@ public class EditionService {
         }
     }
 
-    public Map<Edition, String> getEditionsByCategory(int i) {
-
-
-        return null;
-    }
+   /* public List<EditionCategory> getGategoriesByLang(String ua) {
+        DaoFactory daoFactory = DaoFactory.getInstance();
+        try (EditionCategoryDao editionCategory = daoFactory.createEditionCategoryDao()) {
+            return editionCategory.findAllUkrCategory();
+        }
+    }*/
 }

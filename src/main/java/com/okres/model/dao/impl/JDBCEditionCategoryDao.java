@@ -60,4 +60,6 @@ public class JDBCEditionCategoryDao implements EditionCategoryDao {
     public void close() {
 
     }
+
+
 }

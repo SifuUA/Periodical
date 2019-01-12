@@ -176,7 +176,7 @@
 <footer id="footer" class="card-footer">
     <div class="row" align="center">
         <div class="col-lg-12">
-            <p><fmt:message key="main.footer.copyright"/> &copy; <fmt:message key="main.footer.company"/> 2019</p>
+            <p><fmt:message key="main.footer.copyright"/> &copy; 2019 <fmt:message key="main.footer.company"/> </p>
         </div>
     </div>
 </footer>

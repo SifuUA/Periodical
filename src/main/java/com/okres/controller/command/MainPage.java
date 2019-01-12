@@ -36,6 +36,7 @@ public class MainPage implements Command {
         request.getSession().setAttribute("encodeImages", limitEditionImage);
         request.getSession().setAttribute("numberOfPages", noOfPages);
         request.getSession().setAttribute("currentPage", page);
+        request.getServletContext().setAttribute("editionCategories", servletUtility.setCategory(request.getServletContext()));
 
         String index = (String) request.getSession().getAttribute("editionIndex");
         return getPath(request, index);
