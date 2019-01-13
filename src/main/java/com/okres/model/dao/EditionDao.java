@@ -6,6 +6,13 @@ import org.apache.commons.fileupload.FileItem;
 import java.sql.SQLException;
 import java.util.List;
 
+/**
+ * @author O.Kres
+ * @version 1.0
+ * @project Periodical
+ * @since 1/13/2019
+ */
+
 public interface EditionDao extends GenericDao<Edition> {
 
     @Override

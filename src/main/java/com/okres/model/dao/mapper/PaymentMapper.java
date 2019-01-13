@@ -4,17 +4,17 @@ import com.okres.model.entity.Payment;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Map;
+
+/**
+ * @author O.Kres
+ * @version 1.0
+ * @project Periodical
+ * @since 1/13/2019
+ */
 
 public class PaymentMapper implements ObjectMapper<Payment> {
-
     @Override
-    public Payment extractFromResultSet(ResultSet rs) throws SQLException {
-        return null;
-    }
-
-    @Override
-    public Payment makeUnique(Map<Integer, Payment> cache, Payment teacher) {
+    public Payment extractFromResultSet(ResultSet rs) {
         return null;
     }
 }

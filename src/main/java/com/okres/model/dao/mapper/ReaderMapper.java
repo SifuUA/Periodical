@@ -5,13 +5,18 @@ import com.okres.model.entity.enums.Role;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Map;
+
+/**
+ * @author O.Kres
+ * @version 1.0
+ * @project Periodical
+ * @since 1/13/2019
+ */
 
 public class ReaderMapper implements ObjectMapper<Reader> {
 
     @Override
     public Reader extractFromResultSet(ResultSet rs) throws SQLException {
-
         Reader reader = new Reader();
         reader.setId(rs.getInt("id"));
         reader.setFirstName(rs.getString("first_name"));
@@ -21,12 +26,5 @@ public class ReaderMapper implements ObjectMapper<Reader> {
         reader.setPassword(rs.getString("password"));
         reader.setRole(rs.getInt("role_id") == 1 ? Role.ADMIN : Role.READER);
         return reader;
-    }
-
-    @Override
-    public Reader makeUnique(Map<Integer, Reader> cache, Reader reader) {
-
-        cache.putIfAbsent(reader.getId(), reader);
-        return cache.get(reader.getId());
     }
 }

@@ -4,13 +4,18 @@ import com.okres.model.entity.Edition;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Map;
+
+/**
+ * @author O.Kres
+ * @version 1.0
+ * @project Periodical
+ * @since 1/13/2019
+ */
 
 public class EditionMapper implements ObjectMapper<Edition> {
 
     @Override
     public Edition extractFromResultSet(ResultSet rs) throws SQLException {
-
         Edition edition = new Edition();
         edition.setId(rs.getInt("id"));
         edition.setEditionName(rs.getString("name"));
@@ -19,12 +24,5 @@ public class EditionMapper implements ObjectMapper<Edition> {
         edition.setPrice(rs.getInt("price"));
         edition.setNotation(rs.getString("notation"));
         return edition;
-    }
-
-    @Override
-    public Edition makeUnique(Map<Integer, Edition> cache, Edition edition) {
-
-        cache.putIfAbsent(edition.getId(), edition);
-        return cache.get(edition.getId());
     }
 }

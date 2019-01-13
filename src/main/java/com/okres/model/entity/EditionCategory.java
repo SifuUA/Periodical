@@ -1,5 +1,12 @@
 package com.okres.model.entity;
 
+/**
+ * @author O.Kres
+ * @version 1.0
+ * @project Periodical
+ * @since 1/13/2019
+ */
+
 public class EditionCategory {
     private int categoryId;
     private String category;

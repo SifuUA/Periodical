@@ -4,6 +4,13 @@ import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author O.Kres
+ * @version 1.0
+ * @project Periodical
+ * @since 1/13/2019
+ */
+
 public class Edition {
     private int id;
     private String editionName;

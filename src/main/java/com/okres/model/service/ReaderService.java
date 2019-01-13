@@ -4,15 +4,22 @@ import com.okres.model.dao.DaoFactory;
 import com.okres.model.dao.ReaderDao;
 import com.okres.model.entity.Reader;
 import com.okres.model.entity.enums.Role;
+import org.apache.log4j.Logger;
 
-import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-public class ReaderService {
+/**
+ * @author O.Kres
+ * @version 1.0
+ * @project Periodical
+ * @since 1/13/2019
+ */
 
+public class ReaderService {
+    private static Logger logger = Logger.getLogger(ReaderService.class);
     private DaoFactory daoFactory = DaoFactory.getInstance();
     private ReaderDao readerDao = daoFactory.createReaderDao();
 
@@ -20,12 +27,6 @@ public class ReaderService {
         Optional<Reader> result;
         result = readerDao.findReaderByEmailAndPassword(email, password);
         return result;
-    }
-
-    public Reader createGuestReader() {
-        Reader reader = new Reader();
-        reader.setRole(Role.GUEST);
-        return reader;
     }
 
     public List<Reader> getAllreaders() {
@@ -42,11 +43,10 @@ public class ReaderService {
     }
 
     public void createReader(Reader reader) {
-
         try {
             readerDao.create(reader);
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error("Cant crete reader: " + e);
         }
     }
 

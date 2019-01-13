@@ -1,14 +1,19 @@
 package com.okres.model.dao.mapper;
 
 import com.okres.controller.Servlet;
-import com.okres.controller.utils.ServletUtility;
 import com.okres.model.entity.EditionCategory;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Map;
 
 import static java.util.Objects.nonNull;
+
+/**
+ * @author O.Kres
+ * @version 1.0
+ * @project Periodical
+ * @since 1/13/2019
+ */
 
 public class EditionCategoryMapper implements ObjectMapper<EditionCategory> {
     @Override
@@ -21,12 +26,5 @@ public class EditionCategoryMapper implements ObjectMapper<EditionCategory> {
         else
             editionCategory.setCategory(rs.getString("category"));
         return editionCategory;
-    }
-
-    @Override
-    public EditionCategory makeUnique(Map<Integer, EditionCategory> cache, EditionCategory editionCategory) {
-
-        cache.putIfAbsent(editionCategory.getCategoryId(), editionCategory);
-        return cache.get(editionCategory.getCategoryId());
     }
 }

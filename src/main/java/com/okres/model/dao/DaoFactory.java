@@ -2,6 +2,13 @@ package com.okres.model.dao;
 
 import com.okres.model.dao.impl.JDBCDaoFactory;
 
+/**
+ * @author O.Kres
+ * @version 1.0
+ * @project Periodical
+ * @since 1/13/2019
+ */
+
 public abstract class DaoFactory {
 
     private static DaoFactory daoFactory;

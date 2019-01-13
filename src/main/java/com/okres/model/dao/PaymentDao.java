@@ -5,7 +5,14 @@ import com.okres.model.entity.Payment;
 import java.sql.SQLException;
 import java.util.List;
 
-public interface PaymentDao extends GenericDao<Payment>{
+/**
+ * @author O.Kres
+ * @version 1.0
+ * @project Periodical
+ * @since 1/13/2019
+ */
+
+public interface PaymentDao extends GenericDao<Payment> {
     @Override
     void create(Payment entity) throws SQLException;
 
