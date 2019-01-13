@@ -1,4 +1,10 @@
 package com.okres.controller;
+/**
+ * @author O.Kres
+ * @project Periodical
+ * @version 1.0
+ * @since 1/13/2019
+ */
 
 import com.okres.controller.command.*;
 import com.okres.controller.command.Exception;
