@@ -1,28 +1,28 @@
 package com.okres.controller.command;
 
-import com.okres.model.entity.enums.Role;
+import org.apache.log4j.Logger;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
 
-import static java.util.Objects.nonNull;
+/**
+ * @author O.Kres
+ * @version 1.0
+ * @project Periodical
+ * @since 1/13/2019
+ */
 
 public class Logout implements Command {
+    private static Logger logger = Logger.getLogger(Logout.class);
 
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public String execute(HttpServletRequest request, HttpServletResponse response) {
         request.getSession().removeAttribute("role");
         HttpSession session = request.getSession();
+        logger.info("User: " + request.getSession().getAttribute("reader") + " is logout. " +
+                "Session " + session.getId() + " " + session.getCreationTime() + " is invalidated");
         session.invalidate();
         return "redirect: home";
-    }
-
-
-    private boolean isHasRights(HttpServletRequest request) {
-        Role currentRole = (Role) request.getSession().getAttribute("role");
-        return nonNull(currentRole) && (currentRole.equals(Role.ADMIN) || currentRole.equals(Role.READER));
     }
 }

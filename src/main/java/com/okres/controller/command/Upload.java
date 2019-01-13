@@ -7,47 +7,53 @@ import org.apache.commons.fileupload.FileItemFactory;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.log4j.Logger;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.Iterator;
 import java.util.List;
+
+
+/**
+ * @author O.Kres
+ * @version 1.0
+ * @project Periodical
+ * @since 1/13/2019
+ */
 
 @MultipartConfig(location = "/tmp", fileSizeThreshold = 1024 * 1024,
         maxFileSize = 1024 * 1024 * 5, maxRequestSize = 1024 * 1024 * 5 * 5)
 public class Upload implements Command {
-
+    private static final Logger logger = Logger.getLogger(Upload.class);
     private FileItem file = null;
     private EditionService editionService = new EditionService();
     private Edition edition = new Edition();
 
+    /**
+     * Method for upload image to DB (insert new Edition)
+     *
+     * @return main admin page
+     */
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+    public String execute(HttpServletRequest request, HttpServletResponse response) {
         response.setContentType("text/html;charset=UTF-8");
         try {
-            long maxFileSize = (2 * 1024 * 1024);
-            int maxMemSize = (2 * 1024 * 1024);
             boolean isMultiPart = ServletFileUpload.isMultipartContent(request);
             if (isMultiPart) {
                 FileItemFactory factory = new DiskFileItemFactory();
                 ServletFileUpload upload = new ServletFileUpload(factory);
                 List items = upload.parseRequest(request);
-                Iterator<FileItem> iter = items.iterator();
-                while (iter.hasNext()) {
-                    FileItem fileItem = iter.next();
-                    if (fileItem.isFormField()) {
+                for (FileItem fileItem : (Iterable<FileItem>) items) {
+                    if (fileItem.isFormField())
                         processFormField(fileItem);
-                    } else
+                    else
                         file = fileItem;
                 }
                 editionService.inputEditionData(edition, file);
             }
         } catch (FileUploadException e) {
-            e.printStackTrace();
+            logger.error("Error when try to upload image to DB: " + e);
         }
         return "/WEB-INF/views/admin.jsp";
     }
@@ -62,5 +68,4 @@ public class Upload implements Command {
         } else if (item.getFieldName().equals("notation"))
             edition.setNotation(item.getString());
     }
-
 }

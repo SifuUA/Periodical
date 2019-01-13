@@ -3,12 +3,16 @@ package com.okres.controller.command;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import static java.lang.System.out;
+/**
+ * @author O.Kres
+ * @version 1.0
+ * @project Periodical
+ * @since 1/13/2019
+ */
 
 public class Exception implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
-
         return "/WEB-INF/views/errorPage.jsp";
     }
 }

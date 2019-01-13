@@ -57,7 +57,7 @@ public class Servlet extends HttpServlet {
         commands.put("readerSubscription", new ReaderSubscriptions());
         commands.put("registerReader", new RegisterReader());
         commands.put("viewReadersSubscriptionsByAdmin", new AcceptSubscription());
-        commands.put("confirm", new ConfitmPayment(readerService, paymentService));
+        commands.put("confirm", new ConfirmPayment(readerService, paymentService));
         commands.put("delete", new DeleteEdition());
     }
 
