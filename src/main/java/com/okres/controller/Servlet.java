@@ -6,6 +6,7 @@ import com.okres.controller.utils.ServletUtility;
 import com.okres.model.service.EditionService;
 import com.okres.model.service.PaymentService;
 import com.okres.model.service.ReaderService;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -21,6 +22,7 @@ import java.util.concurrent.ConcurrentHashMap;
 @WebServlet(urlPatterns = "/servlet/*")
 public class Servlet extends HttpServlet {
     private Map<String, Command> commands = new ConcurrentHashMap<>();
+    private static final Logger logger = Logger.getLogger(Servlet.class);
     public static String langFlag;
 
     @Override
@@ -34,7 +36,6 @@ public class Servlet extends HttpServlet {
         config.getServletContext().setAttribute("editionList", editionService.getAllEditions());
         config.getServletContext().setAttribute("encodeImages", servletUtility.setEditionImage(config.getServletContext()));
         config.getServletContext().setAttribute("editionCategories", servletUtility.setCategory(config.getServletContext()));
-
         commands.put("login", new Login(readerService));
         commands.put("home", new MainPage());
         commands.put("logout", new Logout());
@@ -64,13 +65,27 @@ public class Servlet extends HttpServlet {
         processRequest(req, resp);
     }
 
+
+    /**
+     * One method for process doGet and doPost requests and response
+     *
+     * @see #doGet(HttpServletRequest, HttpServletResponse)
+     * @see #doPost(HttpServletRequest, HttpServletResponse)
+     */
     private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        langFlag = (String) request.getSession().getAttribute("lang");
+        logger.info("Choose language: " + langFlag);
         getCommand(request, response);
     }
 
-    private void getCommand(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        langFlag = (String) request.getSession().getAttribute("lang");
 
+    /**
+     * Control and process all requests from browser
+     * and choose correct command that is created in
+     *
+     * @see #init(ServletConfig)
+     */
+    private void getCommand(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String path = request.getRequestURI();
         if (path.contains("admin/"))
             path = path.replaceAll(".*/servlet/admin/", "");
@@ -81,9 +96,12 @@ public class Servlet extends HttpServlet {
         String page = command.execute(request, response);
         if (page.contains("redirect:")) {
             String destination = page.replaceAll("redirect: ", "");
+            logger.info("Redirect on chosen command: " + destination);
             response.sendRedirect(request.getContextPath() + "/servlet/" + destination);
-        } else
+        } else {
             request.getRequestDispatcher(page).forward(request, response);
+            logger.info("Forward on page: " + page);
+        }
     }
 }
 

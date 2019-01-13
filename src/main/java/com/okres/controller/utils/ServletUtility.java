@@ -28,7 +28,6 @@ public class ServletUtility {
                 e.printStackTrace();
             }
         }
-        //return encodeImages;
         return editionWithImage;
     }
 
@@ -72,7 +71,7 @@ public class ServletUtility {
                 if (categoryFlag && map.getKey().getCategory() == category) {
                     resultEditionImage.put(map.getKey(), map.getValue());
                     recordsPerPage--;
-                } else if (!categoryFlag){
+                } else if (!categoryFlag) {
                     resultEditionImage.put(map.getKey(), map.getValue());
                     recordsPerPage--;
                 }
@@ -101,6 +100,4 @@ public class ServletUtility {
         request.getSession().setAttribute("imageIndex", index);
         return index != null;
     }
-
-
 }

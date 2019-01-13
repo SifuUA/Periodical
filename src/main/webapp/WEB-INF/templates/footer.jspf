@@ -1,6 +1,9 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
+
+
 <br/>
 <footer id="footer" class="card-footer">
+
     <div class="row" align="center">
         <div class="col-lg-12">
             <p><fmt:message key="main.footer.copyright"/> &copy; 2019 <fmt:message key="main.footer.company"/> </p>
