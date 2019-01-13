@@ -3,7 +3,6 @@ package com.okres.model.dao.mapper;
 import com.okres.model.entity.Payment;
 
 import java.sql.ResultSet;
-import java.sql.SQLException;
 
 /**
  * @author O.Kres
