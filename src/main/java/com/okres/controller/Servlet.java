@@ -1,10 +1,4 @@
 package com.okres.controller;
-/**
- * @author O.Kres
- * @project Periodical
- * @version 1.0
- * @since 1/13/2019
- */
 
 import com.okres.controller.command.*;
 import com.okres.controller.command.Exception;
@@ -25,6 +19,12 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * @author O.Kres
+ * @version 1.0
+ * @project Periodical
+ * @since 1/13/2019
+ */
 @WebServlet(urlPatterns = "/servlet/*")
 public class Servlet extends HttpServlet {
     private Map<String, Command> commands = new ConcurrentHashMap<>();

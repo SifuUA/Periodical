@@ -11,17 +11,22 @@ import java.io.IOException;
 
 import static java.util.Objects.nonNull;
 
+/**
+ * @author O.Kres
+ * @version 1.0
+ * @project Periodical
+ * @since 1/13/2019
+ */
+
 @WebFilter(value = {"/servlet/admin/*", "/servlet/reader/*"})
 public class AccessFilter implements Filter {
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
-
+    public void init(FilterConfig filterConfig) {
     }
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
             throws IOException, ServletException {
-
         final HttpServletRequest req = (HttpServletRequest) servletRequest;
         final HttpServletResponse res = (HttpServletResponse) servletResponse;
         HttpSession session = req.getSession();

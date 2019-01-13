@@ -1,10 +1,6 @@
+
 package com.okres.controller.utils;
-/**
- * @author O.Kres
- * @project Periodical
- * @version 1.0
- * @since 1/13/2019
- */
+
 
 import com.okres.model.entity.Edition;
 import com.okres.model.entity.EditionCategory;
@@ -17,7 +13,12 @@ import java.sql.SQLException;
 import java.util.*;
 
 import static java.util.Objects.nonNull;
-
+/**
+ * @author O.Kres
+ * @project Periodical
+ * @version 1.0
+ * @since 1/13/2019
+ */
 public class ServletUtility {
     private EditionService editionService = new EditionService();
 
