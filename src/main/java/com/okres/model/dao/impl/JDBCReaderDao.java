@@ -4,31 +4,38 @@ import com.okres.model.dao.ReaderDao;
 import com.okres.model.dao.mapper.ReaderMapper;
 import com.okres.model.entity.Reader;
 import com.okres.model.entity.enums.Role;
+import com.okres.model.service.PropertyHolder;
+import org.apache.log4j.Logger;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 
+/**
+ * @author O.Kres
+ * @version 1.0
+ * @project Periodical
+ * @since 1/13/2019
+ */
+
 public class JDBCReaderDao implements ReaderDao {
-
     private Connection connection;
+    private PropertyHolder propertyHolder = new PropertyHolder();
+    private static Logger logger = Logger.getLogger(JDBCReaderDao.class);
 
-
-    public JDBCReaderDao(Connection connection) {
+    JDBCReaderDao(Connection connection) {
         this.connection = connection;
     }
-
-    ResultSet resultSet;
 
     @Override
     public void create(Reader read) throws SQLException {
         try {
             connection.setAutoCommit(false);
             PreparedStatement preparedStatement =
-                    connection.prepareStatement("INSERT INTO periodical.reader (first_name, last_name, phone_number, email, password, role_id) VALUES (?,?,?,?,?,?)");
-            System.out.println(read.toString());
+                    connection.prepareStatement(propertyHolder.getPropValues("insert.into.reader"));
             preparedStatement.setString(1, read.getFirstName());
             preparedStatement.setString(2, read.getLastName());
             preparedStatement.setString(3, read.getPhoneNumber());
@@ -37,16 +44,10 @@ public class JDBCReaderDao implements ReaderDao {
             preparedStatement.setInt(6, read.getRole().equals(Role.ADMIN) ? 1 : 0);
             preparedStatement.executeUpdate();
             connection.commit();
-        } catch (SQLException e) {
+        } catch (SQLException | IOException e) {
             connection.rollback();
-            e.printStackTrace();
+            logger.error("Cant insert reader: " + e);
         }
-
-    }
-
-    @Override
-    public Reader findById(int id) {
-        return null;
     }
 
     @Override
@@ -56,52 +57,30 @@ public class JDBCReaderDao implements ReaderDao {
         ResultSet resultSet;
         ReaderMapper readerMapper = new ReaderMapper();
         try {
-            preparedStatement = connection.prepareCall("SELECT * FROM periodical.reader where role_id = 0");
+            preparedStatement = connection.prepareCall(propertyHolder.getPropValues("select.reader"));
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 readers.add(readerMapper.extractFromResultSet(resultSet));
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException | IOException e) {
+            logger.error("Cant select reader by role: " + e);
         }
         return readers;
-    }
-
-    @Override
-    public void update(Reader entity) {
-
-    }
-
-    @Override
-    public void delete(int id) {
-
-    }
-
-    @Override
-    public void close() {
-
     }
 
     @Override
     public Map<Integer, List<String>> findReaderPayments(int reader_id) {
         Map<Integer, List<String>> result = new HashMap<>();
         int count = 0;
-
         try {
             PreparedStatement preparedStatement =
-                    connection.prepareStatement(
-                            "SELECT r.first_name, r.last_name, r.phone_number, e.name, e.price, p.approve\n" +
-                                    "FROM periodical.reader AS r, periodical.payment AS p, periodical.edition AS e, periodical.edition_category AS ec\n" +
-                                    "WHERE r.id = p.reader_id AND r.role_id = 0 AND e.id = p.edition_id AND e.category_id = ec.category_id AND r.id = ?");
-
+                    connection.prepareStatement(propertyHolder.getPropValues("select.reader.payments"));
             preparedStatement.setInt(1, reader_id);
             ResultSet resultSet = preparedStatement.executeQuery();
             getSubscriptions(result, count, resultSet);
-
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException | IOException e) {
+            logger.error("Cant select reader payments by reader id: " + reader_id + " " + e);
         }
-
         return result;
     }
 
@@ -109,20 +88,14 @@ public class JDBCReaderDao implements ReaderDao {
     public Map<Integer, List<String>> findReadersPayments() {
         Map<Integer, List<String>> result = new HashMap<>();
         int count = 0;
-
         try {
             PreparedStatement preparedStatement =
-                    connection.prepareStatement(
-                            "SELECT r.first_name, r.last_name, r.phone_number, e.name, e.price, p.approve\n" +
-                                    "FROM periodical.reader AS r, periodical.payment AS p, periodical.edition AS e, periodical.edition_category AS ec\n" +
-                                    "WHERE r.id = p.reader_id AND r.role_id = 0 AND e.id = p.edition_id AND e.category_id = ec.category_id");
-
+                    connection.prepareStatement(propertyHolder.getPropValues("select.reader.payments.all"));
             ResultSet resultSet = preparedStatement.executeQuery();
             getSubscriptions(result, count, resultSet);
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException | IOException e) {
+            logger.error("Cant select all reader payments:" + e);
         }
-
         return result;
     }
 
@@ -144,9 +117,8 @@ public class JDBCReaderDao implements ReaderDao {
         Optional<Reader> result = Optional.empty();
         ResultSet rs;
         ReaderMapper readerMapper;
-
         try {
-            PreparedStatement ps = connection.prepareCall("SELECT * FROM periodical.reader WHERE email = ? AND password = ?");
+            PreparedStatement ps = connection.prepareCall(propertyHolder.getPropValues("select.reader.by.email.password"));
             ps.setString(1, email);
             ps.setString(2, password);
             rs = ps.executeQuery();
@@ -154,9 +126,30 @@ public class JDBCReaderDao implements ReaderDao {
             if (rs.next()) {
                 result = Optional.of(readerMapper.extractFromResultSet(rs));
             }
-        } catch (SQLException e) {
+        } catch (SQLException | IOException e) {
+            logger.error("Cant select all reader by email and password:" + e);
             throw new RuntimeException(e);
         }
         return result;
+    }
+
+    @Override
+    public void update(Reader entity) {
+
+    }
+
+    @Override
+    public Reader findById(int id) {
+        return null;
+    }
+
+    @Override
+    public void delete(int id) {
+
+    }
+
+    @Override
+    public void close() {
+
     }
 }

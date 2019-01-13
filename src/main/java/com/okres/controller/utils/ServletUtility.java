@@ -5,6 +5,7 @@ package com.okres.controller.utils;
 import com.okres.model.entity.Edition;
 import com.okres.model.entity.EditionCategory;
 import com.okres.model.service.EditionService;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -13,14 +14,16 @@ import java.sql.SQLException;
 import java.util.*;
 
 import static java.util.Objects.nonNull;
+
 /**
  * @author O.Kres
- * @project Periodical
  * @version 1.0
+ * @project Periodical
  * @since 1/13/2019
  */
 public class ServletUtility {
     private EditionService editionService = new EditionService();
+    private static Logger logger = Logger.getLogger(ServletUtility.class);
 
     /**
      * Method for encode image from DB and put in map
@@ -40,7 +43,7 @@ public class ServletUtility {
                 String encode = Base64.getEncoder().encodeToString(imageBytes);
                 editionWithImage.put(edition, encode);
             } catch (SQLException e) {
-                e.printStackTrace();
+                logger.error("Cant get images: " + e);
             }
         }
         return editionWithImage;

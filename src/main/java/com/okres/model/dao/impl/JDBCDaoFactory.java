@@ -1,20 +1,28 @@
 package com.okres.model.dao.impl;
 
 import com.okres.model.dao.*;
+import org.apache.log4j.Logger;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-public class JDBCDaoFactory extends DaoFactory {
+/**
+ * @author O.Kres
+ * @version 1.0
+ * @project Periodical
+ * @since 1/13/2019
+ */
 
+public class JDBCDaoFactory extends DaoFactory {
+    private static Logger logger = Logger.getLogger(JDBCDaoFactory.class);
     private DataSource dataSource = ConnectionPoolHolder.getDataSource();
 
     private Connection getConnection() {
         try {
-            System.out.println(dataSource.toString());
             return dataSource.getConnection();
         } catch (SQLException e) {
+            logger.error("Cant get connection: " + e);
             throw new RuntimeException(e);
         }
     }
@@ -31,7 +39,6 @@ public class JDBCDaoFactory extends DaoFactory {
 
     @Override
     public PaymentDao createPaymentDao() {
-
         return new JDBCPaymentDao(getConnection());
     }
 
