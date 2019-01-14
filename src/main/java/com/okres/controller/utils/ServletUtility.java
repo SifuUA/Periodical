@@ -111,4 +111,13 @@ public class ServletUtility {
         request.getSession().setAttribute("imageIndex", index);
         return index != null;
     }
+
+    /**
+     * Method check valid of fields
+     *
+     * @param param fields from registration form
+     */
+    public String checkField(String param) {
+        return param.replaceAll("<", "&lt;").replaceAll(">", "&gt;");
+    }
 }

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import java.util.Map;
 
 import static java.util.Objects.isNull;
+import static java.util.Objects.nonNull;
 
 /**
  * @author O.Kres
@@ -39,6 +40,8 @@ public class MainPage implements Command {
         Map<Edition, String> limitEditionImage =
                 servletUtility.getLimitEditionImage(request, (page - 1) * recordsPerPage, recordsPerPage);
         request.getSession().setAttribute("encodeImages", limitEditionImage);
+        if (nonNull(request.getParameter("catId")))
+            noOfPages = (int) Math.ceil(limitEditionImage.size() * 1.0 / recordsPerPage);
         request.getSession().setAttribute("numberOfPages", noOfPages);
         request.getSession().setAttribute("currentPage", page);
         request.getServletContext().setAttribute("editionCategories", servletUtility.setCategory(request.getServletContext()));

@@ -4,8 +4,8 @@
 <body>
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" role="navigation">
-        <%--<div class="container">--%>
-        <a class="navbar-brand" href="${pageContext.request.contextPath}/servlet/reader"><fmt:message key="reader.main"/> </a>
+        <a class="navbar-brand" href="${pageContext.request.contextPath}/servlet/reader"><fmt:message
+                key="reader.main"/> </a>
         <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar">
             &#9776;
         </button>
@@ -26,7 +26,8 @@
                 </div>
             </ul>
             <ul class="nav navbar-nav">
-                <li class="nav-item"><a href="${pageContext.request.contextPath}/servlet/readerSubscription" class="nav-link"><fmt:message key="reader.subscriptions"/></a></li>
+                <li class="nav-item"><a href="${pageContext.request.contextPath}/servlet/readerSubscription"
+                                        class="nav-link"><fmt:message key="reader.subscriptions"/></a></li>
             </ul>
 
             <ul class="nav navbar-nav flex-row justify-content-between ml-auto">
@@ -37,7 +38,6 @@
                                         class="nav-link"><fmt:message key="reader.logout"/></a></li>
             </ul>
         </div>
-        <%--</div>--%>
     </nav>
     <div id="modalPassword" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
          aria-hidden="true">
@@ -62,13 +62,12 @@
 
 <div class="container" style="margin-top: 100px">
     <div class="row">
-        <%--<c:forEach var="imgBase" items="${requestScope.encodeImages}">--%>
         <c:forEach var="imgBase" items="${sessionScope.encodeImages}">
             <div class="col-lg-2 col-md-6 col-xs-6">
-                <a href="${pageContext.request.contextPath}/servlet/reader?imageIndex=${imgBase.key.id}" class="d-block mb-4 h-100">
+                <a href="${pageContext.request.contextPath}/servlet/reader?imageIndex=${imgBase.key.id}"
+                   class="d-block mb-4 h-100">
                     <img class="img-fluid img-thumbnail" src="data:image/jpeg;base64,${imgBase.value}" alt="">
                     <h6>${imgBase.key.editionName}</h6>
-                        <%--<h6>${imgBase.key.id}</h6>--%>
                 </a>
             </div>
         </c:forEach>
@@ -77,24 +76,29 @@
 
 <hr>
 <br/>
-<table <%--border="1" cellpadding="5" cellspacing="5"--%> align="center">
+<table align="center">
     <tr>
         <c:if test="${sessionScope.currentPage != 1}">
-            <td><a class="page-link" href="${pageContext.request.contextPath}/servlet/reader?page=${sessionScope.currentPage - 1}">Previous</a></td>
+            <td><a class="page-link"
+                   href="${pageContext.request.contextPath}/servlet/reader?page=${sessionScope.currentPage - 1}">Previous</a>
+            </td>
         </c:if>
         <c:forEach begin="1" end="${sessionScope.numberOfPages}" var="i">
             <c:choose>
                 <c:when test="${sessionScope.currentPage eq i}">
-                    <td> <a class="page-link">${i}</a> </td>
+                    <td><a class="page-link">${i}</a></td>
                 </c:when>
                 <c:otherwise>
-                    <td><a class="page-link" href="${pageContext.request.contextPath}/servlet/reader?page=${i}">${i}</a></td>
+                    <td><a class="page-link" href="${pageContext.request.contextPath}/servlet/reader?page=${i}">${i}</a>
+                    </td>
                 </c:otherwise>
             </c:choose>
         </c:forEach>
         <c:if test="${sessionScope.currentPage lt sessionScope.numberOfPages}">
-            <td><a class="page-link" href="${pageContext.request.contextPath}/servlet/reader?page=${sessionScope.currentPage + 1}">Next</a></td>
+            <td><a class="page-link"
+                   href="${pageContext.request.contextPath}/servlet/reader?page=${sessionScope.currentPage + 1}">Next</a>
+            </td>
         </c:if>
     </tr>
 </table>
-<%@include file="../templates/footer.jspf"%>
+<%@include file="../templates/footer.jspf" %>

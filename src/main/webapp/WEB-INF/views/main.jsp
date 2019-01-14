@@ -4,7 +4,6 @@
 <body>
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" role="navigation">
-        <%--<div class="container">--%>
         <a class="navbar-brand" href="${pageContext.request.contextPath}/servlet/home"><fmt:message
                 key="main.button.home"/></a>
         <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar">
@@ -75,7 +74,6 @@
                 </li>
             </ul>
         </div>
-        <%--</div>--%>
     </nav>
     <div id="modalPassword" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
          aria-hidden="true">
@@ -100,19 +98,12 @@
 
 <div class="container" style="margin-top: 100px">
     <div class="row">
-        <%-- <c:forEach var="imgBase" items="${applicationScope.encodeImages}">
-             <div class="col-lg-2 col-md-6 col-xs-6">
-                 <a href="#" class="d-block mb-4 h-100">
-                     <img class="img-fluid img-thumbnail" src="data:image/jpeg;base64,${imgBase}" alt="">
-                 </a>
-             </div>
-         </c:forEach>--%>
         <c:forEach var="imgBase" items="${sessionScope.encodeImages}">
             <div class="col-lg-2 col-md-6 col-xs-6">
-                <a href="${pageContext.request.contextPath}/servlet/home?imageIndex=${imgBase.key.id}" class="d-block mb-4 h-100">
+                <a href="${pageContext.request.contextPath}/servlet/home?imageIndex=${imgBase.key.id}"
+                   class="d-block mb-4 h-100">
                     <img class="img-fluid img-thumbnail" src="data:image/jpeg;base64,${imgBase.value}" alt="">
                     <h6>${imgBase.key.editionName}</h6>
-                        <%--<h6>${imgBase.key.id}</h6>--%>
                 </a>
             </div>
         </c:forEach>
@@ -122,7 +113,7 @@
 <hr>
 <br/>
 
-<table <%--border="1" cellpadding="5" cellspacing="5"--%> align="center">
+<table align="center">
     <tr>
         <c:if test="${sessionScope.currentPage != 1}">
             <td><a class="page-link"

@@ -1,5 +1,6 @@
 package com.okres.controller.command;
 
+import com.okres.controller.utils.ServletUtility;
 import com.okres.model.entity.Reader;
 import com.okres.model.entity.enums.Role;
 import com.okres.model.service.ReaderService;
@@ -24,6 +25,7 @@ public class RegisterReader implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         ReaderService readerService = new ReaderService();
+        ServletUtility servletUtility = new ServletUtility();
         String firstName = new String(request.getParameter("fname").getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8);
         String lastName = new String(request.getParameter("lname").getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8);
         String phoneNumber = request.getParameter("phone");
@@ -31,7 +33,8 @@ public class RegisterReader implements Command {
         String password = new String(request.getParameter("password").getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8);
 
         if (nonNull(phoneNumber) && nonNull(email)) {
-            Reader reader = new Reader(firstName, lastName, phoneNumber, email, password, Role.READER);
+            Reader reader = new Reader(servletUtility.checkField(firstName), servletUtility.checkField(lastName),
+                    servletUtility.checkField(phoneNumber), servletUtility.checkField(email), servletUtility.checkField(password), Role.READER);
             logger.info("Information for register reader: " + reader);
             if (!readerService.readerIsRegistred(reader))
                 readerService.createReader(reader);

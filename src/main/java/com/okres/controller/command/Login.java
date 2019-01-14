@@ -36,7 +36,7 @@ public class Login implements Command {
         String password = request.getParameter("password");
         Optional<Reader> reader = readerService.getReaderByEmailAndPassword(email, password);
         if (!reader.isPresent()) {
-            logger.error("Access denied, reader role is a GUEST: " + reader.get());
+            logger.error("Access denied, reader role is a GUEST email: " + email + " password " + password);
             return "redirect: registration";
         }
         httpSession.setAttribute("role", reader.get().getRole());
