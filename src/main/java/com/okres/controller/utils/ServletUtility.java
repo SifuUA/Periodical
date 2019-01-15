@@ -67,7 +67,7 @@ public class ServletUtility {
      */
     public Map<Edition, String> getLimitEditionImage(HttpServletRequest request, int start, int recordsPerPage) {
         String currentCategory = request.getParameter("catId");
-        boolean categoryFlag = false;
+            boolean categoryFlag = false;
         int category = 0;
         int counter = 0;
         if (currentCategory != null) {

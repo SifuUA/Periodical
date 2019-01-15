@@ -4,7 +4,8 @@
 <body>
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" role="navigation">
-        <a class="navbar-brand" href="#"><fmt:message key="admin.home"/></a>
+        <a class="navbar-brand" href="${pageContext.request.contextPath}/servlet/admin"><fmt:message
+                key="admin.home"/></a>
         <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar">
             &#9776;
         </button>

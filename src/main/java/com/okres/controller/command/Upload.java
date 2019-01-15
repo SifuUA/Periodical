@@ -1,5 +1,6 @@
 package com.okres.controller.command;
 
+import com.okres.controller.utils.ServletUtility;
 import com.okres.model.entity.Edition;
 import com.okres.model.service.EditionService;
 import org.apache.commons.fileupload.FileItem;
@@ -37,6 +38,7 @@ public class Upload implements Command {
      */
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
+        ServletUtility servletUtility = new ServletUtility();
         response.setContentType("text/html;charset=UTF-8");
         try {
             boolean isMultiPart = ServletFileUpload.isMultipartContent(request);
@@ -55,6 +57,8 @@ public class Upload implements Command {
         } catch (FileUploadException e) {
             logger.error("Error when try to upload image to DB: " + e);
         }
+        request.getServletContext().setAttribute("editionList", editionService.getAllEditions());
+        request.getServletContext().setAttribute("encodeImages", servletUtility.setEditionImage(request.getServletContext()));
         return "/WEB-INF/views/admin.jsp";
     }
 
