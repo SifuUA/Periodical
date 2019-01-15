@@ -47,7 +47,7 @@ The application can be accessed at `http://localhost:8888/servlet/home`.
 
 **3. See the database configuration** `/src/main/resources/db_config.properties`
 
-**4. You mast have installed MySQL Server and MySQL Workbench, than you can using MySQL Workbench run** `database.sql`
+**4. You mast have installed MySQL Server and MySQL Workbench, than you can using MySQL Workbench run** `Dump20190115.sql`
 **for creating database, tables and some data**
 
 
